@@ -1,0 +1,17 @@
+@extends('layout.master')
+
+@section('content')
+
+
+    Title: {{ $event->title }} <br/>
+    Body: {!!  $event->body !!} <br/>
+    Date: {{ $event->date }} <br/>
+    Location: {{ $event->location }} <br/>
+
+    @if($event->is_registration_open)
+        <a href="event/register/{{ $event->id }}">Register now</a>
+    @else
+        Registration closed
+    @endif
+
+@stop
