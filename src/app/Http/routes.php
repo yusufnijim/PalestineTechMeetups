@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::controller('event', 'EventController');
+    Route::controller('blog', 'BlogController');
 
     Route::controller('/registration', 'RegistrationController');
 
