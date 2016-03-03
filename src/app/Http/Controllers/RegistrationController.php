@@ -21,7 +21,7 @@ class RegistrationController extends MyBaseController
             ]
         )->first();
 
-        return view('registration.signup')
+        return view('registration/signup')
             ->with('event', $event)
             ->with('status', $status);
     }
@@ -50,13 +50,25 @@ class RegistrationController extends MyBaseController
             ->with('reg', $reg);
     }
 
-    public function postView($id)
+    public function postUpdateAttended($id)
     {
         $reg = RegistrationModel::where('event_id', $id)
             ->where('user_id', request()['user_id'])
             ->first();
         $reg->update([
-            'is_attend' => request()['is_attend'] == 1 ? 0 : 1,
+            'is_attend' => request()['is_attended'] == 1 ? 0 : 1,
+        ]);
+
+        return redirect("/registration/view/$id");
+    }
+
+    public function postUpdateAccepted($id)
+    {
+        $reg = RegistrationModel::where('event_id', $id)
+            ->where('user_id', request()['user_id'])
+            ->first();
+        $reg->update([
+            'is_attend' => request()['is_accepted'] == 1 ? 0 : 1,
         ]);
 
         return redirect("/registration/view/$id");

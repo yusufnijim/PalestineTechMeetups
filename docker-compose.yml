@@ -5,7 +5,7 @@ front:
   links:
     - db
   volumes:
-    - ./www:/var/www
+    - ./src:/var/www
     - ./sites:/etc/nginx/conf.d
     - ./logs:/var/log/supervisor
 db:

@@ -5,7 +5,7 @@ namespace App\Models;
 
 class EventModel extends BaseModel
 {
-    protected $table = 'events';
+    protected $table = 'event';
     /**
      * The attributes that are mass assignable.
      *
@@ -31,6 +31,7 @@ class EventModel extends BaseModel
             'is_registration_open' => $request->is_registration_open,
             'location' => $request->location,
             'date' => $request->date,
+            'max_registrars_count' => $request->max_registrars_count,
         ]);
     }
 
@@ -42,6 +43,7 @@ class EventModel extends BaseModel
             'is_registration_open' => $request->is_registration_open,
             'location' => $request->location,
             'date' => $request->date,
+            'max_registrars_count' => $request->max_registrars_count,
         ]);
     }
 

@@ -8,6 +8,7 @@
         Title: {!! Form::text('title') !!} <br / >
         Body: {!! Form::textarea('body', '', ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
 
+        Max registrars count: {!! Form::number('max_registrars_count', 1, ['min'=> 1, 'max' => 999]) !!} <br/>
         registration open: {!! Form::checkbox('is_registration_open', true, true) !!} <br/>
         Event Date: {!! Form::date('date', '', ['class'=> 'event_date']) !!} <br/>
         Location: {!! Form::textarea('location', '', ['size' => '30x2']) !!} <br/>

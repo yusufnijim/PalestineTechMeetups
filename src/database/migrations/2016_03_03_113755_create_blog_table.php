@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class CreateBlogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,22 +12,17 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('event', function (Blueprint $table) {
+        //
+        Schema::create('blog', function (Blueprint $table) {
             $table->increments('id');
-            
 
             $table->string('title');
             $table->longText('body');
-            $table->tinyInteger('is_registration_open')->nullable();
-            $table->integer('max_registrars_count')->nullable();
 
             $table->timestamp('published_at');
-            $table->date('date');
-            $table->string('location');
-
-
             $table->timestamps();
         });
+
     }
 
     /**
@@ -37,6 +32,7 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('event');
+        //
+        Schema::drop('blog');
     }
 }

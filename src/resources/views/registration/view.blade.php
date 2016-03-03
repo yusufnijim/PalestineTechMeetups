@@ -11,6 +11,7 @@
                 <th>User name</th>
                 <th>Arabic full name</th>
                 <th>Registered at</th>
+                <th>Accepted</th>
                 <th>Attended</th>
                 <th>Image</th>
             </tr>
@@ -21,6 +22,12 @@
                     <td>{{ $instance->user->arabic_full_name }}</td>
                     <td>{{ $instance->created_at }}</td>
                     <td> {!! Form::open() !!}
+                        {!! Form::hidden('user_id', $instance->user_id) !!}
+                        {!! Form::hidden('is_attend', $instance->is_attend) !!}
+                        {!! Form::submit($instance->is_accepted ? 'Yes' : 'No' )!!}
+                        {!! Form::close() !!}
+                    </td>
+                     <td> {!! Form::open() !!}
                         {!! Form::hidden('user_id', $instance->user_id) !!}
                         {!! Form::hidden('is_attend', $instance->is_attend) !!}
                         {!! Form::submit($instance->is_attend ? 'Yes' : 'No' )!!}

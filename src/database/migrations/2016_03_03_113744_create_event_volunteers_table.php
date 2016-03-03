@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EventRegistration extends Migration
+class CreateEventVolunteersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class EventRegistration extends Migration
      */
     public function up()
     {
-        Schema::create('event_registration', function (Blueprint $table) {
+        //
+        Schema::create('event_volunteer', function (Blueprint $table) {
             $table->increments('id');
 
 
             $table->integer('event_id');
             $table->integer('user_id');
-            $table->tinyInteger('is_accepted')->nullable();
-            $table->tinyInteger('is_attend')->nullable();
-
+            $table->tinyInteger('type')->nullable();
 
             $table->timestamps();
         });
@@ -35,5 +34,6 @@ class EventRegistration extends Migration
     public function down()
     {
         //
+        Schema::drop('event_volunteer');
     }
 }
