@@ -6,7 +6,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="htttp://www.binarytheme.com">YOUR LOGO </a>
+        <a class="navbar-brand"
+           href="/">YOUR LOGO </a>
     </div>
     <!-- Collect the nav links for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">

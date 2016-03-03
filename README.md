@@ -25,3 +25,16 @@ Next tasks:
     - Design
     - QA
     - Feedback
+
+limit 100
+is_accepted
+before registering for event, custom fields
+ organizers
+volunteers
+speakers
+mentors
+ send emails to all users, or only accepted ones
+ statistics
+ news or blog
+ set max number of registers
+

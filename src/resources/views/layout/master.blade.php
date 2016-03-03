@@ -33,7 +33,6 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 
-    <link href="{{ asset( 'assets/css/bootstrap-datepicker.css') }}" rel="stylesheet"/>
     <script src="{{ asset( 'assets/js/bootstrap-datepicker.js') }}"></script>
     <link href="{{ asset( 'assets/css/style.css') }}" rel="stylesheet"/>
 
