@@ -136,6 +136,13 @@ class UserModel extends Authenticatable implements HasRoleAndPermissionContract
         return $user;
     }
 
+
+    public function test() {
+
+    }
+
+
+
     public static function professions($rev = NULL)
     {
         $array = [

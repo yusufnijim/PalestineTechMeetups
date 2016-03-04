@@ -27,6 +27,7 @@
     {!! Form::close() !!}
 
 
+
     <h2>My events</h2>
     registered, attended
 @stop

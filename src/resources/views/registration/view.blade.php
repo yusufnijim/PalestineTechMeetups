@@ -9,8 +9,8 @@
         Number of accepted: {{ $number_of_accepted }}<br/>
         Number of attended: {{ $number_of_attended }}<br/><br/>
 
-        <table border="1" class="event_index">
-
+        <table border="1" class="table event_index">
+            <thead>
             <tr>
                 <th>User name</th>
                 <th>Arabic full name</th>
@@ -19,7 +19,8 @@
                 <th>Attended</th>
                 <th>Image</th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach($reg as $instance)
                 <tr>
                     <td>{{ $instance->user->first_name }}</td>
@@ -46,10 +47,20 @@
                     <td>{!!  $instance->user->imagetag !!}</td>
                 </tr>
             @endforeach
-
+            </tbody>
         </table>
 
     </div>
 
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css"/>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.event_index').DataTable();
+        });
+    </script>
 
 @stop

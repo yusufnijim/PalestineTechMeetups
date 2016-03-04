@@ -3,8 +3,8 @@
 @section('content')
 
 
-    Title: {{ $event->title }} <br/>
-    Body: {!!  $event->body !!} <br/>
+    Title: {{ $blog->title }} <br/>
+    Body: {!!  $blog->body !!} <br/>
 
 
 @stop

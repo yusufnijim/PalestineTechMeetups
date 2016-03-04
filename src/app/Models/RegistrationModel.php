@@ -27,4 +27,6 @@ class RegistrationModel extends BaseModel
     {
         return $this->hasOne('App\Models\UserModel', 'id', 'user_id');
     }
+
+
 }

@@ -13,6 +13,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a>
+            <li><a href="/event">Events</a>
+            <li><a href="/blog">Blog</a>
+            <li><a href="/user">Users</a>
             </li>
                 @if(auth()->check())
                 <li>

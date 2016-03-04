@@ -15,7 +15,7 @@
             <tr>
                 <td>{{ $blog->id }}</td>
                 <td>{{ $blog->title }}</td>
-                <td><a href="{{ url("/registration/signup/$blog->id") }}">View</a></td>
+                <td><a href="{{ url("/blog/view/$blog->id") }}">View</a></td>
 
                 <td><a href="{{ url("blog/edit/$blog->id") }}">edit</a></td>
                 <td>
