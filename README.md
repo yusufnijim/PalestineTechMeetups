@@ -6,18 +6,18 @@ To run this site:
 	git clone https://AminCo@bitbucket.org/AminCo/ntm.git
 
 2- Fire up the docker containers
-	$ docker-compose up:
+	$ docker-compose up
 
-3- Connect to web instance
+3- Install third party packages using composer:
 
-4- Install third party packages using composer:
-	$ composer install -vvv
+    $ docker-compose run web bash -c "cd /var/www/; ./composer install -vvv"
 
-5- Configure your database:
-	.env file
+4- Create the database using artisan:
+	$ docker-compose run web bash -c "/var/www/artisan migrate"
 
-6- Create the database using artisan:
-	$ php artisan migrate
+5- Configure Laravel permissions:
+
+    $ chmod 777 src/storage/ src/bootstrap/cache -R
 
 
 Walla, you rock !

@@ -28,6 +28,7 @@ class BlogModel extends BaseModel
         return Static::create([
             'title' => $request->title,
             'body' => $request->body,
+            'is_published' => $request->is_published,
         ]);
     }
 
@@ -36,6 +37,7 @@ class BlogModel extends BaseModel
         return Static::find($id)->update([
             'title' => $request->title,
             'body' => $request->body,
+            'is_published' => $request->is_published,
         ]);
     }
 

@@ -137,11 +137,6 @@ class UserModel extends Authenticatable implements HasRoleAndPermissionContract
     }
 
 
-    public function test() {
-
-    }
-
-
 
     public static function professions($rev = NULL)
     {

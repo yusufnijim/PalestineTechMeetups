@@ -8,6 +8,8 @@
         Title: {!! Form::text('title', $blog->title) !!} <br/>
         Body: {!! Form::textarea('body', $blog->body, ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
 
+        Published: {!! Form::checkbox('is_published', true, $blog->is_published) !!} <br />
+
         {!! Form::submit('update') !!}
 
         {!! Form::close() !!}

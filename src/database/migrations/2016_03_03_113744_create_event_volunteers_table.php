@@ -16,10 +16,9 @@ class CreateEventVolunteersTable extends Migration
         Schema::create('event_volunteer', function (Blueprint $table) {
             $table->increments('id');
 
-
             $table->integer('event_id');
             $table->integer('user_id');
-            $table->tinyInteger('type')->nullable();
+            $table->tinyInteger('type_id')->nullable();
 
             $table->timestamps();
         });

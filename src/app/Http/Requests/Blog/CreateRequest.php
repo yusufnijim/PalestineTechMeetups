@@ -26,6 +26,7 @@ class CreateRequest extends Request
         return [
             'title' => 'required|max:255',
             'body' => 'required',
+            'is_published' => 'bool',
         ];
     }
 }

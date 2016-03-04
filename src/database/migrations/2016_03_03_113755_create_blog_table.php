@@ -18,8 +18,8 @@ class CreateBlogTable extends Migration
 
             $table->string('title');
             $table->longText('body');
+            $table->tinyInteger('is_published')->nullable();
 
-            $table->timestamp('published_at');
             $table->timestamps();
         });
 

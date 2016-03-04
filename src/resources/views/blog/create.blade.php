@@ -5,8 +5,10 @@
 @section('content')
     <div>
         {!! Form::open() !!}
-        Title: {!! Form::text('title') !!} <br / >
+        Title: {!! Form::text('title') !!} <br />
         Body: {!! Form::textarea('body', '', ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
+
+        Published: {!! Form::checkbox('is_published', true, true) !!} <br />
 
         {!! Form::submit('create') !!}
 
