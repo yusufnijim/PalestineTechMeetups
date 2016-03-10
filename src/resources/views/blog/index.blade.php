@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <a href="blog/create">Create new</a>
 
     <table border="1" class="event_index">
         <tr>

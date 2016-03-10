@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <a href="event/create">Create new</a>
-
     <table border="1" class="event_index">
         <tr>
             <th>ID</th>

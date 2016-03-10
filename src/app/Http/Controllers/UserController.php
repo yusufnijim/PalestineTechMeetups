@@ -38,8 +38,12 @@ class UserController extends MyBaseController
 
     public function getProfile()
     {
-        $user = auth()->user();
-        return redirect("/user/edit/$user->id");
+        if (auth()->check()) {
+            $user = auth()->user();
+            return redirect("/user/edit/$user->id");
+        } else {
+            abort(404);
+        }
     }
 
     public function getLogin()

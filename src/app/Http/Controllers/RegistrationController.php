@@ -50,13 +50,14 @@ class RegistrationController extends MyBaseController
 
         //ToDo:: perhaps improve ? or cache
         $number_of_registrars = $reg->count();
-        $number_of_accepted = RegistrationModel::where('event_id', $id)->where('is_accepted', 1)->get()->count();
-        $number_of_attended = RegistrationModel::where('event_id', $id)->where('is_attended', 1)->get()->count();
+        $number_of_accepted = RegistrationModel::where('event_id', $id)
+            ->where('is_accepted', 1)->get()->count();
+        $number_of_attended = RegistrationModel::where('event_id', $id)
+            ->where('is_attended', 1)->get()->count();
 
         return view("registration/view")
             ->with('event', $event)
             ->with('reg', $reg)
-
             ->with('number_of_registrars', $number_of_registrars)
             ->with('number_of_accepted', $number_of_accepted)
             ->with('number_of_attended', $number_of_attended);

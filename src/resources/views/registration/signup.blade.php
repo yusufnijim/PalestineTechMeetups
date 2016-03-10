@@ -7,12 +7,12 @@
 
         Event description{!!  $event->body !!}
 
-        @if($status)
-            <h4> You signed up for this event </h4>
+        @if($status == -1)
+            <h4>Login to sign up now !</h4>
         @elseif(! $event->is_registration_open)
             <h4>Sorry registration for this event has been closed</h4>
-        @elseif($status == -1)
-            <h4>Login to sign up now !</h4>
+        @elseif($status)
+            <h4> You signed up for this event </h4>
         @else
             {!! Form::open() !!}
 
