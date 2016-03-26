@@ -13,7 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+//        'App\Model' => 'App\Policies\ModelPolicy',
+//        \App\Policies\Event::class => \App\Policies\EventPolicy::class,
     ];
 
     /**
@@ -26,6 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        $gate->define('index', function($user, $model) {
+            return true;
+        });
         //
+    }
+
+    public function before($user, $ability)
+    {
+        return true;
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
     }
 }

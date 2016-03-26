@@ -10,10 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use App\Models\UserModel;
-
-//$user = UserModel::findOrNew(1);
-//Auth::login($user);
 
 /*
 |--------------------------------------------------------------------------
@@ -25,47 +21,45 @@ use App\Models\UserModel;
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-$result = DB::query("select true");
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::controller('user', 'UserController');
-    Route::get('/profile', 'UserController@getProfile');
-    Route::get('/user/profile', 'UserController@getProfile');
 
-
+    // admin routes
     Route::controller('event', 'EventController');
     Route::controller('blog', 'BlogController');
 
     Route::controller('/registration', 'RegistrationController');
 
+    Route::get('/backend', 'BackendController@anyIndex');
 
-    Route::group(['prefix' => '/admin'], function () {
-
-        Route::controller('/user/', 'Admin\UserController');
-        Route::controller('/role/', 'Admin\RoleController');
-        Route::controller('/', 'Admin\MainController');
-    });
+    Route::controller('/user', 'UserController');
+    Route::controller('/role', 'RoleController');
 
 
-    Route::get('/', 'EventController@anyIndex');
+    // user routes
+    Route::get('/login', 'UserController@getLogin');
+    Route::get('/logout', 'UserController@getLogout');
 
-
-    Route::get('logout', function () {
-        session()->flash('flash_message', 'User logged out successfully');
-        Auth::logout();
-        return redirect('/');
-    });
+    Route::get('/profile', 'UserController@getProfile');
+    Route::get('/user/profile', 'UserController@getProfile');
 
     Route::get('facebook', 'UserController@facebook');
     Route::get('facebook_callback', 'UserController@facebook_callback');
 
+    // front end routes
+    Route::get('/', 'HomeController@anyIndex');
+
 });
 
-
+/**
+ * This function is a small helper like dd() but doesn't actually die
+ * @param $var
+ */
 function d($var)
 {
-    echo "<pre>";
-    print_r($var);
-    echo "</pre>";
+    array_map(function ($x) {
+        (new \Illuminate\Support\Debug\Dumper)->dump($x);
+    }, func_get_args());
+
 }

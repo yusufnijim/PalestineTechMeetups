@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.backend')
 
 @section('content')
 
@@ -9,6 +9,7 @@
             <th>Date</th>
             <th>View Event</th>
             <th>View registered users</th>
+            <th>Event Volunteers</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -19,6 +20,7 @@
                 <td>{{ $event->date }}</td>
                 <td><a href="{{ url("/registration/signup/$event->id") }}">View</a></td>
                 <td><a href="{{ url("/registration/view/$event->id") }}">Registered users</a></td>
+                <td><a href="{{ url("/event/volunteers/$event->id") }}">Volunteers</a></td>
 
                 <td><a href="{{ url("event/edit/$event->id") }}">edit</a></td>
                 <td>
@@ -26,7 +28,7 @@
                         'url' => "/event/delete/$event->id",
                         "method" => 'post']
                         ) !!}
-                    {!! Form::submit('Delete') !!}
+                    {!! Form::submit('Delete', ['data-confirm' => "Are you sure to delete this item?"]) !!}
                     {!! Form::close() !!}
                 </td>
             </tr>

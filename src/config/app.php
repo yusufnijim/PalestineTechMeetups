@@ -159,7 +159,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Bican\Roles\RolesServiceProvider::class,
 
     ],
 

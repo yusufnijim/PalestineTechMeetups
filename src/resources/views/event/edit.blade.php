@@ -1,15 +1,16 @@
-@extends('layout.master')
+@extends('layout.backend')
 
 
 
 @section('content')
     <div>
         {!! Form::open(['method' => 'put']) !!}
-        Title: {!! Form::text('title', $event->title) !!} <br/>
-        Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
+        Title: {!! Form::text('title', $event->title, ['required' => 'true']) !!} <br/>
+        Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body', 'required' => true]) !!}
+        <br/>
 
         Max registrars
-        count: {!! Form::number('max_registrars_count', $event->max_registrars_count, ['min'=> 1, 'max' => 999]) !!}
+        count: {!! Form::number('max_registrars_count', $event->max_registrars_count, ['min'=> 1, 'max' => 999, 'required' => true]) !!}
         <br/>
         registration open: {!! Form::checkbox('is_registration_open', true, $event->is_registration_open) !!} <br/>
         Event Date: {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
@@ -33,4 +34,6 @@
 
         </script>
     </div>
+
+
 @stop

@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Nablus Tech Meetups</a>
+        <a class="navbar-brand" href="/">Nablus Tech Meetups</a>
     </div>
 
     <!-- /.navbar-header -->
@@ -212,16 +212,23 @@
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
+                @if(auth()->check() )
+                    <li><a href="/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                @endif
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                </li>
+                @if(!auth()->check() )
+                    <li><a href="/user/login"><i class="fa fa-sign-out fa-fw"></i> Login</a>
+                @else
+                    <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        @endif
+                    </li>
             </ul>
             <!-- /.dropdown-user -->
         </li>
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
+</nav>

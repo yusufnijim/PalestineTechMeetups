@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.backend')
 
 @section('sidebar')
 @stop

@@ -10,6 +10,10 @@ class BlogController extends MyBaseController
 
     public function anyIndex()
     {
+        if (!auth()->user()->hasPermission('blog.manage')) {
+            abort(403, 'Access denied');
+        }
+
         $blogs = BlogModel::all();
 
         return view('blog/index')
@@ -25,11 +29,19 @@ class BlogController extends MyBaseController
 
     public function getCreate()
     {
+        if (!auth()->user()->hasPermission('blog.manage')) {
+            abort(403, 'Access denied');
+        }
+
         return view('blog/create');
     }
 
     public function postCreate(CreateRequest $request)
     {
+        if (!auth()->user()->hasPermission('blog.manage')) {
+            abort(403, 'Access denied');
+        }
+
         BlogModel::insert($request);
         session()->flash('flash_message', 'blog created successfully');
         return redirect("blog");
@@ -38,12 +50,20 @@ class BlogController extends MyBaseController
 
     public function getEdit($id)
     {
+        if (!auth()->user()->hasPermission('blog.manage')) {
+            abort(403, 'Access denied');
+        }
+
         $blog = BlogModel::findOrFail($id);
         return view('blog/edit')->with('blog', $blog);
     }
 
     public function putEdit($id, CreateRequest $request)
     {
+        if (!auth()->user()->hasPermission('blog.manage')) {
+            abort(403, 'Access denied');
+        }
+
         BlogModel::edit($id, $request);
         session()->flash('flash_message', 'blog updated successfully');
         return redirect("blog");
@@ -52,6 +72,10 @@ class BlogController extends MyBaseController
 
     public function postDelete($id)
     {
+        if (!auth()->user()->hasPermission('blog.manage')) {
+            abort(403, 'Access denied');
+        }
+
         BlogModel::find($id)->delete();
         session()->flash('flash_message', 'blog deleted successfully');
         return redirect("blog");

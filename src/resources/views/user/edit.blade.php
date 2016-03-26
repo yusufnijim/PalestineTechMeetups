@@ -1,6 +1,7 @@
 @extends('layout.backend')
 
 @section('content')
+    
     {!! Form::open(['method' => 'put', 'files' => true]) !!}
 
     First Name: {!!  Form::text('first_name', $user->first_name, ['required' => '']) !!} <br/>

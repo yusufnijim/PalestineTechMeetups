@@ -2,6 +2,6 @@
 
 @section('content')
 
-    503 be right back
+    403 Access denied
 
 @endsection

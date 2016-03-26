@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
-use App\Models\UserModel;
+use App\Models\User\UserModel;
 use App\Http\Requests\User\CreateRequest;
 
 
@@ -17,6 +17,10 @@ class UserController extends MyBaseController
 
     public function anyIndex()
     {
+        if (!auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
         $users = UserModel::all();
         return view('user/index')
             ->with('users', $users);
@@ -24,6 +28,10 @@ class UserController extends MyBaseController
 
     public function getEdit($id)
     {
+        if (auth()->user()->id != $id OR !auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
         $user = UserModel::findOrFail($id);
         return view('/user/view')
             ->with('user', $user);
@@ -31,10 +39,37 @@ class UserController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
+        if (auth()->user()->id != $id OR !auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
         UserModel::edit($id, $request);
         session()->flash('flash_message', 'Profile updated successfully');
         return redirect("/user/edit/$id");
     }
+
+    public function getCreate()
+    {
+        if (!auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
+        $user = new UserModel();
+        return view('/user/create')
+            ->with('user', $user);
+    }
+
+    public function putCreate(CreateRequest $request)
+    {
+        if (!auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
+        UserModel::insert($request);
+        session()->flash('flash_message', 'Profile updated successfully');
+        return redirect("/user/");
+    }
+
 
     public function getProfile()
     {
@@ -89,7 +124,7 @@ class UserController extends MyBaseController
     public function anyLogout()
     {
         session()->flash('flash_message', 'User logged out successfully');
-        Auth::logout();
+        auth()->logout();
         return redirect('/login');
     }
 }
@@ -98,45 +133,39 @@ class UserController extends MyBaseController
 trait UserSocalLogin
 {
 
+    /**
+     * This function will redirect the user to facebook login
+     * @return mixed
+     */
     public function facebook()
     {
         return \Socialite::with('facebook')->redirect();
     }
 
+    /**
+     * this function will handle social login with facebook using socialite package
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function facebook_callback()
     {
         $fb_user_object = \Socialite::with('facebook')->user();
         $user = UserModel::where('fb_id', $fb_user_object->user['id'])
             ->first();
-        // dd($fb_user_object);
-        // dd($user);
 
         if ($user) {
             auth()->login($user);
             session()->flash('flash_message', 'welcome back ' . $user->first_name);
-            return redirect('/user/index');
+            return redirect('/user/');
         } else {
-            $new_user = new UserModel();
-
-            $new_user->fill([
-                'email' => $fb_user_object->email,
-                'first_name' => $fb_user_object->user['first_name'],
-                'last_name' => $fb_user_object->user['last_name'],
-
-                'fb_id' => $fb_user_object->user['id'],
-                'fb_token' => $fb_user_object->token,
-
-//                'image' => $fb_user_object->avatar,
-            ]);
-
-            $new_user->save();
+            $new_user = UserModel::insert_fb($fb_user_object);
 
             if ($new_user) {
                 session()->flash('flash_message', 'Welcome ' . $new_user->first_name . ' Account registered');
                 auth()->login($new_user);
-                return redirect('/user');
+                return redirect('/user/');
             } else {
-                session()->flash('flash_message', 'some error occured');
+                session()->flash('flash_message', 'some error occurred');
                 return redirect('/login');
             }
 

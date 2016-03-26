@@ -45,6 +45,9 @@ class RegistrationController extends MyBaseController
 
     public function getView($id)
     {
+        if (!auth()->user()->can('registrations.manage')) {
+            abort(403, 'Access denied');
+        }
         $event = EventModel::findOrFail($id);
         $reg = RegistrationModel::where('event_id', $id)->get();
 
@@ -65,6 +68,10 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateaccepted($id)
     {
+        if (!auth()->user()->can('registrations.manage')) {
+            abort(403, 'Access denied');
+        }
+
         $reg = RegistrationModel::where('event_id', $id)
             ->where('user_id', request()['user_id'])
             ->first();
@@ -78,6 +85,10 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateattended($id)
     {
+        if (!auth()->user()->can('registrations.manage')) {
+            abort(403, 'Access denied');
+        }
+
         $reg = RegistrationModel::where('event_id', $id)
             ->where('user_id', request()['user_id'])
             ->first();

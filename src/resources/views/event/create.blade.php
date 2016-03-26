@@ -1,17 +1,18 @@
-@extends('layout.master')
+@extends('layout.backend')
 
 
 
 @section('content')
     <div>
         {!! Form::open() !!}
-        Title: {!! Form::text('title') !!} <br / >
-        Body: {!! Form::textarea('body', '', ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
+        Title: {!! Form::text('title', '', ['required' => 'true']) !!} <br / >
+        Body: {!! Form::textarea('body', '', ['class'=>'event_body', 'id' => 'event_body', 'required' => 'true']) !!}
+        <br/>
 
-        Max registrars count: {!! Form::number('max_registrars_count', 1, ['min'=> 1, 'max' => 999]) !!} <br/>
+        Max registrars count: {!! Form::number('max_registrars_count', 1, ['min'=> 1, 'max' => 999, ]) !!} <br/>
         registration open: {!! Form::checkbox('is_registration_open', true, true) !!} <br/>
-        Event Date: {!! Form::date('date', '', ['class'=> 'event_date']) !!} <br/>
-        Location: {!! Form::textarea('location', '', ['size' => '30x2']) !!} <br/>
+        Event Date: {!! Form::date('date', '', ['class'=> 'event_date', 'required' => 'true']) !!} <br/>
+        Location: {!! Form::textarea('location', '', ['size' => '30x2', ]) !!} <br/>
         {!! Form::submit('create') !!}
 
         {!! Form::close() !!}
@@ -26,8 +27,8 @@
                     defaultDate: 'now',
                     autoclose: true
                 });
+                $("#event_date").datepicker("setDate", new Date());
             });
-            $("#event_date").datepicker("setDate", new Date());
 
         </script>
     </div>

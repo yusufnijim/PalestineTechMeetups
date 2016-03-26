@@ -14,52 +14,43 @@ class VolunteerModel extends BaseModel
     // protected $fillable = [
     // ];
 
-    private $type = [
-        'Speaker',
-        'Organizer',
-        'Volunteer',
-        'Mentor',
+    public static $type = [
+        0 => 'Speaker',
+        1 => 'Organizer',
+        2 => 'Volunteer',
+        3 => 'Mentor',
     ];
 
 
-    public function getGenderAttribute($value)
+    public function getTypeAttribute($value)
     {
-        if ($value == 1) {
-            return "Male";
-        } elseif ($value == 2) {
-            return "Female";
-        } else {
-            return "not specified";
-        }
+        return static::$type[$this->type_id];
     }
-
-    public function setGenderAttribute($value)
-    {
-        if ($value == "male") {
-            return 1;
-        } elseif ($value == "female") {
-            return 2;
-        } else {
-            return 0;
-        }
-    }
-
 
     protected $guarded = [];
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-    ];
 
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne UserModel
+     */
     public function user()
     {
-        return $this->hasOne('App\Models\UserModel', 'id', 'user_id');
+        return $this->hasOne('App\Models\User\UserModel', 'id', 'user_id');
     }
 
-
-
-
+    /**
+     * add user as a volunteer to event
+     * @param $event_id
+     * @return static
+     */
+    public static function insert($event_id)
+    {
+        $values_array = [
+            'event_id' => $event_id,
+            'user_id' => request()->user_id,
+            'type_id' => request()->type_id,
+        ];
+        $instance = Static::firstOrCreate($values_array);
+        return $instance;
+    }
 }

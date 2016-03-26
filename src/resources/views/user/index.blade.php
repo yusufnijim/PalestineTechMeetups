@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.backend')
 
 @section('content')
 
@@ -17,7 +17,7 @@
                 <td>{{ $user->first_name }}</td>
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->image }}</td>
+                <td>{!! $user->imagetag !!}</td>
                 <td><a href="{{ url("user/edit/$user->id") }}">edit</a></td>
                 <td>
                     {!! Form::open( [

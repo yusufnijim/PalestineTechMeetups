@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.backend')
 
 
 
@@ -37,7 +37,7 @@
 		@foreach($roles as $role)
 			<tr>
 				<td> {{ $role->name }} </td>
-				<td> {{ $role->slug }} </td>
+				<td> {{ $role->label }} </td>
 				<td> {{ $role->description }} </td>
 
 				<td>

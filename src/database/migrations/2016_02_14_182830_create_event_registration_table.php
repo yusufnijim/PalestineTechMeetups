@@ -19,6 +19,7 @@ class CreateEventRegistrationTable extends Migration
             $table->integer('event_id');
             $table->integer('user_id');
             $table->tinyInteger('is_accepted')->nullable();
+            $table->tinyInteger('is_confirmed')->nullable();
             $table->tinyInteger('is_attended')->nullable();
 
 

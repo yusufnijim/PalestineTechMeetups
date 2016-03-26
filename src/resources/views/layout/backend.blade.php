@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ isset($title) ? $title : "NTM" }}</title>
+    <title>{{ isset($title) ? $title . " | " : ""  }} Nablus Tech Meetups</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,13 +38,20 @@
 
     @include('partial/_profile_sidebar')
     @include('partial/_menu_sidebar')
-    <!-- Page Content -->
+            <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Blank</h1>
+                    <h1 class="page-header">{{ @$title }}</h1>
+
+                    @include('partial/_error')
+                    @include('partial/_flash')
                     @yield('content')
+
+                    <br/>
+                    <br/>
+                    <br/>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
