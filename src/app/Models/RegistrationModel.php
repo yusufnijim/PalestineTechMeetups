@@ -25,7 +25,7 @@ class RegistrationModel extends BaseModel
 
     public function user()
     {
-        return $this->hasOne('App\Models\UserModel', 'id', 'user_id');
+        return $this->hasOne('App\Models\User\UserModel', 'id', 'user_id');
     }
 
 

@@ -49,7 +49,6 @@ class RoleController extends MyBaseController
         }
 
         $id = $request->input('id');
-
         $role = RoleModel::find($id)->delete();
 
         $request->session()->flash('flash_message', 'Role deleted successfully!');

@@ -45,7 +45,7 @@ class RegistrationController extends MyBaseController
 
     public function getView($id)
     {
-        if (!auth()->user()->can('registrations.manage')) {
+        if (!auth()->user()->hasPermission('registrations.manage')) {
             abort(403, 'Access denied');
         }
         $event = EventModel::findOrFail($id);
@@ -66,9 +66,40 @@ class RegistrationController extends MyBaseController
             ->with('number_of_attended', $number_of_attended);
     }
 
+    public function getExport($id)
+    {
+        $reg = RegistrationModel::where('event_id', $id)->get();
+
+
+        // filename for download
+        $filename = "event_" . $id . "_" . date('Ymd') . ".xls";
+
+        // send header information
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header("Content-Type: application/vnd.ms-excel");
+
+        $flag = false;
+        foreach ($reg as $row) {
+            $record = $row['attributes'];
+            if (!$flag) {
+                // display field/column names as first row
+                echo implode("\t", array_keys($record)) . "\r\n";
+                $flag = true;
+            }
+            echo implode("\t", array_values($record)) . "\r\n";
+        }
+    }
+
+    function cleanData(&$str)
+    {
+        $str = preg_replace("/\t/", "\\t", $str);
+        $str = preg_replace("/\r?\n/", "\\n", $str);
+        if (strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+    }
+
     public function postUpdateaccepted($id)
     {
-        if (!auth()->user()->can('registrations.manage')) {
+        if (!auth()->user()->hasPermission('registrations.manage')) {
             abort(403, 'Access denied');
         }
 
@@ -85,7 +116,7 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateattended($id)
     {
-        if (!auth()->user()->can('registrations.manage')) {
+        if (!auth()->user()->hasPermission('registrations.manage')) {
             abort(403, 'Access denied');
         }
 

@@ -6,7 +6,7 @@
     <div>
         {!! Form::open(['method' => 'put']) !!}
         Title: {!! Form::text('title', $event->title, ['required' => 'true']) !!} <br/>
-        Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body', 'required' => true]) !!}
+        Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body']) !!}
         <br/>
 
         Max registrars

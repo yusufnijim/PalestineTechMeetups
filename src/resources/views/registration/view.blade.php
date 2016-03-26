@@ -9,6 +9,7 @@
         Number of accepted: {{ $number_of_accepted }}<br/>
         Number of attended: {{ $number_of_attended }}<br/><br/>
 
+        <button onclick="window.open('/registration/export/{!! $event->id !!}')">EXPORT</button>
         <table border="1" class="table event_index">
             <thead>
             <tr>

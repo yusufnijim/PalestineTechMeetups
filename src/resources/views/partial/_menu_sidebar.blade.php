@@ -51,6 +51,9 @@
                     <li>
                         <a href="/role">Roles</a>
                     </li>
+                    <li>
+                        <a href="/role/permission">Permissions</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

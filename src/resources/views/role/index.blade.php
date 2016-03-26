@@ -22,10 +22,10 @@
 	<table border=1>
 			<tr>
 				<th>
-					Role name
+					Label
 				</th>
 				<th>
-					Role slug
+					Name
 				</th>
 				<th>
 					Description
@@ -36,8 +36,8 @@
 			</tr>
 		@foreach($roles as $role)
 			<tr>
-				<td> {{ $role->name }} </td>
 				<td> {{ $role->label }} </td>
+				<td> {{ $role->name }} </td>
 				<td> {{ $role->description }} </td>
 
 				<td>

@@ -28,8 +28,10 @@ class UserController extends MyBaseController
 
     public function getEdit($id)
     {
-        if (auth()->user()->id != $id OR !auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
+        if (auth()->user()->id != $id) {
+            if (!auth()->user()->hasPermission('users.manage')) {
+                abort(403, 'Access denied');
+            }
         }
 
         $user = UserModel::findOrFail($id);
@@ -39,15 +41,28 @@ class UserController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        if (auth()->user()->id != $id OR !auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
+        if (auth()->user()->id != $id) {
+            if (!auth()->user()->hasPermission('users.manage')) {
+                abort(403, 'Access denied');
+            }
         }
-
         UserModel::edit($id, $request);
         session()->flash('flash_message', 'Profile updated successfully');
         return redirect("/user/edit/$id");
     }
 
+
+    public function putView($id, CreateRequest $request)
+    {
+        if (auth()->user()->id != $id) {
+            if (!auth()->user()->hasPermission('users.manage')) {
+                abort(403, 'Access denied');
+            }
+        }
+        UserModel::edit($id, $request);
+        session()->flash('flash_message', 'Profile updated successfully');
+        return redirect("/user/edit/$id");
+    }
     public function getCreate()
     {
         if (!auth()->user()->hasPermission('users.manage')) {

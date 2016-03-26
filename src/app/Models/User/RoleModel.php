@@ -16,7 +16,6 @@ class RoleModel extends BaseModel
             'name' => $request->input('name'),
             'label' => $request->input('name'),
             'description' => $request->input('description'),
-            'level' => 1, // optional, set to 1 by default
         ]);
 
         return $role;

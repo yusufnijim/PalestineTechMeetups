@@ -42,6 +42,9 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         'password', 'remember_token',
     ];
 
+
+
+
     public function getImagetagAttribute($value)
     {
         if (!$this->image) {
@@ -90,6 +93,20 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         }
     }
 
+    public static function professions($rev = NULL)
+    {
+        $array = [
+            1 => 'student',
+            2 => 'employed',
+            3 => 'unemployed',
+        ];
+        if ($rev) {
+            return array_flip($array);
+        } else {
+            return $array;
+        }
+    }
+
     public function setProfessionAttribute($value)
     {
         if ($value == "student") {
@@ -102,6 +119,9 @@ class UserModel extends BaseModel implements AuthenticatableContract,
             return $value;
         }
     }
+
+
+
 
     public static function insert($request)
     {
@@ -144,7 +164,6 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         $user->save();
         return $user;
     }
-
 
     public static function edit($id, $request)
     {
@@ -189,19 +208,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     }
 
 
-    public static function professions($rev = NULL)
-    {
-        $array = [
-            1 => 'student',
-            2 => 'employed',
-            3 => 'unemployed',
-        ];
-        if ($rev) {
-            return array_flip($array);
-        } else {
-            return $array;
-        }
-    }
+
 
     public static function insert_fb($fb_user_object)
     {
