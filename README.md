@@ -31,7 +31,7 @@ $ docker-compose run ntm_web bash -c "cd /var/www/; ./composer install -vvv -n"
 
 4- Create the database using artisan:
 ```
-$ docker-compose run ntm_web bash -c "cd /var/www/; php artisan migrate"
+$ docker-compose run ntm_web bash -c "cd /var/www/; php artisan migrate --seed"
 ```
 
 5- Configure Laravel permissions:
