@@ -60,8 +60,8 @@ trait HasRole
      */
     public function hasPermission($permission)
     {
-        // WARNING: skip permissions check in development mode
-        if (config('app.debug')) {
+        // WARNING: skip permissions check, for use in development mode ONLY
+        if (env('SKIP_PERMISSION_CHECK')) {
             return TRUE;
         };
 

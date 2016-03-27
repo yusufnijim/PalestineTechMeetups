@@ -120,6 +120,10 @@ class UserController extends MyBaseController
         }
     }
 
+    public function deleteDelete($id) {
+        $user = UserModel::find($id)->delete();
+        return redirect("/user");
+    }
     /**
      * Show the application welcome screen to the user.
      *
@@ -171,14 +175,14 @@ trait UserSocalLogin
         if ($user) {
             auth()->login($user);
             session()->flash('flash_message', 'welcome back ' . $user->first_name);
-            return redirect('/user/');
+            return redirect('/profile/');
         } else {
             $new_user = UserModel::insert_fb($fb_user_object);
 
             if ($new_user) {
                 session()->flash('flash_message', 'Welcome ' . $new_user->first_name . ' Account registered');
                 auth()->login($new_user);
-                return redirect('/user/');
+                return redirect('/profile/');
             } else {
                 session()->flash('flash_message', 'some error occurred');
                 return redirect('/login');

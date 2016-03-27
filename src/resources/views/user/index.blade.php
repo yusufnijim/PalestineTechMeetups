@@ -21,8 +21,8 @@
                 <td><a href="{{ url("user/edit/$user->id") }}">edit</a></td>
                 <td>
                     {!! Form::open( [
-                        'url' => "/event/delete/$user->id",
-                        "method" => 'post']
+                        'url' => "/user/delete/$user->id",
+                        "method" => 'delete']
                         ) !!}
                     {!! Form::submit('Delete') !!}
                     {!! Form::close() !!}
