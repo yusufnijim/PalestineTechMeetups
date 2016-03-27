@@ -3,23 +3,24 @@
 @section('content')
 
     <div>
-
-        @foreach($volunteers as $volunteer)
-
-            {!! Form::open(['method' => 'delete']) !!}
-
-            {{ $volunteer->user->first_name }}
-            {{ $volunteer->type }}
-            {!! Form::hidden('record_id', $volunteer->id) !!}
-            {!! Form::submit("Delete") !!}
-            {!! Form::close() !!}
-            <br/>
-            <br/>
-
-        @endforeach
+        <h2>Volunteers </h2>
 
         <div>
-            Volunteers <br/>
+            @foreach($volunteers as $volunteer)
+
+                {!! Form::open(['method' => 'delete']) !!}
+
+                {{ $volunteer->user->first_name }}
+                {{ $volunteer->type }}
+                {!! Form::hidden('record_id', $volunteer->id) !!}
+                {!! Form::submit("Delete") !!}
+                {!! Form::close() !!}
+                <br/>
+                <br/>
+
+            @endforeach
+        </div>
+        <div>
 
             {!! Form::open(['method' => 'post']) !!}
             Member name: {!! Form::select('user_id', $users_list) !!}

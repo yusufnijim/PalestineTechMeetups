@@ -21,12 +21,6 @@ class EventController extends MyBaseController
             ->with('events', $events);
     }
 
-    public function getView($id)
-    {
-        $event = EventModel::findOrFail($id);
-        return view('event/view')->with('event', $event);
-    }
-
 
     public function getCreate()
     {

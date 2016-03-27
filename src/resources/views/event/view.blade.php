@@ -9,7 +9,7 @@
     Location: {{ $event->location }} <br/>
 
     @if($event->is_registration_open)
-        <a href="event/register/{{ $event->id }}">Register now</a>
+        <a href="/registration/signup/{{ $event->id }}">Register now</a>
     @else
         Registration closed
     @endif

@@ -43,8 +43,6 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     ];
 
 
-
-
     public function getImagetagAttribute($value)
     {
         if (!$this->image) {
@@ -121,7 +119,15 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     }
 
 
+    public function events_registered()
+    {
+        return $this->belongsToMany(\App\Models\EventModel::class, 'event_registration', 'user_id', 'event_id')->withPivot('is_attended');
+    }
 
+    public function events_volunteered()
+    {
+        return $this->belongsToMany(\App\Models\EventModel::class, 'event_volunteer', 'user_id', 'event_id')->withPivot('type_id');
+    }
 
     public static function insert($request)
     {
@@ -206,8 +212,6 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         $user->save();
         return $user;
     }
-
-
 
 
     public static function insert_fb($fb_user_object)
