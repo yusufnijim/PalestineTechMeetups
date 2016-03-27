@@ -16,7 +16,7 @@ To run this site:
 
 1- Download source code:
 ```
-git clone https://github.com/NablusTechMeetups/web
+$ git clone https://github.com/NablusTechMeetups/web.git
 ```
 
 2- Fire up the docker containers
@@ -47,4 +47,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Authors
 
-* **Amin M** - *Initial work* - [PurpleBooth](https://github.com/amin-m)
+* **Amin M** - *Initial work* - [Amin-M](https://github.com/amin-m)
