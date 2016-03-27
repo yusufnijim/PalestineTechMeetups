@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::controller('/user', 'UserController');
     Route::controller('/role', 'RoleController');
+    Route::controller('/survey', 'SurveyController');
 
 
     // user routes
