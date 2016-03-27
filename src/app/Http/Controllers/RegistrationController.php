@@ -8,6 +8,11 @@ use App\Models\RegistrationModel;
 class RegistrationController extends MyBaseController
 {
 
+    /**
+     * This function will display the event page, with sign up details
+     * @param $id
+     * @return mixed
+     */
     public function getSignup($id)
     {
         $event = EventModel::findOrFail($id);
