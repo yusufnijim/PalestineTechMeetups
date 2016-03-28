@@ -14,27 +14,27 @@ class CreateUserTable extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
-            
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('arabic_full_name')->nullable();
 
-            $table->string('email')->unique()->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('arabic_full_name');
+
+            $table->string('email')->unique();
             $table->string('password', 60)->nullable();
             $table->rememberToken()->nullable();
-            $table->timestamps();
 
-            $table->string('fb_token')->nullable();
-            $table->string('fb_id')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->string('location')->nullable();
+            $table->string('fb_token');
+            $table->string('fb_id');
+            $table->string('phone_number');
+            $table->string('location');
 
             $table->tinyInteger('profession')->nullable();
-            $table->string('profession_location')->nullable();
+            $table->string('profession_location');
 
             $table->tinyInteger('gender')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image');
 
+            $table->nullableTimestamps();
         });
     }
 

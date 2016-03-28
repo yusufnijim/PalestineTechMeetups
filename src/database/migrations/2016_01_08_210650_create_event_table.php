@@ -21,12 +21,14 @@ class CreateEventTable extends Migration
             $table->tinyInteger('is_registration_open')->nullable();
             $table->integer('max_registrars_count')->nullable();
 
-            $table->timestamp('published_at');
-            $table->date('date');
+            $table->timestamp('published_at')->nullable();
+            $table->date('date')->nullable();
             $table->string('location');
 
+            $table->tinyInteger('require_additional_fields');
+            $table->integer('survey_id');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

@@ -11,6 +11,7 @@
             <th>View registered users</th>
             <th>Event Volunteers</th>
             <th>Edit</th>
+            <th>Additional info</th>
             <th>Delete</th>
         </tr>
         @foreach($events as $event)
@@ -23,6 +24,19 @@
                 <td><a href="{{ url("/event/volunteers/$event->id") }}">Volunteers</a></td>
 
                 <td><a href="{{ url("event/edit/$event->id") }}">edit</a></td>
+
+                <td>
+                    @if($event->require_additional_fields)
+                        @if($event->survey_id)
+                            <a href="{{ url("/survey/edit/$event->survey_id") }}">Info</a>
+                        @else
+                            <a href="{{ url("/survey/create/?event_id=$event->id") }}">Create</a>
+                        @endif
+                    @else
+                        NO
+                    @endif
+
+                </td>
                 <td>
                     {!! Form::open( [
                         'url' => "/event/delete/$event->id",
@@ -31,6 +45,7 @@
                     {!! Form::submit('Delete', ['data-confirm' => "Are you sure to delete this item?"]) !!}
                     {!! Form::close() !!}
                 </td>
+                {{ $event->survey }}
             </tr>
         @endforeach
 

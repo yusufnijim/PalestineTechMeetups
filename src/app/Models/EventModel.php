@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Survey\SurveyModel;
 
 class EventModel extends BaseModel
 {
@@ -23,6 +23,11 @@ class EventModel extends BaseModel
     protected $hidden = [
     ];
 
+    public function survey()
+    {
+        return $this->hasOne(SurveyModel::class, 'id', 'survey_id');
+    }
+
     public static function insert($request)
     {
         return Static::create([
@@ -32,6 +37,7 @@ class EventModel extends BaseModel
             'location' => $request->location,
             'date' => $request->date,
             'max_registrars_count' => $request->max_registrars_count,
+            'require_additional_fields' => $request->max_registrars_count,
         ]);
     }
 
@@ -43,7 +49,7 @@ class EventModel extends BaseModel
             'is_registration_open' => $request->is_registration_open,
             'location' => $request->location,
             'date' => $request->date,
-            'max_registrars_count' => $request->max_registrars_count,
+            'require_additional_fields' => $request->max_registrars_count,
         ]);
     }
 

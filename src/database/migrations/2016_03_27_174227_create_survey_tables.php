@@ -12,65 +12,91 @@ class CreateSurveyTables extends Migration
      */
     public function up()
     {
-        //
+        // survey table
         Schema::create('survey', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name');
-            $table->longText('description');
-//            $table->tinyInteger('is_published')->nullable();
+            $table->string('name'); // name of this survey
+            $table->longText('description')->nullable(); // description
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
 
-        //
+        // question types table
+        Schema::create('survey_question_type', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+
+            $table->nullableTimestamps();
+        });
+
+
+        // questions table
         Schema::create('survey_question', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('question');
-            $table->string('type');
+            $table->string('question'); // question value
 
-            $table->longText('choices');
-
-            $table->integer('survey_id')->unsigned();
+            $table->integer('survey_id')->unsigned(); // which survey the question belongs to
             $table->foreign('survey_id')
                 ->references('id')
                 ->on('survey')
                 ->onDelete('cascade');
 
+            $table->integer('type_id')->unsigned(); // type of the question, text, paragraph, dropdown, select...etc
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('survey_question_type')
+                ->onDelete('cascade');
 
-            $table->string('rule');
 
+            $table->longText('choice')->nullable(); // potential values this question has.
+            $table->longText('default')->nullable(); // potential values this question has.
 
-            $table->timestamps();
+            $table->string('rule')->nullable();
+            $table->integer('order')->unsigned()->nullable(); // will hold the order of questions to be diplayed in
+
+            $table->nullableTimestamps();
         });
 
-
-        //
-        Schema::create('survey_answer', function (Blueprint $table) {
+        // answers table
+        Schema::create('survey_question_answer', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('user_id');
+            $table->integer('user_id'); // user who submitted this answer
 
-            $table->integer('exam_id')->unsigned();
-            $table->foreign('exam_id')
+            $table->integer('survey_id')->unsigned(); //survey this answer belongs to
+            $table->foreign('survey_id')
                 ->references('id')
                 ->on('survey')
                 ->onDelete('cascade');
 
-            $table->integer('question_id')->unsigned();
-
+            $table->integer('question_id')->unsigned(); // the question this answer belongs to
             $table->foreign('question_id')
                 ->references('id')
                 ->on('survey_question')
                 ->onDelete('cascade');
 
 
-            $table->string('answer');
+            $table->string('answer'); // value submitted by the user
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
 
+
+        // default question types, supported already
+        DB::table('survey_question_type')->insert(
+            array(
+                array('name' => 'Short answer'),
+                array('name' => 'Paragraph'),
+                array('name' => 'Multiple choice'),
+                array('name' => 'Checkboxes'),
+                array('name' => 'Dropdown'),
+                array('name' => 'Linear scale'),
+                array('name' => 'Multiple choice grid'),
+                array('name' => 'Date'),
+                array('name' => 'Time'),
+            ));
     }
 
     /**
@@ -81,8 +107,10 @@ class CreateSurveyTables extends Migration
     public function down()
     {
         //
-        Schema::drop('survey_answer');
+        Schema::drop('survey_question_answer');
         Schema::drop('survey_question');
+
+        Schema::drop('survey_question_type');
         Schema::drop('survey');
     }
 }

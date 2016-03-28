@@ -5,7 +5,7 @@
 @section('content')
     <div>
         {!! Form::open() !!}
-        Title: {!! Form::text('title', '', ['required' => 'true']) !!} <br / >
+        Title: {!! Form::text('title', '', ['required' => 'true']) !!} <br/>
         Body: {!! Form::textarea('body', '', ['class'=>'event_body', 'id' => 'event_body']) !!}
         <br/>
 
@@ -13,6 +13,9 @@
         registration open: {!! Form::checkbox('is_registration_open', true, true) !!} <br/>
         Event Date: {!! Form::date('date', '', ['class'=> 'event_date', 'required' => 'true']) !!} <br/>
         Location: {!! Form::textarea('location', '', ['size' => '30x2', ]) !!} <br/>
+
+        Require additional user details: {!! Form::checkbox('require_additional_fields', true, false) !!} <br/>
+
         {!! Form::submit('create') !!}
 
         {!! Form::close() !!}

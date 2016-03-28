@@ -3,7 +3,7 @@
 
 @section('content')
     <div>
-        <h2>{{ $event->title }} </h2><br /> <br /> <br />
+        <h2>{{ $event->title }} </h2><br/> <br/> <br/>
 
         Event description{!!  $event->body !!}
 
@@ -14,10 +14,19 @@
         @elseif($status)
             <h4> You signed up for this event </h4>
         @else
-            {!! Form::open() !!}
 
-            {!! Form::submit('register now') !!}
-            {!! Form::close() !!}
+            @if(!$event->require_addional_fields)
+                {!! Form::open() !!}
+
+                {!! Form::submit('register now') !!}
+                {!! Form::close() !!}
+            @else
+                {!! Form::open() !!}
+
+                {!! Form::submit('register now') !!}
+                {!! Form::close() !!}
+
+            @endif
         @endif
     </div>
 @stop

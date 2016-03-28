@@ -16,9 +16,21 @@ class CreateRoleTable extends Migration
             $table->string('name');
             $table->string('label');
             $table->string('description');
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
+
+        DB::table('role')->insert([
+            'name' => 'administrator',
+            'label' => 'Administrator',
+
+        ]);
+        DB::table('role')->insert([
+            'name' => 'volunteer',
+            'label' => 'Volunteer',
+        ]);
+
     }
+
     /**
      * Reverse the migrations.
      *

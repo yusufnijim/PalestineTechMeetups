@@ -29,6 +29,7 @@ class CreateRequest extends Request
             'is_registration_open' => 'bool',
             'date' => 'required|date',
             'max_registrars_count' => 'required|integer|between:1,999',
+            'require_additional_fields' => 'bool',
         ];
     }
 }

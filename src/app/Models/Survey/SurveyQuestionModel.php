@@ -4,9 +4,9 @@ namespace App\Models\Survey;
 
 use App\Models\BaseModel;
 
-class SurveyModel extends BaseModel
+class SurveyQuestionModel extends BaseModel
 {
-    protected $table = 'survey';
+    protected $table = 'survey_question';
     /**
      * The attributes that are mass assignable.
      *
@@ -25,26 +25,19 @@ class SurveyModel extends BaseModel
     protected $hidden = [
     ];
 
-    public function questions()
+    public function type()
     {
 //        return $this->belongsToMany(\App\Models\User\RoleModel::class, "permission_role", 'user_id', 'role_id');
-        return $this->hasMany(SurveyQuestionModel::class, 'survey_id', 'id');
+        return $this->hasOne(SurveyQuestionTypeModel::class, 'id', 'type_id');
     }
 
-    public static function insert($request)
-    {
-        dd($request->input());
-        return Static::create([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
-    }
 
     public static function edit($id, $request)
     {
-        return Static::findOrFail($id)->update([
-            'name' => $request->name,
-            'description' => $request->description,
+        return Static::find($id)->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'is_published' => $request->is_published,
         ]);
     }
 

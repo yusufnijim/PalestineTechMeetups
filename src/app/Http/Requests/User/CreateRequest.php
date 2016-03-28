@@ -32,7 +32,7 @@ class CreateRequest extends Request
             'phone_number' => 'numeric|digits_between:8,12',
             'profession' => 'max:255',
             'profession_location' => 'max:255',
-            'gender' => 'bool',
+            'gender' => '',
             'image' => 'image'
         ];
     }

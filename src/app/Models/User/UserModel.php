@@ -42,6 +42,10 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         'password', 'remember_token',
     ];
 
+    public function getNameAttribute($value)
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 
     public function getImagetagAttribute($value)
     {
@@ -131,50 +135,18 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 
     public static function insert($request)
     {
-
-        $user = new Static();
-        $user->fill([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'location' => $request->location,
-
-            'arabic_full_name' => $request->arabic_full_name,
-            'profession' => $request->profession,
-            'profession_location' => $request->profession_location,
-
-            'phone_number' => $request->phone_number,
-            'gender' => $request->gender,
-        ]);
-        // to use the attribute set method
-        $user->profession = $request->profession;
-
-
-        $image = $request->file('image');
-        if ($image) {
-            $original_name = $image->getClientOriginalName();
-
-            $ext = get_extension($original_name);
-            if (in_array($ext, static::$user_images_allowed_extensions)) {
-
-                $new_file = $id . $request->file('image')->getClientOriginalName();
-                $result = $request->file('image')
-                    ->move(public_path() . static::$user_images_upload_directory,
-                        $new_file
-                    );
-
-                $user->image = $new_file;
-            } else {
-                session()->flash('flash_message', 'unkown image file extension');
-            }
-        }
-        $user->save();
+        $user = static::_handleCreateEdit(new Static(), $request);
         return $user;
     }
 
     public static function edit($id, $request)
     {
+        $user = static::_handleCreateEdit(Static::findOrFail($id), $request);
+        return $user;
+    }
 
-        $user = Static::findOrFail($id);
+    private static function _handleCreateEdit($user, $request)
+    {
         $user->fill([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -187,10 +159,19 @@ class UserModel extends BaseModel implements AuthenticatableContract,
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
         ]);
+
         // to use the attribute set method
         $user->profession = $request->profession;
 
+        $user->save();
+        static::_uploadUserImage($user, $request);
 
+        $user->save();
+        return $user;
+    }
+
+    private static function _uploadUserImage($user, $request)
+    {
         $image = $request->file('image');
         if ($image) {
             $original_name = $image->getClientOriginalName();
@@ -198,7 +179,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
             $ext = get_extension($original_name);
             if (in_array($ext, static::$user_images_allowed_extensions)) {
 
-                $new_file = $id . $request->file('image')->getClientOriginalName();
+                $new_file = $user->id . $request->file('image')->getClientOriginalName();
                 $result = $request->file('image')
                     ->move(public_path() . static::$user_images_upload_directory,
                         $new_file
@@ -209,10 +190,9 @@ class UserModel extends BaseModel implements AuthenticatableContract,
                 session()->flash('flash_message', 'unkown image file extension');
             }
         }
-        $user->save();
+
         return $user;
     }
-
 
     public static function insert_fb($fb_user_object)
     {

@@ -16,6 +16,9 @@
                 <th>User name</th>
                 <th>Arabic full name</th>
                 <th>Registered at</th>
+                @if($event->require_additional_fields AND $event->survey_id)
+                    <th>Addtional fields</th>
+                @endif
                 <th>Accepted</th>
                 <th>Attended</th>
                 <th>Image</th>
@@ -28,6 +31,11 @@
                     <td>{{ $instance->user->arabic_full_name }}</td>
                     <td>{{ $instance->created_at }}</td>
 
+                    @if($event->require_additional_fields AND $event->survey_id)
+                        <td>
+                            <a href="/survey/answer/{{$event->survey_id}}/{{$instance->user->id}}">View</a>
+                        </td>
+                    @endif
 
                     <td> {!! Form::open(['method' => 'post', 'url' => 'registration/updateaccepted/' . $event->id]) !!}
                         {!! Form::hidden('user_id', $instance->user_id) !!}
