@@ -32,8 +32,9 @@ class BlogController extends MyBaseController
         if (!auth()->user()->hasPermission('blog.manage')) {
             abort(403, 'Access denied');
         }
-
-        return view('blog/create');
+        $blog = new BlogModel();
+        return view('blog/create')
+            ->with('blog', $blog);
     }
 
     public function postCreate(CreateRequest $request)

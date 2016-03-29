@@ -42,11 +42,22 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         'password', 'remember_token',
     ];
 
+    /**
+     * return user's full name.
+     *
+     * @param $value
+     * @return string
+     */
     public function getNameAttribute($value)
     {
         return $this->first_name . " " . $this->last_name;
     }
 
+    /**
+     * Return HTML tag for user image
+     * @param $value
+     * @return string
+     */
     public function getImagetagAttribute($value)
     {
         if (!$this->image) {
@@ -59,29 +70,37 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         return $result;
     }
 
-
-    public function getGenderAttribute($value)
+    /**
+     * return display name for gender, male/female
+     * @return int|string
+     */
+    public function getGenderNameAttribute()
     {
-        if ($value == 1) {
+        if ($this->gender == 1) {
             return "Male";
-        } elseif ($value == 2) {
+        } elseif ($this->gender == 2) {
             return "Female";
         } else {
-            return "not specified";
-        }
-    }
-
-    public function setGenderAttribute($value)
-    {
-        if ($value == "male") {
             return 1;
-        } elseif ($value == "female") {
-            return 2;
-        } else {
-            return 0;
         }
     }
 
+//    public function setGenderAttribute($value)
+//    {
+//        if ($value === "male") {
+//            return 1;
+//        } elseif ($value === "female") {
+//            return 2;
+//        } else {
+//            return $value;
+//        }
+//    }
+
+    /**
+     *
+     * @param $value
+     * @return string
+     */
     public function getProfessionAttribute($value)
     {
         if ($value == 1) {
@@ -95,6 +114,11 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         }
     }
 
+    /**
+     * return user profession name or value.
+     * @param null $rev
+     * @return array
+     */
     public static function professions($rev = NULL)
     {
         $array = [
@@ -109,42 +133,55 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         }
     }
 
-    public function setProfessionAttribute($value)
-    {
-        if ($value == "student") {
-            return 1;
-        } elseif ($value == "Employed") {
-            return 2;
-        } elseif ($value == "Unemployed") {
-            return 3;
-        } else {
-            return $value;
-        }
-    }
 
-
+    /**
+     * Return events this user registered in.
+     * @return $this
+     */
     public function events_registered()
     {
         return $this->belongsToMany(\App\Models\EventModel::class, 'event_registration', 'user_id', 'event_id')->withPivot('is_attended');
     }
 
+    /**
+     * return events this user volunteered in.
+     * @return $this
+     */
     public function events_volunteered()
     {
         return $this->belongsToMany(\App\Models\EventModel::class, 'event_volunteer', 'user_id', 'event_id')->withPivot('type_id');
     }
 
+    /**
+     * insert new user
+     * @param $request
+     * @return mixed
+     */
     public static function insert($request)
     {
         $user = static::_handleCreateEdit(new Static(), $request);
         return $user;
     }
 
+    /**
+     * Edit user attributes
+     * @param $id
+     * @param $request
+     * @return mixed
+     */
     public static function edit($id, $request)
     {
         $user = static::_handleCreateEdit(Static::findOrFail($id), $request);
         return $user;
     }
 
+
+    /**
+     * This function will handle user attributes, creating or editing
+     * @param $user
+     * @param $request
+     * @return mixed
+     */
     private static function _handleCreateEdit($user, $request)
     {
         $user->fill([
@@ -158,18 +195,25 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
+            'profession' => $request->profession,
         ]);
 
-        // to use the attribute set method
-        $user->profession = $request->profession;
-
+        $user->gender = $request->gender;
         $user->save();
+
+
         static::_uploadUserImage($user, $request);
 
         $user->save();
         return $user;
     }
 
+    /**
+     * handle user image uploads
+     * @param $user
+     * @param $request
+     * @return mixed
+     */
     private static function _uploadUserImage($user, $request)
     {
         $image = $request->file('image');
@@ -194,6 +238,11 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         return $user;
     }
 
+    /**
+     * insert user from FB login
+     * @param $fb_user_object
+     * @return static
+     */
     public static function insert_fb($fb_user_object)
     {
         $instance = new Static();
@@ -212,12 +261,11 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         return $instance;
 
     }
-}
 
-function get_extension($file)
-{
-    $file_array = explode(".", $file);
-    $extension = end($file_array);
-
-    return $extension ? $extension : false;
+    public function accessMediasAll()
+    {
+        if ($this->hasPermission('blog.edit'))
+            return true;
+        // return true for access to all medias
+    }
 }

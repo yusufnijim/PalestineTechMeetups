@@ -6,6 +6,7 @@ use App\Http\Requests\Event\CreateRequest as CreateRequest;
 use App\Models\EventModel;
 use App\Models\User\UserModel;
 use App\Models\VolunteerModel;
+use Illuminate\Console\Scheduling\Event;
 
 class EventController extends MyBaseController
 {
@@ -28,7 +29,8 @@ class EventController extends MyBaseController
             abort(403, 'Access denied');
         }
 
-        return view('event/create');
+        return view('event/create')
+            ->with("event", new EventModel());
     }
 
     public function postCreate(CreateRequest $request)

@@ -26,6 +26,29 @@ class UserController extends MyBaseController
             ->with('users', $users);
     }
 
+
+    public function getCreate()
+    {
+        if (!auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
+        $user = new UserModel();
+        return view('/user/create')
+            ->with('user', $user);
+    }
+
+    public function postCreate(CreateRequest $request)
+    {
+        if (!auth()->user()->hasPermission('users.manage')) {
+            abort(403, 'Access denied');
+        }
+
+        UserModel::insert($request);
+        session()->flash('flash_message', 'Profile created successfully');
+        return redirect("/user/");
+    }
+
     public function getEdit($id)
     {
         if (auth()->user()->id != $id) {
@@ -35,7 +58,7 @@ class UserController extends MyBaseController
         }
 
         $user = UserModel::findOrFail($id);
-        return view('/user/view')
+        return view('/user/edit')
             ->with('user', $user);
     }
 
@@ -52,37 +75,15 @@ class UserController extends MyBaseController
     }
 
 
-    public function putView($id, CreateRequest $request)
-    {
-        if (auth()->user()->id != $id) {
-            if (!auth()->user()->hasPermission('users.manage')) {
-                abort(403, 'Access denied');
-            }
-        }
-        UserModel::edit($id, $request);
-        session()->flash('flash_message', 'Profile updated successfully');
-        return redirect("/user/edit/$id");
-    }
-    public function getCreate()
+    public function getView($id)
     {
         if (!auth()->user()->hasPermission('users.manage')) {
             abort(403, 'Access denied');
         }
 
-        $user = new UserModel();
-        return view('/user/create')
+        $user = UserModel::findOrFail($id);
+        return view('/user/view')
             ->with('user', $user);
-    }
-
-    public function putCreate(CreateRequest $request)
-    {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
-
-        UserModel::insert($request);
-        session()->flash('flash_message', 'Profile updated successfully');
-        return redirect("/user/");
     }
 
 
@@ -90,7 +91,7 @@ class UserController extends MyBaseController
     {
         if (auth()->check()) {
             $user = auth()->user();
-            return redirect("/user/edit/$user->id");
+            return redirect("/user/view/$user->id");
         } else {
             abort(404);
         }
@@ -101,7 +102,8 @@ class UserController extends MyBaseController
         return view('user/login');
     }
 
-    public function postLogin()
+    public
+    function postLogin()
     {
         $credentials = \Input::only('email', 'password');
         $user = UserModel::where('email', \Input::get('email'))->first();
@@ -120,16 +122,20 @@ class UserController extends MyBaseController
         }
     }
 
-    public function deleteDelete($id) {
+    public
+    function deleteDelete($id)
+    {
         $user = UserModel::find($id)->delete();
         return redirect("/user");
     }
+
     /**
      * Show the application welcome screen to the user.
      *
      * @return Response
      */
-    public function getRegister()
+    public
+    function getRegister()
     {
         return redirect('/user/login');
     }
@@ -140,7 +146,8 @@ class UserController extends MyBaseController
      * @return Response
      */
 
-    public function anyLogout()
+    public
+    function anyLogout()
     {
         session()->flash('flash_message', 'User logged out successfully');
         auth()->logout();

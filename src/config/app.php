@@ -160,6 +160,7 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Bestmomo\Filemanager\FilemanagerServiceProvider::class,
     ],
 
     /*
