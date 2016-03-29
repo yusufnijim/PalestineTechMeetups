@@ -14,18 +14,18 @@ class CreateEventTable extends Migration
     {
         Schema::create('event', function (Blueprint $table) {
             $table->increments('id');
-            
+
 
             $table->string('title');
             $table->longText('body');
             $table->tinyInteger('is_registration_open')->nullable();
             $table->integer('max_registrars_count')->nullable();
 
-            $table->timestamp('published_at')->nullable();
+            $table->tinyInteger('is_published')->nullable();
             $table->date('date')->nullable();
             $table->string('location');
 
-            $table->tinyInteger('require_additional_fields');
+            $table->tinyInteger('require_additional_fields')->nullable();
             $table->integer('survey_id');
 
             $table->nullableTimestamps();

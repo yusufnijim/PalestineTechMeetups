@@ -25,8 +25,9 @@ $factory->define(App\Models\EventModel::class, function (Faker\Generator $faker)
     return [
         'title' => $faker->text(10),
         'body' => $faker->text(400),
-        'max_registrars_count' => rand(1,999),
+        'max_registrars_count' => rand(1, 999),
         'is_registration_open' => $faker->boolean(),
+        'is_published' => $faker->boolean(),
         'location' => $faker->address,
         'date' => $faker->dateTime(),
     ];

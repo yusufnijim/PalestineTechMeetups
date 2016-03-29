@@ -21,7 +21,7 @@ class SurveyController extends MyBaseController
 
     public function getCreate()
     {
-        return view("survey/create");
+        return view("survey/create")->with('survey', new SurveyModel());
     }
 
     public function postCreate()

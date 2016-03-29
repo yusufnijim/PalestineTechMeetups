@@ -3,7 +3,7 @@
 @section('content')
 
 
-    {!! $user !!}
+    {{ $user }}
     <br />
     <br />
     <br />

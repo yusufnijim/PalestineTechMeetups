@@ -1,18 +1,9 @@
-@extends('layout.backend')
+@extends('survey.form')
 
-@section('content')
-
-    <div>
-        {!! Form::open() !!}
-        Title: {!! Form::text('name', '', ['required' => 'true']) !!} <br/>
-        Body: {!! Form::textarea('description', '', ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
+@section('form')
 
 
-        {!! Form::submit('create') !!}
+    {!! Form::open([ 'method' => 'post']) !!}
 
-        {!! Form::close() !!}
-
-
-    </div>
 
 @stop

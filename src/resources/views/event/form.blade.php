@@ -15,11 +15,13 @@
     Event Date: {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
     Location: {!! Form::textarea('location', $event->location, ['size' => '30x2']) !!} <br/>
 
+    Published: {!! Form::checkbox('is_published', 1, $event->is_published) !!} <br/>
+
     Require additional user details: {!! Form::checkbox('require_additional_fields', true, $event->require_additional_fields) !!}
     <br/>
 
-    {!! Form::submit('update') !!}
 
+    {!! Form::submit('submit') !!}
     {!! Form::close() !!}
 
 

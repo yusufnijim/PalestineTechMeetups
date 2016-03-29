@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\EventModel;
-use App\Models\User\UserModel;
-use App\Models\User\RoleModel;
+use App\Models\BlogModel;
+use App\Models\EventModel;
 
 class HomeController extends MyBaseController
 {
     public function anyIndex()
     {
-        return view("frontend.index");
+        $blogs = BlogModel::published()->take(3)->get();
+        $events = EventModel::published()->take(3)->get();
+        return view("frontend.index")
+            ->with('events', $events)
+            ->with('blogs', $blogs);
     }
 
 

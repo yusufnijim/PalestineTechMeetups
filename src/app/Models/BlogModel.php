@@ -41,4 +41,8 @@ class BlogModel extends BaseModel
         ]);
     }
 
+    public function scopePublished($query, $flag = true)
+    {
+        return $query->where('is_published', $flag);
+    }
 }

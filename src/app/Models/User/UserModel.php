@@ -248,8 +248,8 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         $instance = new Static();
         $instance->fill([
             'email' => $fb_user_object->email,
-            'first_name' => $fb_user_object->user['first_name'],
-            'last_name' => $fb_user_object->user['last_name'],
+            'first_name' => $fb_user_object->user['name'],
+//            'last_name' => $fb_user_object->user['last_name'],
 
             'fb_id' => $fb_user_object->user['id'],
             'fb_token' => $fb_user_object->token,

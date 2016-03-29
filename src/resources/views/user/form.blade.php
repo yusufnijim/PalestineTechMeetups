@@ -24,7 +24,8 @@
     {!! $user->imagetag !!}
     Image: {!! Form::file('image') !!}
 
-    {!! Form::submit("save") !!}
+
+    {!! Form::submit('submit') !!}
     {!! Form::close() !!}
 
 

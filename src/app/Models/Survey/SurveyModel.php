@@ -33,10 +33,10 @@ class SurveyModel extends BaseModel
 
     public static function insert($request)
     {
-        dd($request->input());
+//        dd($request->input());
         return Static::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $request->description2,
         ]);
     }
 
@@ -44,7 +44,7 @@ class SurveyModel extends BaseModel
     {
         return Static::findOrFail($id)->update([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $request->description2,
         ]);
     }
 

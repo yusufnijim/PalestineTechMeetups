@@ -9,8 +9,8 @@
 
     Published: {!! Form::checkbox('is_published', true, $blog->is_published) !!} <br/>
 
-    {!! Form::submit('update') !!}
 
+    {!! Form::submit('submit') !!}
     {!! Form::close() !!}
 
 
@@ -19,7 +19,9 @@
         CKEDITOR.replace('body', {
             filebrowserBrowseUrl: '{!! url('filemanager/index.html') !!}'
         });
+
+
     </script>
-    </div>
+
 
 @stop
