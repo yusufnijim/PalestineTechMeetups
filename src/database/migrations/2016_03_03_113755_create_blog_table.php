@@ -17,6 +17,9 @@ class CreateBlogTable extends Migration
             $table->increments('id');
 
             $table->string('title');
+
+            $table->string('permalink', 255)->unique();
+
             $table->longText('body');
             $table->tinyInteger('is_published')->nullable();
 

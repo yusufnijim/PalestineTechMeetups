@@ -5,6 +5,7 @@
     @yield('form')
 
     Title: {!! Form::text('title', $event->title, ['required' => 'true']) !!} <br/>
+    Permalink: {!! Form::text('permalink', $event->permalink, ['required' => 'true']) !!} <br/>
     Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body']) !!}
     <br/>
 

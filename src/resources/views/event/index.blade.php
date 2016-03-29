@@ -42,7 +42,7 @@
                         'url' => "/event/delete/$event->id",
                         "method" => 'post']
                         ) !!}
-                    {!! Form::submit('Delete', ['data-confirm' => "Are you sure to delete this item?"]) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block' , 'onclick' => 'return confirm("Are you sure you want to delete?")']) !!}
                     {!! Form::close() !!}
                 </td>
                 {{ $event->survey }}

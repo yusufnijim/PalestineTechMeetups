@@ -1,7 +1,6 @@
 @extends('layout.backend')
 
 
-
 @section('title', 'Page Title')
 
 
@@ -14,53 +13,54 @@
 
 
 @section('content')
-<br />
-<br />
-<br />
-<br />
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
-	<table border=1>
-			<tr>
-				<th>
-					Label
-				</th>
-				<th>
-					Name
-				</th>
-				<th>
-					Description
-				</th>
-				<th>
-					Delete
-				</th>
-			</tr>
-		@foreach($roles as $role)
-			<tr>
-				<td> {{ $role->label }} </td>
-				<td> {{ $role->name }} </td>
-				<td> {{ $role->description }} </td>
+    <table border=1>
+        <tr>
+            <th>
+                Label
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+        @foreach($roles as $role)
+            <tr>
+                <td> {{ $role->label }} </td>
+                <td> {{ $role->name }} </td>
+                <td> {{ $role->description }} </td>
 
-				<td>
-					{!! Form::open(['method' => 'delete']) !!}
-						{!! Form::submit('Delete') !!}
-						{!! Form::hidden('id', $role->id) !!}
-					{!! Form::close() !!}
-				<td>
-			</tr>
-	    @endforeach
+                <td>
+                {!! Form::open(['method' => 'delete']) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block' , 'onclick' => 'return confirm("Are you sure you want to delete?")']) !!}
 
-	</table>
+                {!! Form::hidden('id', $role->id) !!}
+                {!! Form::close() !!}
+                <td>
+            </tr>
+        @endforeach
 
-<br />
-	{!! Form::open() !!}
+    </table>
 
-		{!! Form::label('name', 'name') !!}
-		{!! Form::text('name') !!} <br />
+    <br/>
+    {!! Form::open() !!}
 
-		{!! Form::label('description', 'description') !!}
-		{!! Form::text('description') !!} <br />
+    {!! Form::label('name', 'name') !!}
+    {!! Form::text('name') !!} <br/>
 
-		{!! Form::submit('Create') !!}
-	{!! Form::close() !!}
+    {!! Form::label('description', 'description') !!}
+    {!! Form::text('description') !!} <br/>
+
+    {!! Form::submit('Create') !!}
+    {!! Form::close() !!}
 @endsection
 

@@ -22,7 +22,7 @@
                         'url' => "/blog/delete/$blog->id",
                         "method" => 'post']
                         ) !!}
-                    {!! Form::submit('Delete') !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block' , 'onclick' => 'return confirm("Are you sure you want to delete?")']) !!}
                     {!! Form::close() !!}
                 </td>
             </tr>

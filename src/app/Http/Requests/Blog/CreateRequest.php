@@ -25,6 +25,7 @@ class CreateRequest extends Request
     {
         return [
             'title' => 'required|max:255',
+            'permalink' => 'required|unique:event,permalink',
             'body' => 'required',
             'is_published' => 'bool',
         ];

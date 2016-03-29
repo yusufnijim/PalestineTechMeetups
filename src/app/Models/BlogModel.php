@@ -25,21 +25,31 @@ class BlogModel extends BaseModel
 
     public static function insert($request)
     {
-        return Static::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'is_published' => $request->is_published,
-        ]);
+
+        $instance = static::_handleCreateEdit(new Static(), $request);
+        return $instance;
     }
 
     public static function edit($id, $request)
     {
-        return Static::find($id)->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'is_published' => $request->is_published,
-        ]);
+        $instance = static::_handleCreateEdit(Static::findOrFail($id), $request);
+        return $instance;
     }
+
+    private static function _handleCreateEdit($instance, $request)
+    {
+        $instance->fill([
+                'title' => $request->title,
+
+                'permalink' => $request->permalink,
+                'body' => $request->body,
+                'is_published' => $request->is_published,
+            ]
+        );
+        $instance->save();
+        return $instance;
+    }
+
 
     public function scopePublished($query, $flag = true)
     {

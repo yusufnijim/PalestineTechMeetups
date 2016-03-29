@@ -33,19 +33,22 @@ class SurveyModel extends BaseModel
 
     public static function insert($request)
     {
-//        dd($request->input());
-        return Static::create([
-            'name' => $request->name,
-            'description' => $request->description2,
-        ]);
+        $instance = static::_handleCreateEdit(new Static(), $request);
     }
 
     public static function edit($id, $request)
     {
-        return Static::findOrFail($id)->update([
+        return static::_handleCreateEdit(Static::findOrFail($id), $request);
+    }
+
+    private static function _handleCreateEdit($instance, $request)
+    {
+        $instance->fill([
             'name' => $request->name,
             'description' => $request->description2,
         ]);
-    }
+        $instance->save();
 
+        return $instance;
+    }
 }

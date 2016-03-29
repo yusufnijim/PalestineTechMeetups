@@ -25,6 +25,8 @@ $factory->define(App\Models\EventModel::class, function (Faker\Generator $faker)
     return [
         'title' => $faker->text(10),
         'body' => $faker->text(400),
+        'permalink' => $faker->text(20),
+
         'max_registrars_count' => rand(1, 999),
         'is_registration_open' => $faker->boolean(),
         'is_published' => $faker->boolean(),
@@ -37,6 +39,7 @@ $factory->define(App\Models\EventModel::class, function (Faker\Generator $faker)
 $factory->define(App\Models\BlogModel::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->text(10),
+        'permalink' => $faker->text(20),
         'body' => $faker->text(400),
         'is_published' => $faker->boolean(),
     ];

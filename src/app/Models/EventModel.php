@@ -33,7 +33,6 @@ class EventModel extends BaseModel
     {
         $instance = static::_handleCreateEdit(new Static(), $request);
         return $instance;
-
     }
 
     public static function edit($id, $request)
@@ -48,6 +47,7 @@ class EventModel extends BaseModel
         $instance->fill([
                 'title' => $request->title,
                 'body' => $request->body,
+                'permalink' => $request->permalink,
                 'is_registration_open' => $request->is_registration_open,
                 'location' => $request->location,
                 'date' => $request->date,

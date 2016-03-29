@@ -25,7 +25,7 @@
                         'url' => "/user/delete/$user->id",
                         "method" => 'delete']
                         ) !!}
-                    {!! Form::submit('Delete') !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block' , 'onclick' => 'return confirm("Are you sure you want to delete?")']) !!}
                     {!! Form::close() !!}
                 </td>
                 <td>
