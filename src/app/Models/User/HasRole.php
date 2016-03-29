@@ -21,22 +21,31 @@ trait HasRole
      * @param  string $role
      * @return mixed
      */
-    public function assignRole($role)
+    public function assignRole($role, $save = true)
     {
         // if we passed a role name, find it
         if (is_string($role)) {
             $role = RoleModel::whereName($role)->first();
         }
 
-
         // if user already has the role, return true.
-        if (($this->roles()->find([$role->id])->count())) {
+        if ($save AND ($this->roles()->find([$role->id])->count())) {
             return $role;
         }
 
         // assign role
-        return $this->roles()->save(($role));
+        if ($save) {
+            return $this->roles()->save(($role));
+        } else {
+            return $this->roles()->detach(($role));
+        }
     }
+
+    public function revokeRole($role, $save = false)
+    {
+        return $this->assignRole($role, $save);
+    }
+
 
     /**
      * Determine if the user has the given role.
@@ -49,7 +58,9 @@ trait HasRole
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
-        return !!$role->intersect($this->roles)->count();
+//        dd($role->name);
+        return $this->roles()->find([$role->id])->count();
+//        return !!$role->intersect($this->roles)->count();
     }
 
     /**

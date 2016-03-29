@@ -11,6 +11,7 @@
             <th>Image</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Roles</th>
         </tr>
         @foreach($users as $user)
             <tr>
@@ -26,6 +27,9 @@
                         ) !!}
                     {!! Form::submit('Delete') !!}
                     {!! Form::close() !!}
+                </td>
+                <td>
+                    <a href="/role/user/{{$user->id}}">Manage</a>
                 </td>
             </tr>
         @endforeach

@@ -26,17 +26,17 @@ $ docker-compose up
 
 3- Install third party packages using composer:
 ```
-$ docker-compose run ntm_web bash -c "cd /var/www/; ./composer install -vvv -n"
+$ docker-compose run web bash -c "cd /var/www/; ./composer install -vvv -n"
 ```
 
 4- Create the database using artisan:
 ```
-$ docker-compose run ntm_web bash -c "cd /var/www/; php artisan migrate --seed"
+$ docker-compose run web bash -c "cd /var/www/; php artisan migrate --seed"
 ```
 
 5- Configure Laravel permissions:
 ```
-$ chmod 777 src/storage/ src/bootstrap/cache -R
+$ chmod 777 src/storage/ src/bootstrap/cache src/public/userimages -R
 ```
 
 Walla, you rock !

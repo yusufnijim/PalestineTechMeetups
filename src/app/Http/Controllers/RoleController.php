@@ -86,4 +86,25 @@ class RoleController extends MyBaseController
         return redirect('/role/permission');
     }
 
+    public function getUser($user_id)
+    {
+        $user = UserModel::find($user_id);
+//        $user->assignRole('administrator');
+        $roles = RoleModel::all();
+        return view('role/user')
+            ->with('user', $user)
+            ->with('roles', $roles);
+    }
+
+    public function postUser($user_id)
+    {
+        $user = UserModel::find($user_id);
+        $role = RoleModel::find(request()->role_id);
+        if ($user->hasRole($role)) {
+            $user->revokeRole($role);
+        } else {
+            $user->assignRole($role);
+        }
+        return redirect('role/user/' . $user_id);
+    }
 }

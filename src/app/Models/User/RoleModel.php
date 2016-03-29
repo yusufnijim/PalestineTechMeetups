@@ -52,12 +52,16 @@ class RoleModel extends BaseModel
             return $permission;
         }
 
-        if($save) {
+        if ($save) {
             // assign the permission to this role
             return $this->permissions()->save($permission);
-        }
-        else {
+        } else {
             return $this->permissions()->detach($permission);
         }
+    }
+
+    public function revokePermissionFrom($permission, $save = false)
+    {
+        $this->givePermissionTo($permission, $save);
     }
 }
