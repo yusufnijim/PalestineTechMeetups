@@ -8,6 +8,8 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">Nablus Tech Meetups</a>
+        <a class="" href="/event">Events</a>
+        <a class="" href="/blog">Blog</a>
     </div>
 
     <!-- /.navbar-header -->

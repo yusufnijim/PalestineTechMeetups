@@ -10,6 +10,9 @@
     <meta name="author" content="">
 
     <title>{{ isset($title) ? $title . " | " : ""  }} Nablus Tech Meetups</title>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"
+            integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+            crossorigin="anonymous"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -76,7 +79,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/dist/js/sb-admin-2.js"></script>
-
 </body>
 
 </html>
