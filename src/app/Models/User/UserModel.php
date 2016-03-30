@@ -196,8 +196,8 @@ class UserModel extends BaseModel implements AuthenticatableContract,
             'gender' => $request->gender,
             'profession' => $request->profession,
         ]);
-
         $user->gender = $request->gender;
+
         $user->save();
 
 
