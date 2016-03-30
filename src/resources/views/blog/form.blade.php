@@ -4,14 +4,37 @@
 
     @yield('form')
 
-    Title: {!! Form::text('title', $blog->title, ['required' => 'true', 'id' => 'title']) !!} <br/>
-    Permalink: {!! Form::text('permalink', $blog->permalink, ['required' => 'true', 'id' => 'permalink']) !!} <br/>
-    Body: {!! Form::textarea('body', $blog->body, ['class'=>'event_body', 'id' => 'event_body']) !!} <br/>
+    <div class="form-group">
+        {!! Form::label('title', 'Title') !!}
 
-    Published: {!! Form::checkbox('is_published', true, $blog->is_published) !!} <br/>
+        : {!! Form::text('title', $blog->title, ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!}
+        <br/>
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('permalink', 'Permalink') !!}
+
+        : {!! Form::text('permalink', $blog->permalink, ['required' => 'true', 'id' => 'permalink', 'class' => 'form-control']) !!} <br/>
+    </div>
 
 
-    {!! Form::submit('submit') !!}
+    <div class="form-group">
+        {!! Form::label('body', 'Body') !!}
+
+        : {!! Form::textarea('body', $blog->body, ['class'=>'event_body', 'id' => 'event_body', 'class' => 'form-control']) !!} <br/>
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('is_published', 'Published') !!}
+
+        : {!! Form::checkbox('is_published', true, $blog->is_published, ['class' => 'form-control']) !!} <br/>
+    </div>
+
+
+    <div class="form-group">
+        {!! Form::submit('submit') !!}
+    </div>
+
     {!! Form::close() !!}
 
 

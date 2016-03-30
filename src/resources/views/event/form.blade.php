@@ -4,29 +4,61 @@
 
     @yield('form')
 
-
-    Title: {!! Form::text('title', $event->title, ['required' => 'true', 'id' => 'title']) !!} <br/>
-    Permalink: {!! Form::text('permalink', $event->permalink, ['required' => 'true', 'id' => 'permalink']) !!} <br/>
-    Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body']) !!}
-    <br/>
     <div class="form-group">
-        <label> Max registrars count: </label>
-        {!! Form::number('max_registrars_count', $event->max_registrars_count, ['min'=> 1, 'max' => 999, 'required' => true]) !!}
+
+        {!! Form::label('title', 'Title') !!}
+        : {!! Form::text('title', $event->title, ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!} <br/>
+    </div>
+    <div class="form-group">
+        {!! Form::label('permalink', 'Permalink') !!}
+
+        : {!! Form::text('permalink', $event->permalink, ['required' => 'true', 'id' => 'permalink', 'class' => 'form-control']) !!} <br/>
+    </div>
+    <div class="form-group">
+
+        {!! Form::label('body', 'Body') !!}
+        : {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body', 'class' => 'form-control']) !!}
+    </div><br/>
+    <div class="form-group">
+
+        {!! Form::label('max_registrars_count', 'Max registrars count') !!}:
+        {!! Form::number('max_registrars_count', $event->max_registrars_count, ['min'=> 1, 'max' => 999, 'required' => true, 'class' => 'form-control']) !!}
         <br/>
     </div>
-    registration open: {!! Form::checkbox('is_registration_open', true, $event->is_registration_open) !!} <br/>
-    Event Date: {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
-    Location: {!! Form::textarea('location', $event->location, ['size' => '30x2']) !!} <br/>
+    <div class="form-group">
+        {!! Form::label('is_registration_open', 'registration open') !!}
 
-    Published: {!! Form::checkbox('is_published', 1, $event->is_published) !!} <br/>
+        : {!! Form::checkbox('is_registration_open', true, $event->is_registration_open) !!} <br/>
+    </div>
+    <div class="form-group">
+        {!! Form::label('date', 'Event Date open') !!}
 
-    Require additional user details: {!! Form::checkbox('require_additional_fields', true, $event->require_additional_fields) !!}
-    <br/>
+        : {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
+    </div>
+    <div class="form-group">
+        {!! Form::label('location', 'Location') !!}
 
+        : {!! Form::textarea('location', $event->location, ['size' => '30x2']) !!} <br/>
 
-    {!! Form::submit('submit') !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('is_published', 'Published') !!}
+
+        : {!! Form::checkbox('is_published', 1, $event->is_published) !!} <br/>
+
+    </div>
+    <div class="form-group">
+        {!! Form::label('require_additional_fields', 'Require additional user
+        details') !!}
+
+        : {!! Form::checkbox('require_additional_fields', true, $event->require_additional_fields) !!}
+        <br/>
+    </div>
+
+    <div class="form-group">
+        {!! Form::submit('submit') !!}
+    </div>
     {!! Form::close() !!}
-
 
 
     <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>

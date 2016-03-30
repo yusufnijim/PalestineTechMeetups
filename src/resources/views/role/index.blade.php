@@ -51,17 +51,7 @@
         @endforeach
 
     </table>
-
+    @include('role/form')
     <br/>
-    {!! Form::open() !!}
-
-    {!! Form::label('name', 'name') !!}
-    {!! Form::text('name') !!} <br/>
-
-    {!! Form::label('description', 'description') !!}
-    {!! Form::text('description') !!} <br/>
-
-    {!! Form::submit('Create') !!}
-    {!! Form::close() !!}
 @endsection
 
