@@ -15,7 +15,7 @@ class EventController extends MyBaseController
             abort(403, 'Access denied');
         }
 
-        $events = EventModel::all();
+        $events = EventModel::with('survey')->get();
 
         return view('event/index')
             ->with('events', $events);

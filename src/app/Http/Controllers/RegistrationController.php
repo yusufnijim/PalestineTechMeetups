@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EventModel;
 use App\Models\RegistrationModel;
+use App\Models\User\UserModel;
 
 class RegistrationController extends MyBaseController
 {
@@ -43,7 +44,7 @@ class RegistrationController extends MyBaseController
                 'event_id' => $id,
             ]
         );
-        session()->flash('flash_message', 'sign up complete');
+        flash('sign up complete', 'success');
 
         return redirect("/registration/signup/$id");
     }
@@ -74,33 +75,9 @@ class RegistrationController extends MyBaseController
     public function getExport($id)
     {
         $reg = RegistrationModel::where('event_id', $id)->get();
-
-
-        // filename for download
-        $filename = "event_" . $id . "_" . date('Ymd') . ".xls";
-
-        // send header information
-        header("Content-Disposition: attachment; filename=\"$filename\"");
-        header("Content-Type: application/vnd.ms-excel");
-
-        $flag = false;
-        foreach ($reg as $row) {
-            $record = $row['attributes'];
-            if (!$flag) {
-                // display field/column names as first row
-                echo implode("\t", array_keys($record)) . "\r\n";
-                $flag = true;
-            }
-            echo implode("\t", array_values($record)) . "\r\n";
-        }
+        return export_to_excel($reg, "event_" . $id);
     }
 
-    function cleanData(&$str)
-    {
-        $str = preg_replace("/\t/", "\\t", $str);
-        $str = preg_replace("/\r?\n/", "\\n", $str);
-        if (strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
-    }
 
     public function postUpdateaccepted($id)
     {
@@ -135,4 +112,36 @@ class RegistrationController extends MyBaseController
         return redirect("/registration/view/$id");
     }
 
+    public function anyUpdateconfirmed($event_id, $user_id)
+    {
+        $reg = RegistrationModel::where('event_id', $event_id)
+            ->where('user_id', $user_id)
+            ->first();
+
+        if ($reg) {
+            $reg->update([
+                'is_confirmed' => 1,
+            ]);
+        }
+        flash('Thank you for confirming your attendance', 'success');
+        return redirect("/");
+    }
+
+    public function getSendemail($event_id)
+    {
+        return view("registration/email")->with('event', EventModel::findOrfail($event_id));
+    }
+
+    public function postSendemail()
+    {
+        dd(request()->input());
+//        $users = UserModel::all();
+//        foreach ($users as $user) {
+//            \Mail::send('email/custom', ['user' => $user], function ($m) use ($user) {
+//                $m->from('noreply@NablusTechMeetups.com', 'Nablus Tech Meetups');
+//
+//                $m->to('mukh_amin@yahoo.com', $user->name)->subject('Email !');
+//            });
+//        }
+    }
 }

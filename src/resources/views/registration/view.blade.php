@@ -9,8 +9,12 @@
         Number of accepted: {{ $number_of_accepted }}<br/>
         Number of attended: {{ $number_of_attended }}<br/><br/>
 
-        <button onclick="window.open('/registration/export/{!! $event->id !!}')">EXPORT</button>
-        <table border="1" class="table event_index">
+        <button onclick="window.open('/registration/sendemail/{!! $event->id !!}')">Send email</button>
+        <button onclick="window.open('/registration/export/{!! $event->id !!}')">Export to excel</button>
+
+        <table border="1" class="event_registration_index table table-striped table-bordered table-hover"
+               id="dataTables-example">
+
             <thead>
             <tr>
                 <th>User name</th>
@@ -20,6 +24,7 @@
                     <th>Addtional fields</th>
                 @endif
                 <th>Accepted</th>
+                <th>Confirmed</th>
                 <th>Attended</th>
                 <th>Image</th>
             </tr>
@@ -44,6 +49,7 @@
                         {!! Form::close() !!}
                     </td>
 
+                    <td> {{$instance->is_confirmed ? "Yes" : "No" }}</td>
 
                     <td> {!! Form::open(['method' => 'post', 'url' => 'registration/updateattended/' . $event->id]) !!}
                         {!! Form::hidden('user_id', $instance->user_id) !!}
@@ -68,7 +74,7 @@
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.event_index').DataTable();
+            $('#dataTables-example').DataTable();
         });
     </script>
 

@@ -10,7 +10,8 @@
         "laravel/socialite": "^2.0",
         "laravelcollective/html": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
-        "bestmomo/filemanager": "1.1.2"
+        "bestmomo/filemanager": "1.1.2",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
