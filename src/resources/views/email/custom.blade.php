@@ -1,5 +1,5 @@
-Hello there {{ $user->name }}
+{!! $body !!}
 
-Kindly confirm your attendance at our Event here
-
-<a href="{{ url('/') }}">Confirm</a>
+@if($confirm_attendance)
+    <a href="{{ url('/registration/confirm/' . $event_id . "/" . $user->id) }}">Confirm</a>
+@endif

@@ -18,9 +18,8 @@ class RoleController extends MyBaseController
      */
     public function getIndex(Request $request)
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
+
         $roles = RoleModel::all();
         return view("role/index")->with("roles", $roles);
     }
@@ -32,9 +31,7 @@ class RoleController extends MyBaseController
      */
     public function postIndex(Request $request)
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         $new_role = RoleModel::insert($request);
         $request->session()->flash('flash_message', 'Role created successfully!');
@@ -44,9 +41,7 @@ class RoleController extends MyBaseController
 
     public function deleteIndex(Request $request)
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         $id = $request->input('id');
         $role = RoleModel::find($id)->delete();
@@ -58,6 +53,7 @@ class RoleController extends MyBaseController
 
     public function getPermission()
     {
+        can("user.manage");
 
         $roles = RoleModel::all();
         $permissions = PermissionModel::all();
@@ -68,9 +64,7 @@ class RoleController extends MyBaseController
 
     public function postPermission()
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         $role = RoleModel::find(request()->input()['role_id']);
         $permission = PermissionModel::find(request()->input()['permission_id']);
@@ -88,6 +82,8 @@ class RoleController extends MyBaseController
 
     public function getUser($user_id)
     {
+        can("user.manage");
+
         $user = UserModel::find($user_id);
 //        $user->assignRole('administrator');
         $roles = RoleModel::all();
@@ -98,6 +94,8 @@ class RoleController extends MyBaseController
 
     public function postUser($user_id)
     {
+        can("user.manage");
+
         $user = UserModel::find($user_id);
         $role = RoleModel::find(request()->role_id);
         if ($user->hasRole($role)) {

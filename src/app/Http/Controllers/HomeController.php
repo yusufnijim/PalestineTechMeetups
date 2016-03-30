@@ -9,6 +9,8 @@ class HomeController extends MyBaseController
 {
     public function anyIndex()
     {
+        can("event.manage");
+
         $blogs = BlogModel::published()->take(3)->get();
         $events = EventModel::published()->take(3)->get();
         return view("frontend.index")

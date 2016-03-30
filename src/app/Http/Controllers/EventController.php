@@ -11,9 +11,7 @@ class EventController extends MyBaseController
 {
     public function anyIndex()
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         $events = EventModel::with('survey')->get();
 
@@ -24,9 +22,7 @@ class EventController extends MyBaseController
 
     public function getCreate()
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         return view('event/create')
             ->with("event", new EventModel());
@@ -34,9 +30,7 @@ class EventController extends MyBaseController
 
     public function postCreate(CreateRequest $request)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         $event = EventModel::insert($request);
         flash('event created successfully', 'success');
@@ -46,9 +40,7 @@ class EventController extends MyBaseController
 
     public function getEdit($id)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         $event = EventModel::findOrFail($id);
         return view('event/edit')
@@ -57,9 +49,7 @@ class EventController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         EventModel::edit($id, $request);
         flash('event updated successfully', 'success');
@@ -69,9 +59,7 @@ class EventController extends MyBaseController
 
     public function postDelete($id)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         EventModel::find($id)->delete();
         flash('event deleted successfully', 'success');
@@ -80,9 +68,7 @@ class EventController extends MyBaseController
 
     public function getVolunteers($id)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         $event = EventModel::findOrFail($id);
         $users_list = UserModel::lists('first_name', 'id');
@@ -100,9 +86,7 @@ class EventController extends MyBaseController
 
     public function postVolunteers($id)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         $volunteer = VolunteerModel::insert($id);
         flash('volunteer added successfully', 'success');
@@ -112,9 +96,7 @@ class EventController extends MyBaseController
 
     public function deleteVolunteers($id)
     {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("event.manage");
 
         VolunteerModel::find(request()->record_id)->delete();
         flash('volunteer deleted successfully', 'success');

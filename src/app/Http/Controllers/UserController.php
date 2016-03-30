@@ -17,9 +17,7 @@ class UserController extends MyBaseController
 
     public function anyIndex()
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         $users = UserModel::all();
         return view('user/index')
@@ -29,9 +27,7 @@ class UserController extends MyBaseController
 
     public function getCreate()
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         $user = new UserModel();
         return view('/user/create')
@@ -40,9 +36,7 @@ class UserController extends MyBaseController
 
     public function postCreate(CreateRequest $request)
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         UserModel::insert($request);
         flash('user created successfully', 'success');
@@ -51,11 +45,7 @@ class UserController extends MyBaseController
 
     public function getEdit($id)
     {
-        if (auth()->user()->id != $id) {
-            if (!auth()->user()->hasPermission('users.manage')) {
-                abort(403, 'Access denied');
-            }
-        }
+        can("user.manage");
 
         $user = UserModel::findOrFail($id);
         return view('/user/edit')
@@ -65,10 +55,9 @@ class UserController extends MyBaseController
     public function putEdit($id, CreateRequest $request)
     {
         if (auth()->user()->id != $id) {
-            if (!auth()->user()->hasPermission('users.manage')) {
-                abort(403, 'Access denied');
-            }
+            can("user.manage");
         }
+
         UserModel::edit($id, $request);
         flash('profile edited successfully', 'success');
         return redirect("/user/edit/$id");
@@ -77,9 +66,7 @@ class UserController extends MyBaseController
 
     public function getView($id)
     {
-        if (!auth()->user()->hasPermission('users.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("user.manage");
 
         $user = UserModel::findOrFail($id);
         return view('/user/view')
@@ -123,6 +110,8 @@ class UserController extends MyBaseController
 
     public function deleteDelete($id)
     {
+        can("user.manage");
+
         $user = UserModel::find($id)->delete();
         flash('user deleted successfully', 'success');
         return redirect("/user");

@@ -71,11 +71,6 @@ trait HasRole
      */
     public function hasPermission($permission)
     {
-        // WARNING: skip permissions check, for use in development mode ONLY
-        if (env('SKIP_PERMISSION_CHECK')) {
-            return TRUE;
-        };
-
         // if passed a permission name, find it
         if (is_string($permission)) {
             $permission = PermissionModel::whereName($permission)->first();

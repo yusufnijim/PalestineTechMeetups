@@ -10,9 +10,7 @@ class BlogController extends MyBaseController
 
     public function anyIndex()
     {
-        if (!auth()->user()->hasPermission('blog.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("blog.manage");
 
         $blogs = BlogModel::all();
 
@@ -23,9 +21,8 @@ class BlogController extends MyBaseController
 
     public function getCreate()
     {
-        if (!auth()->user()->hasPermission('blog.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("blog.manage");
+
         $blog = new BlogModel();
         return view('blog/create')
             ->with('blog', $blog);
@@ -33,9 +30,7 @@ class BlogController extends MyBaseController
 
     public function postCreate(CreateRequest $request)
     {
-        if (!auth()->user()->hasPermission('blog.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("blog.manage");
 
         BlogModel::insert($request);
         flash('blog created successfully', 'success');
@@ -52,9 +47,7 @@ class BlogController extends MyBaseController
 
     public function getEdit($id)
     {
-        if (!auth()->user()->hasPermission('blog.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("blog.manage");
 
         $blog = BlogModel::findOrFail($id);
         return view('blog/edit')->with('blog', $blog);
@@ -62,9 +55,7 @@ class BlogController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        if (!auth()->user()->hasPermission('blog.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("blog.manage");
 
         BlogModel::edit($id, $request);
         flash('blog updated successfully', 'success');
@@ -75,9 +66,7 @@ class BlogController extends MyBaseController
 
     public function postDelete($id)
     {
-        if (!auth()->user()->hasPermission('blog.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("blog.manage");
 
         BlogModel::find($id)->delete();
         flash('blog deleted successfully', 'success');

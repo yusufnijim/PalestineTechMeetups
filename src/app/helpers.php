@@ -59,3 +59,30 @@ function export_to_excel($data, $name = NULL)
 //    $str = preg_replace("/\r?\n/", "\\n", $str);
 //    if (strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
 //}
+
+function can($permission)
+{
+    // WARNING: skip permissions check, for use in development mode ONLY
+    if (env('SKIP_PERMISSION_CHECK')) {
+        return TRUE;
+    };
+
+    if (auth()->check()) {
+        if (!auth()->user()->hasPermission($permission)) {
+            abort(403, 'Access denied');
+        }
+    } else { // check if permission is given to anonymous users
+        $role = \App\Models\User\RoleModel::whereName("anonymous")->first();
+        if (!$role) { // anonymous role doesn't exist yet !
+            abort(403, 'Access denied');
+        } else {
+            $permission = \App\Models\User\PermissionModel::whereName($permission)->first();
+            // anonymous role doesn't have this permission sadly
+            if (!$permission or !$role->permissions()->find([$permission->id])->count()) {
+                abort(403, 'Access denied');
+            }
+        }
+    }
+
+    return true;
+}

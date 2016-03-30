@@ -51,9 +51,8 @@ class RegistrationController extends MyBaseController
 
     public function getView($id)
     {
-        if (!auth()->user()->hasPermission('registrations.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("registrations.manage");
+
         $event = EventModel::findOrFail($id);
         $reg = RegistrationModel::where('event_id', $id)->get();
 
@@ -74,6 +73,8 @@ class RegistrationController extends MyBaseController
 
     public function getExport($id)
     {
+        can("registrations.manage");
+
         $reg = RegistrationModel::where('event_id', $id)->get();
         return export_to_excel($reg, "event_" . $id);
     }
@@ -81,9 +82,7 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateaccepted($id)
     {
-        if (!auth()->user()->hasPermission('registrations.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("registrations.manage");
 
         $reg = RegistrationModel::where('event_id', $id)
             ->where('user_id', request()['user_id'])
@@ -98,9 +97,7 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateattended($id)
     {
-        if (!auth()->user()->hasPermission('registrations.manage')) {
-            abort(403, 'Access denied');
-        }
+        can("registrations.manage");
 
         $reg = RegistrationModel::where('event_id', $id)
             ->where('user_id', request()['user_id'])
@@ -112,7 +109,7 @@ class RegistrationController extends MyBaseController
         return redirect("/registration/view/$id");
     }
 
-    public function anyUpdateconfirmed($event_id, $user_id)
+    public function anyConfirm($event_id, $user_id)
     {
         $reg = RegistrationModel::where('event_id', $event_id)
             ->where('user_id', $user_id)
@@ -129,19 +126,42 @@ class RegistrationController extends MyBaseController
 
     public function getSendemail($event_id)
     {
+        can("registrations.manage");
+
         return view("registration/email")->with('event', EventModel::findOrfail($event_id));
     }
 
-    public function postSendemail()
+    public function postSendemail($event_id)
     {
-        dd(request()->input());
-//        $users = UserModel::all();
-//        foreach ($users as $user) {
-//            \Mail::send('email/custom', ['user' => $user], function ($m) use ($user) {
-//                $m->from('noreply@NablusTechMeetups.com', 'Nablus Tech Meetups');
-//
-//                $m->to('mukh_amin@yahoo.com', $user->name)->subject('Email !');
-//            });
-//        }
+        can("registrations.manage");
+
+        // fetch users
+        $reg = RegistrationModel::where('event_id', $event_id)
+            ->where('is_confirmed', request()->is_confirmed)
+            ->where('is_accepted', request()->is_accepted)
+            ->where('is_attended', request()->is_attended)
+            ->get();;
+
+        $count = 0;
+
+        // loop through those users
+        foreach ($reg as $instance) {
+            $user = UserModel::find($instance->user_id);
+            \Mail::send('email/custom', [
+                'confirm_attendance' => request()->confirm_attendance,
+                'event_id' => $event_id,
+                'user' => $user,
+                'body' => request()->body,
+            ], function ($m) use ($user) {
+                $m->from('noreply@NablusTechMeetups.com', 'Nablus Tech Meetups');
+
+                $m->to('mukh_amin@yahoo.com', $user->name)->subject(request()->subject);
+            });
+            $count++;
+        }
+
+        // done!
+        flash('emails in-queued for ' . $count, 'success');
+        return redirect('/registration/view/' . $event_id);
     }
 }
