@@ -4,14 +4,17 @@
 
 
     <table border="1" class="blog_index table table-striped table-bordered table-hover" id="dataTables-example">
-
-    <tr>
+        <thead>
+        <tr>
             <th>ID</th>
             <th>Title</th>
             <th>View</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
+        </thead>
+        <tbody>
+
         @foreach($blogs as $blog)
             <tr>
                 <td>{{ $blog->id }}</td>
@@ -29,6 +32,19 @@
                 </td>
             </tr>
         @endforeach
+        </tbody>
 
     </table>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
 @stop

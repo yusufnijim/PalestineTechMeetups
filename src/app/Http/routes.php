@@ -30,8 +30,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::controller('blog', 'BlogController');
 
     Route::controller('/registration', 'RegistrationController');
+    Route::controller('/backend', 'BackendController');
 
-    Route::get('/backend', 'BackendController@anyIndex');
 
     Route::controller('/user', 'UserController');
     Route::controller('/role', 'RoleController');

@@ -47,15 +47,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">{{ @$title }}</h1>
-
-                    @include('partial/_error')
-                    @include('partial/_flash')
-                    @yield('content')
-
-                    <br/>
-                    <br/>
-                    <br/>
                 </div>
+
+                @include('partial/_error')
+                @include('partial/_flash')
+                @yield('content')
+
+                <br/>
+                <br/>
+                <br/>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
@@ -65,11 +65,8 @@
     <!-- /#page-wrapper -->
 
 
-</div>
-<!-- /#wrapper -->
+</div><!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
