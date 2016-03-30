@@ -23,14 +23,14 @@
     <div class="form-group">
         {!! Form::label('arabic_full_name', 'Full Arabic Name') !!}
 
-         : {!!  Form::text('arabic_full_name', $user->arabic_full_name, ['required' => '']) !!} <br/>
+        : {!!  Form::text('arabic_full_name', $user->arabic_full_name, ['required' => '']) !!} <br/>
 
 
     </div>
     <div class="form-group">
         {!! Form::label('phone_number', 'Phone Number') !!}
 
-         : {!!  Form::text('phone_number', $user->phone_number) !!} <br/>
+        : {!!  Form::text('phone_number', $user->phone_number) !!} <br/>
     </div>
     <div class="form-group">
         {!! Form::label('profession', 'profession') !!}
@@ -42,7 +42,7 @@
     <div class="form-group">
         {!! Form::label('profession_location', 'profession Location') !!}
 
-         : {!!  Form::text('profession_location', $user->profession_location) !!} <br/>
+        : {!!  Form::text('profession_location', $user->profession_location) !!} <br/>
 
     </div>
     <div class="form-group">
@@ -63,7 +63,7 @@
 
     </div>
     <div class="form-group">
-        {!! Form::submit('submit') !!}
+        {!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
     </div>
     {!! Form::close() !!}
 

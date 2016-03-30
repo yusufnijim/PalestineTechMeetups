@@ -11,6 +11,6 @@
 </div>
 <div class="form-group">
 
-    {!! Form::submit('Create') !!}    </div>
+{!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
 
 {!! Form::close() !!}

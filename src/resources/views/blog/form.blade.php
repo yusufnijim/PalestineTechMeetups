@@ -32,7 +32,7 @@
 
 
     <div class="form-group">
-        {!! Form::submit('submit') !!}
+        {!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
     </div>
 
     {!! Form::close() !!}
