@@ -20,12 +20,6 @@ class BlogController extends MyBaseController
             ->with('blogs', $blogs);
     }
 
-    public function getView($id)
-    {
-        $blog = BlogModel::findOrFail($id);
-        return view('blog/view')->with('blog', $blog);
-    }
-
 
     public function getCreate()
     {
@@ -44,10 +38,17 @@ class BlogController extends MyBaseController
         }
 
         BlogModel::insert($request);
-        session()->flash('flash_message', 'blog created successfully');
+        flash('blog created successfully', 'success');
+
         return redirect("blog");
     }
 
+
+    public function getView($id)
+    {
+        $blog = BlogModel::findOrFail($id);
+        return view('blog/view')->with('blog', $blog);
+    }
 
     public function getEdit($id)
     {
@@ -66,7 +67,8 @@ class BlogController extends MyBaseController
         }
 
         BlogModel::edit($id, $request);
-        session()->flash('flash_message', 'blog updated successfully');
+        flash('blog updated successfully', 'success');
+
         return redirect("blog");
     }
 
@@ -78,7 +80,7 @@ class BlogController extends MyBaseController
         }
 
         BlogModel::find($id)->delete();
-        session()->flash('flash_message', 'blog deleted successfully');
+        flash('blog deleted successfully', 'success');
         return redirect("blog");
     }
 }

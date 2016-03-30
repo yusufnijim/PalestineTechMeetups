@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <table border="1" class="user_index">
+    <table border="1" class="user_index table table-striped table-bordered table-hover" id="dataTables-example">
         <tr>
             <th>First name</th>
             <th>Last name</th>
@@ -19,7 +19,7 @@
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{!! $user->imagetag !!}</td>
-                <td><a href="{{ url("user/edit/$user->id") }}">edit</a></td>
+                <td><a href="{{ url("user/edit/$user->id") }}" class='btn btn-info'>edit</a></td>
                 <td>
                     {!! Form::open( [
                         'url' => "/user/delete/$user->id",
@@ -29,7 +29,7 @@
                     {!! Form::close() !!}
                 </td>
                 <td>
-                    <a href="/role/user/{{$user->id}}">Manage</a>
+                    <a href="/role/user/{{$user->id}}" class='btn btn-info'>Manage</a>
                 </td>
             </tr>
         @endforeach

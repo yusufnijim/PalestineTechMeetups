@@ -13,3 +13,9 @@ function get_extension($file)
 
     return $extension ? $extension : false;
 }
+
+
+function flash($message, $type)
+{
+    session()->flash('flash_message', [$message, $type]);
+}

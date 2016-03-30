@@ -4,14 +4,16 @@
 
     @yield('form')
 
+
     Title: {!! Form::text('title', $event->title, ['required' => 'true', 'id' => 'title']) !!} <br/>
     Permalink: {!! Form::text('permalink', $event->permalink, ['required' => 'true', 'id' => 'permalink']) !!} <br/>
     Body: {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body']) !!}
     <br/>
-
-    Max registrars
-    count: {!! Form::number('max_registrars_count', $event->max_registrars_count, ['min'=> 1, 'max' => 999, 'required' => true]) !!}
-    <br/>
+    <div class="form-group">
+        <label> Max registrars count: </label>
+        {!! Form::number('max_registrars_count', $event->max_registrars_count, ['min'=> 1, 'max' => 999, 'required' => true]) !!}
+        <br/>
+    </div>
     registration open: {!! Form::checkbox('is_registration_open', true, $event->is_registration_open) !!} <br/>
     Event Date: {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
     Location: {!! Form::textarea('location', $event->location, ['size' => '30x2']) !!} <br/>

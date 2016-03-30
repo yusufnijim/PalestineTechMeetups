@@ -45,7 +45,7 @@ class UserController extends MyBaseController
         }
 
         UserModel::insert($request);
-        session()->flash('flash_message', 'Profile created successfully');
+        flash('user created successfully', 'success');
         return redirect("/user/");
     }
 
@@ -70,7 +70,7 @@ class UserController extends MyBaseController
             }
         }
         UserModel::edit($id, $request);
-        session()->flash('flash_message', 'Profile updated successfully');
+        flash('profile edited successfully', 'success');
         return redirect("/user/edit/$id");
     }
 
@@ -102,8 +102,7 @@ class UserController extends MyBaseController
         return view('user/login');
     }
 
-    public
-    function postLogin()
+    public function postLogin()
     {
         $credentials = \Input::only('email', 'password');
         $user = UserModel::where('email', \Input::get('email'))->first();
@@ -114,18 +113,18 @@ class UserController extends MyBaseController
             )
         ) {
             Auth::login($user);
-            session()->flash('flash_message', 'welcome in ' . Auth::user()->username);
+            flash('welcome in ' . Auth::user()->username, 'success');
             return redirect('/user/');
         } else {
-            session()->flash('flash_message', 'Unable to login!');
+            flash('unable to login', 'danger');
             return redirect('/user/login');
         }
     }
 
-    public
-    function deleteDelete($id)
+    public function deleteDelete($id)
     {
         $user = UserModel::find($id)->delete();
+        flash('user deleted successfully', 'success');
         return redirect("/user");
     }
 
@@ -134,8 +133,7 @@ class UserController extends MyBaseController
      *
      * @return Response
      */
-    public
-    function getRegister()
+    public function getRegister()
     {
         return redirect('/user/login');
     }
@@ -146,11 +144,10 @@ class UserController extends MyBaseController
      * @return Response
      */
 
-    public
-    function anyLogout()
+    public function anyLogout()
     {
-        session()->flash('flash_message', 'User logged out successfully');
         auth()->logout();
+        flash('User logged out successfully', 'success');
         return redirect('/login');
     }
 }
@@ -181,17 +178,19 @@ trait UserSocalLogin
 
         if ($user) {
             auth()->login($user);
-            session()->flash('flash_message', 'welcome back ' . $user->first_name);
+
+            flash('welcome back', 'success');
             return redirect('/profile/');
         } else {
             $new_user = UserModel::insert_fb($fb_user_object);
 
             if ($new_user) {
-                session()->flash('flash_message', 'Welcome ' . $new_user->first_name . ' Account registered');
+
+                flash('Welcome ' . $new_user->first_name . ' Account registered', 'success');
                 auth()->login($new_user);
                 return redirect('/profile/');
             } else {
-                session()->flash('flash_message', 'some error occurred');
+                flash('some error occurred', 'danger');
                 return redirect('/login');
             }
 

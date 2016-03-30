@@ -161,6 +161,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Bestmomo\Filemanager\FilemanagerServiceProvider::class,
+//        Laracasts\Flash\FlashServiceProvider,
     ],
 
     /*
@@ -213,6 +214,7 @@ return [
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+//        'Flash' => Laracasts\Flash\Flash::class,
     ],
 
 ];

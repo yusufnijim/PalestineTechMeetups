@@ -6,7 +6,6 @@ use App\Http\Requests\Event\CreateRequest as CreateRequest;
 use App\Models\EventModel;
 use App\Models\User\UserModel;
 use App\Models\VolunteerModel;
-use Illuminate\Console\Scheduling\Event;
 
 class EventController extends MyBaseController
 {
@@ -40,7 +39,7 @@ class EventController extends MyBaseController
         }
 
         $event = EventModel::insert($request);
-        session()->flash('flash_message', 'event created successfully');
+        flash('event created successfully', 'success');
         return redirect("event/edit/" . $event->id);
     }
 
@@ -63,10 +62,21 @@ class EventController extends MyBaseController
         }
 
         EventModel::edit($id, $request);
-        session()->flash('flash_message', 'event updated successfully');
+        flash('event updated successfully', 'success');
         return redirect("event");
     }
 
+
+    public function postDelete($id)
+    {
+        if (!auth()->user()->hasPermission('events.manage')) {
+            abort(403, 'Access denied');
+        }
+
+        EventModel::find($id)->delete();
+        flash('event deleted successfully', 'success');
+        return redirect("event");
+    }
 
     public function getVolunteers($id)
     {
@@ -95,6 +105,7 @@ class EventController extends MyBaseController
         }
 
         $volunteer = VolunteerModel::insert($id);
+        flash('volunteer added successfully', 'success');
 
         return redirect("/event/volunteers/$id");
     }
@@ -106,18 +117,8 @@ class EventController extends MyBaseController
         }
 
         VolunteerModel::find(request()->record_id)->delete();
+        flash('volunteer deleted successfully', 'success');
         return redirect("/event/volunteers/$id");
-    }
-
-    public function postDelete($id)
-    {
-        if (!auth()->user()->hasPermission('events.manage')) {
-            abort(403, 'Access denied');
-        }
-
-        EventModel::find($id)->delete();
-        session()->flash('flash_message', 'event deleted successfully');
-        return redirect("event");
     }
 
 

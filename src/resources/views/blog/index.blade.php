@@ -3,10 +3,12 @@
 @section('content')
 
 
-    <table border="1" class="event_index">
-        <tr>
+    <table border="1" class="blog_index table table-striped table-bordered table-hover" id="dataTables-example">
+
+    <tr>
             <th>ID</th>
             <th>Title</th>
+            <th>View</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -14,9 +16,9 @@
             <tr>
                 <td>{{ $blog->id }}</td>
                 <td>{{ $blog->title }}</td>
-                <td><a href="{{ url("/blog/view/$blog->id") }}">View</a></td>
+                <td><a href="{{ url("/blog/view/$blog->id") }}" class='btn btn-info'>View</a></td>
 
-                <td><a href="{{ url("blog/edit/$blog->id") }}">edit</a></td>
+                <td><a href="{{ url("blog/edit/$blog->id") }}" class='btn btn-info'>edit</a></td>
                 <td>
                     {!! Form::open( [
                         'url' => "/blog/delete/$blog->id",

@@ -18,7 +18,8 @@
     <br/>
     <br/>
 
-    <table border=1>
+    <table border="1" class="role_index table table-striped table-bordered table-hover" id="dataTables-example">
+
         <tr>
             <th>
                 Label
@@ -45,7 +46,7 @@
 
                 {!! Form::hidden('id', $role->id) !!}
                 {!! Form::close() !!}
-                <td>
+                </td>
             </tr>
         @endforeach
 

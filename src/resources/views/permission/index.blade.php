@@ -18,7 +18,7 @@
     <br/>
     <br/>
 
-    <table border=1>
+    <table border="1" class="permission_index table table-striped table-bordered table-hover" id="dataTables-example">
         <tr>
             <th>
                 Label

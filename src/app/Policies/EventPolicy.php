@@ -19,7 +19,7 @@ class EventPolicy
         //
     }
 
-    public function index(UserModel $user)
+    public function change(UserModel $user)
     {
         return true;
     }
