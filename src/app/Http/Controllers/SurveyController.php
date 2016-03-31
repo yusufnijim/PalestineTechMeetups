@@ -33,6 +33,8 @@ class SurveyController extends MyBaseController
         can('event.manage');
 
         SurveyModel::insert(request());
+        flash("survey created successfully", 'success');
+
         return redirect('/survey');
     }
 
@@ -49,19 +51,9 @@ class SurveyController extends MyBaseController
         can('event.manage');
 
         SurveyModel::edit($id, request());
+        flash("survey updated successfully", 'success');
+
         return redirect('/survey');
-    }
-
-    public function anyAnswers($survey_id)
-    {
-        dd($survey_id);
-    }
-
-    public function getAnswer($survey_id, $user_id)
-    {
-        can('event.manage');
-
-        UserModel::surveys();
     }
 
     public function getView($id)
@@ -72,11 +64,30 @@ class SurveyController extends MyBaseController
         return view("survey/view")->with('survey', $survey);
     }
 
-    public function postView($survey_id)
+    public function postAnswer($survey_id)
     {
         can('event.manage');
 
         $survey = SurveyQuestionAnswerModel::insert($survey_id, request()->input());
+        flash("thank you for submitting your asnwers", 'success');
         return redirect('/survey/view/' . $survey_id);
     }
+
+
+    public function getResults($survey_id)
+    {
+        $results = SurveyQuestionAnswerModel::where('survey_id', $survey_id)->get();
+
+        return view('survey/result')
+            ->with("results", $results);
+    }
+
+    public function getResult($survey_id, $user_id)
+    {
+        $results = SurveyQuestionAnswerModel::where('survey_id', $survey_id)->where('user_id', $user_id)->get();
+
+        return view('survey/result')
+            ->with("results", $results);
+    }
+
 }

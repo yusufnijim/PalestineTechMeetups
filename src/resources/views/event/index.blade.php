@@ -57,21 +57,11 @@
 
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.11/filtering/row-based/TableTools.ShowSelectedOnly.js"></script>
 
     <script>
         $(document).ready(function () {
             $('#dataTables-example').DataTable({
                 responsive: true,
-                "oTableTools": {
-                    "sRowSelect": "multi",
-                },
-                "oLanguage": {
-                    "oFilterSelectedOptions": {
-                        AllText: "All Widgets",
-                        SelectedText: "Selected Widgets"
-                    }
-                }
             });
         });
     </script>

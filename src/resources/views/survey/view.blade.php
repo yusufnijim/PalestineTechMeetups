@@ -6,7 +6,7 @@
 
 
     Questions: <br/>
-    {!! Form::open() !!} {{--['url'=>'/survey/answer/' . $survey->id]--}}
+    {!! Form::open(['url'=>'/survey/answer/' . $survey->id]) !!} {{--['url'=>'/survey/answer/' . $survey->id]--}}
 
     @foreach($survey->questions()->orderBy('order')->get() as $question)
         {{$question}}
