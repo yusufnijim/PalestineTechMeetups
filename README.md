@@ -9,6 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisities
 
 Docker + docker-compose
+If you are not using docker for your development environment, read this [README.md](src/README.md)
 
 ### Installing
 
