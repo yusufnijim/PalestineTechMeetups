@@ -17,7 +17,7 @@ $ composer install -vvv -n"
 
 3- Create the database using artisan:
 ```
- cd /var/www/; php artisan migrate --seed
+php artisan migrate --seed
 ```
 
 4- Configure Laravel permissions:
