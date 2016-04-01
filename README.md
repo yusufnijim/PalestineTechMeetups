@@ -21,7 +21,7 @@ $ git clone https://github.com/NablusTechMeetups/web.git
 
 2- Fire up the docker containers
 ```
-$ docker-compose up
+$ docker-compose up -d
 ```
 
 3- Install third party packages using composer:
