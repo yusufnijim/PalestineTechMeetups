@@ -5,7 +5,6 @@
     @yield('form')
 
     <div class="form-group">
-
         {!! Form::label('title', 'Title') !!}
         : {!! Form::text('title', $event->title, ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!} <br/>
     </div>
@@ -52,6 +51,13 @@
         details') !!}
 
         : {!! Form::checkbox('require_additional_fields', true, $event->require_additional_fields) !!}
+        <br/>
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('survey_id', 'Survey') !!}
+
+        : {!! Form::select('survey_id', $surveys)  !!}
         <br/>
     </div>
 

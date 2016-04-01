@@ -22,7 +22,7 @@
                 <td>{{ $event->id }}</td>
                 <td>{{ $event->title }}</td>
                 <td>{{ $event->date }}</td>
-                <td><a href="{{ url("/registration/signup/$event->id") }}" class='btn btn-info'>View</a></td>
+                <td><a href="{{ url("/registration/signup/$event->id") }}" class='btn btn-info' >View</a></td>
                 <td><a href="{{ url("/registration/view/$event->id") }}" class='btn btn-info'>Registered users</a></td>
                 <td><a href="{{ url("/event/volunteers/$event->id") }}" class='btn btn-info'>Volunteers</a></td>
 
@@ -33,7 +33,7 @@
                         @if($event->survey_id)
                             <a href="{{ url("/survey/edit/$event->survey_id") }}">Info</a>
                         @else
-                            <a href="{{ url("/survey/create/?event_id=$event->id") }}">Create</a>
+                            Please create
                         @endif
                     @else
                         NO
@@ -48,7 +48,6 @@
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block' , 'onclick' => 'return confirm("Are you sure you want to delete?")']) !!}
                     {!! Form::close() !!}
                 </td>
-                {{ $event->survey }}
             </tr>
         @endforeach
         </tbody>

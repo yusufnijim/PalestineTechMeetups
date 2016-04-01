@@ -86,3 +86,10 @@ function can($permission)
 
     return true;
 }
+
+
+function getSegmentFromEnd($instance, $position_from_end = 1)
+{
+    $segments = $instance->segments();
+    return $segments[sizeof($segments) - $position_from_end];
+}

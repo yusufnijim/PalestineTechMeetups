@@ -49,10 +49,12 @@ class EventModel extends BaseModel
                 'body' => $request->body,
                 'permalink' => $request->permalink,
                 'is_registration_open' => $request->is_registration_open,
+                'max_registrars_count' => $request->max_registrars_count,
                 'location' => $request->location,
                 'date' => $request->date,
                 'require_additional_fields' => $request->max_registrars_count,
                 'is_published' => $request->is_published ,
+                'survey_id' => $request->survey_id ,
             ]
         );
         $instance->save();

@@ -25,7 +25,7 @@ class CreateRequest extends Request
     {
         return [
             'title' => 'required|max:255',
-            'permalink' => 'required|unique:event,permalink',
+            'permalink' => 'required|unique:event,permalink,' . getSegmentFromEnd($this) . ',id',
             'body' => 'required',
             'is_published' => 'bool',
         ];

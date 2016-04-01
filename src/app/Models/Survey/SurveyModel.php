@@ -27,7 +27,6 @@ class SurveyModel extends BaseModel
 
     public function questions()
     {
-//        return $this->belongsToMany(\App\Models\User\RoleModel::class, "permission_role", 'user_id', 'role_id');
         return $this->hasMany(SurveyQuestionModel::class, 'survey_id', 'id');
     }
 

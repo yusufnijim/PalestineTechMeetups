@@ -6,6 +6,7 @@ use App\Http\Requests\Event\CreateRequest as CreateRequest;
 use App\Models\EventModel;
 use App\Models\User\UserModel;
 use App\Models\VolunteerModel;
+use App\Models\Survey\SurveyModel;
 
 class EventController extends MyBaseController
 {
@@ -25,7 +26,8 @@ class EventController extends MyBaseController
         can("event.manage");
 
         return view('event/create')
-            ->with("event", new EventModel());
+            ->with("event", new EventModel())
+            ->with('surveys', SurveyModel::lists('name','id'));
     }
 
     public function postCreate(CreateRequest $request)
@@ -44,7 +46,8 @@ class EventController extends MyBaseController
 
         $event = EventModel::findOrFail($id);
         return view('event/edit')
-            ->with('event', $event);
+            ->with('event', $event)
+            ->with('surveys', SurveyModel::lists('name','id'));
     }
 
     public function putEdit($id, CreateRequest $request)

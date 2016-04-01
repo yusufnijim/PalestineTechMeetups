@@ -159,7 +159,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      */
     public static function insert($request)
     {
-        $instance = static::_handleCreateEdit(new Static(), $request);
+        $instance = static::_handleInsertEdit(new Static(), $request);
         return $instance;
     }
 
@@ -171,7 +171,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      */
     public static function edit($id, $request)
     {
-        $instance = static::_handleCreateEdit(Static::findOrFail($id), $request);
+        $instance = static::_handleInsertEdit(Static::findOrFail($id), $request);
         return $instance;
     }
 
@@ -181,7 +181,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      * @param $request
      * @return mixed
      */
-    private static function _handleCreateEdit($user, $request)
+    private static function _handleInsertEdit($user, $request)
     {
         $user->fill([
             'first_name' => $request->first_name,

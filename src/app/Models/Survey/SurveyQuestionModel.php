@@ -25,21 +25,23 @@ class SurveyQuestionModel extends BaseModel
     protected $hidden = [
     ];
 
-    public function type()
+
+    public static function insert($request)
     {
-//        return $this->belongsToMany(\App\Models\User\RoleModel::class, "permission_role", 'user_id', 'role_id');
-        return $this->hasOne(SurveyQuestionTypeModel::class, 'id', 'type_id');
+        $instance = static::_handleInsertEdit(new Static(), $request);
+        return $instance;
     }
 
 
-    public static function edit($id, $request)
+//    public static function edit($id, $request)
+//    {
+//        $instance = static::_handleCreateEdit(Static::findOrFail($id), $request);
+//        return $instance;
+//    }
+
+    private static function _handleInsertEdit($instance, $request)
     {
-        return Static::find($id)->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'is_published' => $request->is_published,
-        ]);
+
+        return $instance;
     }
-
-
 }
