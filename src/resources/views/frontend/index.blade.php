@@ -8,7 +8,7 @@
     @foreach($events as $event)
         <h3>{{ $event->title }}</h3>
         {{$event}} <br/>
-        <a href="/events/view/{{$event->id}}">Read more...</a>
+        <a href="/event/view/{{$event->id}}">Read more...</a>
         <br/>
         <br/>
     @endforeach
@@ -19,7 +19,7 @@
         <h3>{{ $blog->title }}</h3>
         {{$blog}} <br/>
 
-        <a href="/events/view/{{$event->id}}">Read more...</a>
+        <a href="/blog/view/{{$event->id}}">Read more...</a>
         <br/>
         <br/>
     @endforeach
