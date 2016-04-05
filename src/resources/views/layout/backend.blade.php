@@ -49,33 +49,39 @@
                     <h1 class="page-header">{{ @$title }}</h1>
 
 
-                @include('partial/_error')
-                @include('partial/_flash')
-                @yield('content')
+                    @include('partial/_error')
+                    @include('partial/_flash')
+                    @yield('content')
 
-                <br/>
-                <br/>
-                <br/>
-                <!-- /.col-lg-12 -->
+                    <br/>
+                    <br/>
+                    <br/>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
+            <!-- /.container-fluid -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /#page-wrapper -->
+
+
     </div>
-    <!-- /#page-wrapper -->
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-</div><!-- /#wrapper -->
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+    <!-- Custom Theme JavaScript -->
+    <script src="/dist/js/sb-admin-2.js"></script>
+    <script src="/js/site.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/2.0.2/css/responsive.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/dist/js/sb-admin-2.js"></script>
 </body>
 
 </html>
