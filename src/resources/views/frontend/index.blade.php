@@ -6,12 +6,22 @@
     <h2>Events</h2>
     <hr/>
     @foreach($events as $event)
-        {{$event}} <br /><br />
+        <h3>{{ $event->title }}</h3>
+        {{$event}} <br/>
+        <a href="/events/view/{{$event->id}}">Read more...</a>
+        <br/>
+        <br/>
     @endforeach
     <h2>Blogs</h2>
+    <hr/>
 
     @foreach($blogs as $blog)
-        {{$blog}} <br /><br />
+        <h3>{{ $blog->title }}</h3>
+        {{$blog}} <br/>
+
+        <a href="/events/view/{{$event->id}}">Read more...</a>
+        <br/>
+        <br/>
     @endforeach
     <hr/>
 

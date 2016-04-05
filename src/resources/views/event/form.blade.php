@@ -55,9 +55,10 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('survey_id', 'Survey') !!}
+        {!! Form::label('survey_id', 'Form') !!}
 
         : {!! Form::select('survey_id', $surveys)  !!}
+        <a href="/survey/create" class="btn btn-warning" target="_blank">new form</a>
         <br/>
     </div>
 
