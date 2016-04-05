@@ -26,7 +26,7 @@ class CreateRequest extends Request
 
         return [
             'first_name' => 'required|max:255',
-            'email' => 'required|max:255', // . getSegmentFromEnd($this) . ',id',
+            'email' => 'required|max:255|unique:user,email,' . getSegmentFromEnd($this) . ',id',
             'last_name' => 'max:255',
             'arabic_full_name' => 'required|max:255',
             'location' => 'max:255',

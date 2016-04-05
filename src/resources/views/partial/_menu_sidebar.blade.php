@@ -52,10 +52,30 @@
                         <a href="/user/create">Create</a>
                     </li>
                     <li>
-                        <a href="/role">Roles</a>
+                        <a href="#">Roles/Permissions <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="/role">Roles</a>
+                            </li>
+                            <li>
+                                <a href="/role/permission">Permissions</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
+
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="/notification"><i class="fa fa-bar-chart-o fa-fw"></i> Notifications<span
+                            class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="/emails">Emails</a>
                     </li>
                     <li>
-                        <a href="/role/permission">Permissions</a>
+                        <a href="/notifications">Notifications</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('email', 'Email') !!}
-        : {!!  Form::text('email', $user->email, ['disabled' => 'true', 'class'=>'form-control']) !!}
+        : {!!  Form::text('email', $user->email, [/* 'disabled' => 'true', */ 'class'=>'form-control']) !!}
 
     </div>
     <div class="form-group">
@@ -60,7 +60,7 @@
     <div class="form-group">
         {!! Form::label('image', 'Image') !!}
 
-        : {!! Form::file('image',[ ] ) !!}
+        : {!! Form::file('image', ['onchange' => 'readURL(this)'] ) !!}
 
 
     </div>
@@ -69,5 +69,16 @@
     </div>
     {!! Form::close() !!}
 
+<script>
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(".user_image").attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 
 @stop

@@ -54,9 +54,7 @@ class UserController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        if (auth()->user()->id != $id) {
-            can("user.manage");
-        }
+        can("user.manage") OR auth()->user()->id != $id;
 
         UserModel::edit($id, $request);
         flash('profile edited successfully', 'success');
