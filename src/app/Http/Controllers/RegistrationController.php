@@ -155,7 +155,7 @@ class RegistrationController extends MyBaseController
             ], function ($m) use ($user) {
                 $m->from('noreply@NablusTechMeetups.com', 'Nablus Tech Meetups');
 
-                $m->to('mukh_amin@yahoo.com', $user->name)->subject(request()->subject);
+                $m->to($user->email, $user->name)->subject(request()->subject);
             });
             $count++;
         }

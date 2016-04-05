@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 Docker + docker-compose
 
 
-If you are not using docker for your development environment, read this [README.md](src/README.md)
+If you are not using docker for your development environment, please read this [README.md](src/README.md)
 
 ### Installing
 
@@ -29,12 +29,12 @@ $ docker-compose up -d
 
 3- Install third party packages using composer:
 ```
-$ docker-compose run web bash -c "cd /var/www/; ./composer install -vvv -n"
+$ docker-compose run web bash -c "./composer install -vvv -n"
 ```
 
 4- Create the database using artisan:
 ```
-$ docker-compose run web bash -c "cd /var/www/; php artisan migrate --seed"
+$ docker-compose run web bash -c "php artisan migrate:refresh --seed"
 ```
 
 5- Configure Laravel permissions:

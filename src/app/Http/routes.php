@@ -2,17 +2,6 @@
 
 /*
 |--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -22,36 +11,33 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+
+// admin routes
+Route::controller('event', 'EventController');
+Route::controller('blog', 'BlogController');
+
+Route::controller('/registration', 'RegistrationController');
+Route::controller('/backend', 'BackendController');
 
 
-    // admin routes
-    Route::controller('event', 'EventController');
-    Route::controller('blog', 'BlogController');
-
-    Route::controller('/registration', 'RegistrationController');
-    Route::controller('/backend', 'BackendController');
+Route::controller('/user', 'UserController');
+Route::controller('/role', 'RoleController');
+Route::controller('/survey', 'SurveyController');
 
 
-    Route::controller('/user', 'UserController');
-    Route::controller('/role', 'RoleController');
-    Route::controller('/survey', 'SurveyController');
+// user routes
+Route::get('/login', 'UserController@getLogin');
+Route::get('/logout', 'UserController@getLogout');
 
+Route::get('/profile', 'UserController@getProfile');
+Route::get('/user/profile', 'UserController@getProfile');
 
-    // user routes
-    Route::get('/login', 'UserController@getLogin');
-    Route::get('/logout', 'UserController@getLogout');
+Route::get('facebook', 'UserController@facebook');
+Route::get('facebook_callback', 'UserController@facebook_callback');
 
-    Route::get('/profile', 'UserController@getProfile');
-    Route::get('/user/profile', 'UserController@getProfile');
+// front end routes
+Route::get('/', 'HomeController@anyIndex');
 
-    Route::get('facebook', 'UserController@facebook');
-    Route::get('facebook_callback', 'UserController@facebook_callback');
-
-    // front end routes
-    Route::get('/', 'HomeController@anyIndex');
-
-});
 
 /**
  * This function is a small helper like dd() but doesn't actually die

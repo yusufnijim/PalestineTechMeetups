@@ -1,11 +1,12 @@
 web:
   container_name: ntm_web
-  image: silintl/php7
+  build: .
   ports:
     - "80:80"
   volumes:
-    - ./src:/var/www
+    - ./src:/var/www/html/
     - ./conf/apache:/etc/apache2/sites-enabled/
+    - ./conf/php:/usr/local/etc/php/
   links:
     - db
 db:
@@ -15,6 +16,7 @@ db:
     - "3306:3306"
   volumes:
     - ./db/:/var/lib/mysql/
+    - ./conf/mysql:/etc/mysql/
   environment:
     MYSQL_DATABASE: ntm
     MYSQL_USER: ntm_user
