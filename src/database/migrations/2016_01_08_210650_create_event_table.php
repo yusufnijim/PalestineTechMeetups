@@ -21,6 +21,9 @@ class CreateEventTable extends Migration
 
             $table->string('permalink', 255)->unique();
 
+            $table->string('featured_image')->nullable();
+
+
             $table->tinyInteger('is_registration_open')->nullable();
             $table->integer('max_registrars_count')->nullable();
 

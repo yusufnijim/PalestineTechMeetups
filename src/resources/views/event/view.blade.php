@@ -4,6 +4,8 @@
 
 
     Title: {{ $event->title }} <br/>
+    {!!  $event->featuredimagetag !!} <br/>
+    Title: {{ $event->title }} <br/>
     Body: {!!  $event->body !!} <br/>
     Date: {{ $event->date }} <br/>
     Location: {{ $event->location }} <br/>

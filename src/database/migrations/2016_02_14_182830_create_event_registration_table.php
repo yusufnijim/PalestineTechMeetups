@@ -28,9 +28,9 @@ class CreateEventRegistrationTable extends Migration
                 ->on('user')
                 ->onDelete('cascade');
 
-            $table->tinyInteger('is_accepted')->nullable();
-            $table->tinyInteger('is_confirmed')->nullable();
-            $table->tinyInteger('is_attended')->nullable();
+            $table->tinyInteger('is_accepted')->default(0);
+            $table->tinyInteger('is_confirmed')->default(0);
+            $table->tinyInteger('is_attended')->default(0);
 
 
             $table->timestamps();

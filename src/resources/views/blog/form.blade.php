@@ -14,14 +14,24 @@
     <div class="form-group">
         {!! Form::label('permalink', 'Permalink') !!}
 
-        : {!! Form::text('permalink', $blog->permalink, ['required' => 'true', 'id' => 'permalink', 'class' => 'form-control']) !!} <br/>
+        : {!! Form::text('permalink', $blog->permalink, ['required' => 'true', 'id' => 'permalink', 'class' => 'form-control']) !!}
+        <br/>
     </div>
 
 
     <div class="form-group">
         {!! Form::label('body', 'Body') !!}
 
-        : {!! Form::textarea('body', $blog->body, ['class'=>'event_body', 'id' => 'event_body', 'class' => 'form-control']) !!} <br/>
+        : {!! Form::textarea('body', $blog->body, ['class'=>'event_body', 'id' => 'event_body', 'class' => 'form-control']) !!}
+
+    </div>
+
+    <div class="form-group">
+        {!! $blog->featured_image !!}
+        {!! Form::label('featured_image', 'Featured image') !!}
+
+        : {!! Form::file('featured_image', ['onchange' => 'readURL(this, ".user_image")'] ) !!}
+
     </div>
 
     <div class="form-group">

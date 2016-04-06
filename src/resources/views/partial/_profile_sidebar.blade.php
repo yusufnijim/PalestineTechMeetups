@@ -1,4 +1,3 @@
-<!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -8,8 +7,26 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">Nablus Tech Meetups</a>
-        <a class="" href="/event">Events</a>
-        <a class="" href="/blog">Blog</a>
+
+        <ul class="nav navbar-nav">
+            <li class="">
+                <a href="/event">Events </a>
+            </li>
+            <li class="">
+                <a href="/blog">Blog </a>
+            </li>
+            <li class="">
+                <a href="/about">About us </a>
+            </li>
+            <li class="">
+                <a href="/contact">Contact us </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="search-div" style="float:left">
+        <form action="/search"><input name="q"></form>
     </div>
 
     <!-- /.navbar-header -->

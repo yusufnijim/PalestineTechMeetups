@@ -7,7 +7,8 @@
     <hr/>
     @foreach($events as $event)
         <h3>{{ $event->title }}</h3>
-        {{$event}} <br/>
+        {!! $event->featured_image_tag  !!}
+        {{$event->summary}} <br/>
         <a href="/registration/signup/{{$event->id}}">Read more...</a>
         <br/>
         <br/>
@@ -17,9 +18,11 @@
 
     @foreach($blogs as $blog)
         <h3>{{ $blog->title }}</h3>
-        {{$blog}} <br/>
+        {!! $blog->featured_image_tag  !!}
 
-        <a href="/blog/view/{{$event->id}}">Read more...</a>
+        {{$blog->summary}} <br/>
+
+        <a href="/blog/view/{{$blog->id}}">Read more...</a>
         <br/>
         <br/>
     @endforeach

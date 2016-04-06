@@ -25,7 +25,8 @@
     <div class="form-group">
         {!! Form::label('arabic_full_name', 'Full Arabic Name') !!}
 
-        : {!!  Form::text('arabic_full_name', $user->arabic_full_name, ['required' => '', 'class'=>'form-control']) !!} <br/>
+        : {!!  Form::text('arabic_full_name', $user->arabic_full_name, ['required' => '', 'class'=>'form-control']) !!}
+        <br/>
 
 
     </div>
@@ -37,7 +38,7 @@
     <div class="form-group">
         {!! Form::label('profession', 'Profession') !!}
 
-
+        imagetag
         : {!!  Form::select('profession', $user->professions(), @$user->professions(true)[$user->profession],[ 'class'=>'form-control'] ) !!}
         <br/>
     </div>
@@ -55,12 +56,19 @@
         <br/>
 
         <br/>
-        {!! $user->imagetag !!}
     </div>
+
     <div class="form-group">
+        {!! Form::label('bio', 'Bio') !!}
+
+        : {!!  Form::text('bio', $user->bio, ['class'=>'form-control']) !!} <br/>
+    </div>
+
+    <div class="form-group">
+        {!! $user->imagetag !!}
         {!! Form::label('image', 'Image') !!}
 
-        : {!! Form::file('image', ['onchange' => 'readURL(this)'] ) !!}
+        : {!! Form::file('image', ['onchange' => 'readURL(this, ".user_image")'] ) !!}
 
 
     </div>
@@ -69,16 +77,15 @@
     </div>
     {!! Form::close() !!}
 
-<script>
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $(".user_image").attr('src', e.target.result);
+    <script>
+        function readURL(input, selector) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(".user_image").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-</script>
-
+    </script>
 @stop

@@ -3,7 +3,7 @@
 @section('form')
 
 
-    {!! Form::open([ 'method' => 'post']) !!}
+    {!! Form::open([ 'method' => 'post', 'files' => true]) !!}
 
 
 @stop

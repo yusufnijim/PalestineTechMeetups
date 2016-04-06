@@ -36,7 +36,7 @@ Route::get('facebook', 'UserController@facebook');
 Route::get('facebook_callback', 'UserController@facebook_callback');
 
 // front end routes
-Route::get('/', 'HomeController@anyIndex');
+Route::controller('/', 'HomeController');
 
 
 /**

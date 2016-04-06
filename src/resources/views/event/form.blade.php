@@ -6,18 +6,29 @@
 
     <div class="form-group">
         {!! Form::label('title', 'Title') !!}
-        : {!! Form::text('title', $event->title, ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!} <br/>
+        : {!! Form::text('title', $event->title, ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!}
+        <br/>
     </div>
     <div class="form-group">
         {!! Form::label('permalink', 'Permalink') !!}
 
-        : {!! Form::text('permalink', $event->permalink, ['required' => 'true', 'id' => 'permalink', 'class' => 'form-control']) !!} <br/>
+        : {!! Form::text('permalink', $event->permalink, ['required' => 'true', 'id' => 'permalink', 'class' => 'form-control']) !!}
+        <br/>
     </div>
     <div class="form-group">
 
         {!! Form::label('body', 'Body') !!}
         : {!! Form::textarea('body', $event->body, ['class'=>'event_body', 'id' => 'event_body', 'class' => 'form-control']) !!}
-    </div><br/>
+    </div>
+
+    <div class="form-group">
+        {!! $event->featured_image !!}
+        {!! Form::label('featured_image', 'Featured image') !!}
+
+        : {!! Form::file('featured_image', ['onchange' => 'readURL(this, ".user_image")'] ) !!}
+
+    </div>
+
     <div class="form-group">
 
         {!! Form::label('max_registrars_count', 'Max registrars count') !!}:

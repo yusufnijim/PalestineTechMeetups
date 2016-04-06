@@ -28,18 +28,15 @@
         {!! Form::label('to', 'To') !!} <br />
 
         Confirmed users
-        No {{ Form::radio('is_confirmed', 0, true) }}
-        Yes {{ Form::radio('is_confirmed', 1) }}
+        {{ Form::checkbox('is_confirmed', 1) }}
         <br>
 
         Accepted users :
-        No {{ Form::radio('is_accepted', 0, true) }}
-        Yes {{ Form::radio('is_accepted', 1) }}
+        {{ Form::checkbox('is_accepted', 1) }}
         <br>
 
         Attended users
-        No {{ Form::radio('is_attended', 0, true) }}
-        Yes {{ Form::radio('is_attended', 1) }}
+        {{ Form::checkbox('is_attended', 1) }}
         <br>
 
     </div>

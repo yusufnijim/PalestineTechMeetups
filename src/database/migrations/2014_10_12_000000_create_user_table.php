@@ -30,6 +30,7 @@ class CreateUserTable extends Migration
 
             $table->tinyInteger('profession')->nullable();
             $table->string('profession_location');
+            $table->string('bio')->nullable();
 
             $table->tinyInteger('gender')->nullable();
             $table->string('image');

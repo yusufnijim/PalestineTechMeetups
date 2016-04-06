@@ -17,6 +17,7 @@ class CreateBlogTable extends Migration
             $table->increments('id');
 
             $table->string('title');
+            $table->string('featured_image')->nullable();
 
             $table->string('permalink', 255)->unique();
 

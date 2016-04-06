@@ -136,12 +136,21 @@ class RegistrationController extends MyBaseController
         can("registrations.manage");
 
         // fetch users
-        $reg = RegistrationModel::where('event_id', $event_id)
-            ->where('is_confirmed', request()->is_confirmed)
-            ->where('is_accepted', request()->is_accepted)
-            ->where('is_attended', request()->is_attended)
-            ->get();;
+        $reg = RegistrationModel::where('event_id', $event_id);
 
+        if (request()->is_confirmed) {
+            $reg->where('is_confirmed', 1);
+        }
+        if (request()->is_accepted) {
+            $reg->where('is_accepted', 1);
+        }
+        if (request()->is_attended) {
+            $reg->where('is_attended', 1);
+        }
+        $reg = $reg->get();
+
+//        d(request()->input());
+//        dd($reg);
         $count = 0;
 
         // loop through those users
@@ -163,5 +172,16 @@ class RegistrationController extends MyBaseController
         // done!
         flash('emails in-queued for ' . $count, 'success');
         return redirect('/registration/view/' . $event_id);
+    }
+
+    public function postSendemailcount($event_id)
+    {
+        // fetch users
+        $reg = RegistrationModel::where('event_id', $event_id)
+            ->where('is_confirmed', request()->is_confirmed)
+            ->where('is_accepted', request()->is_accepted)
+            ->where('is_attended', request()->is_attended)
+            ->get();;
+        dd($reg);
     }
 }

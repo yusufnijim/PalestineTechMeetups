@@ -19,9 +19,9 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     use Authenticatable, Authorizable, CanResetPassword, HasRole;
     protected $table = "user";
 
-    static $user_images_upload_directory = '/userimages/';
+    static $image_upload_directory = '/image/user/';
     static $default_image = 'default.png';
-    static $user_images_allowed_extensions = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
+    static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
      * The attributes that are mass assignable.
@@ -65,7 +65,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         }
 
         $value = $this->image;
-        $result = "<img class='user_image' src='" . static::$user_images_upload_directory . "$value' />";
+        $result = "<img class='user_image' src='" . static::$image_upload_directory . "$value' />";
 
         return $result;
     }
@@ -201,7 +201,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         $user->save();
 
 
-        static::_uploadUserImage($user, $request);
+        static::_uploadImage($user, $request, 'image');
 
         $user->save();
         return $user;
@@ -213,22 +213,22 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      * @param $request
      * @return mixed
      */
-    private static function _uploadUserImage($user, $request)
+    private static function _uploadImage($user, $request, $name)
     {
-        $image = $request->file('image');
+        $image = $request->file($name);
         if ($image) {
             $original_name = $image->getClientOriginalName();
 
             $ext = get_extension($original_name);
-            if (in_array($ext, static::$user_images_allowed_extensions)) {
+            if (in_array($ext, static::$image_allowed_extension)) {
 
-                $new_file = $user->id . $request->file('image')->getClientOriginalName();
-                $result = $request->file('image')
-                    ->move(public_path() . static::$user_images_upload_directory,
+                $new_file = $user->id . $request->file($name)->getClientOriginalName();
+                $result = $request->file($name)
+                    ->move(public_path() . static::$image_upload_directory,
                         $new_file
                     );
 
-                $user->image = $new_file;
+                $user->$name = $new_file;
             } else {
                 session()->flash('flash_message', 'unkown image file extension');
             }
