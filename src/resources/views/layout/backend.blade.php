@@ -77,6 +77,7 @@
     <script src="/dist/js/sb-admin-2.js"></script>
 
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/site.css">
     <link rel="stylesheet" type="text/css"
           href="//cdn.datatables.net/responsive/2.0.2/css/responsive.dataTables.min.css">
@@ -84,7 +85,7 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/site.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 
 </body>
 

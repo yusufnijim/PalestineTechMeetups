@@ -41,7 +41,7 @@
         : {!! Form::checkbox('is_registration_open', true, $event->is_registration_open) !!} <br/>
     </div>
     <div class="form-group">
-        {!! Form::label('date', 'Event Date open') !!}
+        {!! Form::label('date', 'Event Date') !!}
 
         : {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
     </div>
@@ -68,7 +68,8 @@
     <div class="form-group">
         {!! Form::label('survey_id', 'Form') !!}
 
-        : {!! Form::select('survey_id', $surveys)  !!}
+        : {!! Form::select('survey_id', $surveys, $event->survey_id, ['class' => 'form-select-list'])  !!}
+        <button onclick="updateForms()" type="button">Update</button>
         <a href="/survey/create" class="btn btn-warning" target="_blank">new form</a>
         <br/>
     </div>
@@ -115,10 +116,24 @@
                 defaultDate: 'now',
                 autoclose: true
             });
+            $("#event_date").datepicker("setDate", new Date());
+
         });
-        $("#event_date").datepicker("setDate", new Date());
 
+        function updateForms() {
 
+            $.get("/event/surveys", function (data) {
+                var $el = $(".form-select-list");
+                $el.empty(); // remove old options
+
+                $.each(data, function (value, key) {
+                    $el.append($("<option></option>")
+                            .attr("value", value).text(key));
+                });
+
+            });
+
+        }
     </script>
     </div>
 

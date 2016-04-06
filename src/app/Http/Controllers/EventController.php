@@ -30,6 +30,10 @@ class EventController extends MyBaseController
             ->with('surveys', SurveyModel::lists('name','id'));
     }
 
+    public function getSurveys() {
+        can("event.manage");
+        return SurveyModel::lists('name','id');
+    }
     public function postCreate(CreateRequest $request)
     {
         can("event.manage");
