@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://s1.dev/',
+    'url' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -64,8 +64,16 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
+//    'languages' =>  ['ar','en','fr'],
     'locale' => 'en',
+    'languages' => ['en', 'fr', 'ar'],
+
+    'locales' => [
+        'en' => 'English',
+        'ar' => 'Arabic',
+        'sv' => 'Swedish',
+        'de' => 'Dutch',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -159,9 +167,12 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+//        Barryvdh\Debugbar\ServiceProvider::class,
         Bestmomo\Filemanager\FilemanagerServiceProvider::class,
 //        Laracasts\Flash\FlashServiceProvider,
+
+//        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+
     ],
 
     /*
@@ -213,8 +224,11 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+//        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 //        'Flash' => Laracasts\Flash\Flash::class,
+
+//        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+
     ],
 
 ];

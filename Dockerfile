@@ -2,10 +2,9 @@
 
 FROM php:7-apache
 
-#RUN apt-get update
-#    /usr/local/bin/docker-php-ext-install gd mysqli && \
+RUN apt-get update \
+    && apt-get install git -y
 
-#RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
@@ -13,6 +12,7 @@ RUN \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mbstring
 
+RUN
 
 RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 

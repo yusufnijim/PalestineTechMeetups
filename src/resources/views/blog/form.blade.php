@@ -27,10 +27,10 @@
     </div>
 
     <div class="form-group">
-        {!! $blog->featured_image !!}
+        {!! $blog->featuredimagetag !!}
         {!! Form::label('featured_image', 'Featured image') !!}
 
-        : {!! Form::file('featured_image', ['onchange' => 'readURL(this, ".user_image")'] ) !!}
+        : {!! Form::file('featured_image', ['onchange' => 'readURL(this, ".blog-image")'] ) !!}
 
     </div>
 

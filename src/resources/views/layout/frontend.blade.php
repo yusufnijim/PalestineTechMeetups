@@ -73,6 +73,8 @@
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="/assets/css/site.css">
+
 <!-- Custom Theme JavaScript -->
 <script src="/dist/js/sb-admin-2.js"></script>
 

@@ -77,15 +77,4 @@
     </div>
     {!! Form::close() !!}
 
-    <script>
-        function readURL(input, selector) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $(".user_image").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @stop

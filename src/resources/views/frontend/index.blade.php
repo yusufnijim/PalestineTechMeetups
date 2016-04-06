@@ -1,7 +1,7 @@
 @extends ("layout/frontend")
 
 @section("content")
-    Here we display events/blogs and information about NTM
+    {{ trans('frontend/index.Welcome') }}
 
     <h2>Events</h2>
     <hr/>

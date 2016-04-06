@@ -65,7 +65,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         }
 
         $value = $this->image;
-        $result = "<img class='user_image' src='" . static::$image_upload_directory . "$value' />";
+        $result = "<img class='image user-image' src='" . static::$image_upload_directory . "$value' />";
 
         return $result;
     }
@@ -263,7 +263,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 
     public function accessMediasAll()
     {
-        if ($this->hasPermission('blog.edit'))
+        if (can('blog.edit'))
             return true;
         // return true for access to all medias
     }

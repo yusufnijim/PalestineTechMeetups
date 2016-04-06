@@ -93,3 +93,16 @@ function getSegmentFromEnd($instance, $position_from_end = 1)
     $segments = $instance->segments();
     return $segments[sizeof($segments) - $position_from_end];
 }
+
+//
+//function lurl($url)
+//{
+//    return LaravelLocalization::localizeURL($url);
+//}
+//
+//
+//function t($url)
+//{
+//    return LaravelLocalization::localizeURL($url);
+//}
+//

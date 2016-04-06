@@ -59,7 +59,11 @@ trait HasRole
             return $this->roles->contains('name', $role);
         }
 //        dd($role->name);
-        return $this->roles()->find([$role->id])->count();
+        if ($role)
+            return $this->roles()->find([])->count();
+        else {
+            return false;
+        }
 //        return !!$role->intersect($this->roles)->count();
     }
 

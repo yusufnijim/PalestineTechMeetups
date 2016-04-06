@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('language/{lang}', 'HomeController@language')->where('lang', '[A-Za-z_-]+');
+
 
 // admin routes
 Route::controller('event', 'EventController');

@@ -113,7 +113,7 @@ class BlogModel extends BaseModel
         }
 
         $value = $this->featured_image;
-        $result = "<img class='blog_image' src='" . static::$image_upload_directory . "$value' />";
+        $result = "<img class='image blog-image' src='" . static::$image_upload_directory . "$value' />";
 
         return $result;
     }
