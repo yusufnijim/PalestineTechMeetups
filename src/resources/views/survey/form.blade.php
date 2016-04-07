@@ -14,13 +14,16 @@
         {!! Form::submit('submit') !!}
         {!! Form::close() !!}
 
+
+        @include('survey/partial/formbuilder')
+
+
     </div>
     <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
     <script type="text/javascript">
         CKEDITOR.replace('description2', {
             filebrowserBrowseUrl: '{!! url('filemanager/index.html') !!}'
         });
-
 
     </script>
 

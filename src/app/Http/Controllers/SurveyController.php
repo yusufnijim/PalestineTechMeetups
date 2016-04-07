@@ -90,4 +90,12 @@ class SurveyController extends MyBaseController
             ->with("results", $results);
     }
 
+    public function anySaveform()
+    {
+        $form_data = request()->fromData;
+        $xml = simplexml_load_string($form_data);
+        dd($xml);
+
+        return json_encode(true);
+    }
 }

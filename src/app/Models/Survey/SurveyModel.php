@@ -48,6 +48,8 @@ class SurveyModel extends BaseModel
         ]);
         $instance->save();
 
+        dd($request->input());
+        SurveyQuestionModel::insert($request, $instance->id);
         return $instance;
     }
 }

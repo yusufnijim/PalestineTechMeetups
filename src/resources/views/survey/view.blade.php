@@ -10,9 +10,6 @@
 
     @foreach($survey->questions()->orderBy('order')->get() as $question)
         {{$question}}
-        <h3>{{ $question->question }}</h3>
-        {{ $question->type->name }} <br/>
-
 
         @if($question->type->name == 'Short answer')
             {!! Form::text("answer[$question->id]", $question->choice) !!}

@@ -1,3 +1,14 @@
 <?php
 
-phpinfo();
+//phpinfo();
+
+
+$xml= '<form-template>
+	<fields>
+		<field type="textarea" name="textarea-1460034136031" label="Text Area" class="form-control text-area"></field>
+		<field subtype="text" type="text" name="text-1460034137447" label="Text Field" class="form-control text-input"></field>
+	</fields>
+</form-template>';
+
+echo "<pre>";
+echo "<textarea>", $xml, "</textarea>";
