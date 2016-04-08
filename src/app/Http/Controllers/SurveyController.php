@@ -90,11 +90,10 @@ class SurveyController extends MyBaseController
             ->with("results", $results);
     }
 
-    public function anySaveform()
+    public function anySaveform($survey_id = 1)
     {
-        $form_data = request()->fromData;
-        $xml = simplexml_load_string($form_data);
-        dd($xml);
+        $request = request();
+        SurveyQuestionModel::insert($request, $survey_id);
 
         return json_encode(true);
     }

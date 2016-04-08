@@ -46,9 +46,6 @@ class SurveyModel extends BaseModel
             'name' => $request->name,
             'description' => $request->description2,
         ]);
-        $instance->save();
-
-        dd($request->input());
         SurveyQuestionModel::insert($request, $instance->id);
         return $instance;
     }

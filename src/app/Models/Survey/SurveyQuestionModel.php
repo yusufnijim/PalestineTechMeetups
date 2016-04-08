@@ -30,6 +30,18 @@ class SurveyQuestionModel extends BaseModel
     {
         $instance = new Static();
 
+//        $instance->save();
+
+        $form_data = $request->fromData;
+        $xml = simplexml_load_string($form_data);
+        d($xml);
+        dd($form_data);
+        foreach($xml as $value) {
+            d($value);
+
+        }
+
+
         $instance->survey_id = $survey_id;
         $instance = static::_handleInsertEdit($instance, $request);
 
@@ -45,8 +57,6 @@ class SurveyQuestionModel extends BaseModel
 
     private static function _handleInsertEdit($instance, $request)
     {
-//        d($request->input());
-//        dd($instance);
         $instance->fill([
             'question' => "a" . $request->question,
             'type_id' => 1, // $request->type_id,
@@ -58,7 +68,8 @@ class SurveyQuestionModel extends BaseModel
     }
 
 
-    public function type() {
+    public function type()
+    {
         return $this->hasOne(SurveyQuestionTypeModel::class, 'id', 'type_id');
     }
 }
