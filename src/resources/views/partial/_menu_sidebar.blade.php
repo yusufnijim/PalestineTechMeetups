@@ -25,7 +25,7 @@
                         <a href="/event/create">Create</a>
                     </li>
                     <li>
-                        <a href="/survey">Surveys</a>
+                        <a href="/survey" >Forms</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

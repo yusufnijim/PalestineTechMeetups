@@ -28,7 +28,6 @@ class SurveyQuestionAnswerModel extends BaseModel
     public static function insert($survey_id, $request)
     {
         $user_id = auth()->check() ? auth()->user()->id : 0;
-
         foreach ($request['answer'] as $question_id => $answer) {
             $instance = Static::create([
                 'survey_id' => $survey_id,

@@ -33,6 +33,7 @@ class SurveyModel extends BaseModel
     public static function insert($request)
     {
         $instance = static::_handleCreateEdit(new Static(), $request);
+        return $instance;
     }
 
     public static function edit($id, $request)
@@ -46,6 +47,8 @@ class SurveyModel extends BaseModel
             'name' => $request->name,
             'description' => $request->description2,
         ]);
+        $instance->save();
+
         SurveyQuestionModel::insert($request, $instance->id);
         return $instance;
     }

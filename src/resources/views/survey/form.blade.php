@@ -5,18 +5,19 @@
     @yield('form')
 
     <div>
+        {!! Form::hidden('survey_id', $survey->id, ['id' => 'survey_id']) !!}
         Title: {!! Form::text('name', $survey->name, ['required' => 'true']) !!} <br/>
         Body: {!! Form::textarea('description2', $survey->description,
         ['class'=>'survey_body', 'id' => 'survey_body']) !!}
         <br/>
 
 
-        {!! Form::submit('submit') !!}
+        {!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
         {!! Form::close() !!}
 
-
-        @include('survey/partial/formbuilder')
-
+        @if(isset($edit))
+            @include('survey/partial/formbuilder')
+        @endif
 
     </div>
     <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>

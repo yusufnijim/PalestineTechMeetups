@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,6 +11,7 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
 
 Route::get('language/{lang}', 'HomeController@language')->where('lang', '[A-Za-z_-]+');
 

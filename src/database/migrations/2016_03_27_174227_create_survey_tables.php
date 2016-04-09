@@ -18,6 +18,7 @@ class CreateSurveyTables extends Migration
 
             $table->string('name'); // name of this survey
             $table->longText('description')->nullable(); // description
+            $table->longText('raw_form')->nullable(); // description
 
             $table->nullableTimestamps();
         });
@@ -35,7 +36,7 @@ class CreateSurveyTables extends Migration
         Schema::create('survey_question', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('question'); // question value
+            $table->string('title'); // question title
 
             $table->integer('survey_id')->unsigned(); // which survey the question belongs to
             $table->foreign('survey_id')
@@ -54,7 +55,8 @@ class CreateSurveyTables extends Migration
             $table->longText('default')->nullable(); // potential values this question has.
 
             $table->string('rule')->nullable();
-            $table->integer('order')->unsigned()->nullable(); // will hold the order of questions to be diplayed in
+            $table->string('other')->nullable();
+//            $table->integer('order')->unsigned()->nullable(); // will hold the order of questions to be displayed in
 
             $table->nullableTimestamps();
         });

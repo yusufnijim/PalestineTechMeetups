@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" media="screen"
       href="http://formbuilder.online/assets/css/form-builder.min.css">
-<textarea id="fb-template"></textarea>
+
+<textarea id="fb-template">{{ $survey->raw_form }}</textarea>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>
 <script>
@@ -18,7 +20,12 @@
                 'select',
             ],
             dataType: 'xml',
-            prefix: 'fb-'
+            prefix: 'fb-',
+            disableFields: [
+                'header',
+                'paragraph',
+                'hidden'
+            ]
         };
 
         var fbTemplate = document.getElementById('fb-template');
@@ -32,10 +39,10 @@
     });
 
     function saveForm(formData) {
-
-        $.post("/survey/saveform", {formdata: formData})
+        survey_id = $('#survey_id').val();
+        $.get("/survey/saveform/" + survey_id, {formdata: formData})
                 .done(function (data) {
-                    alert("Data Loaded: " + data);
+                    alert('Saved successfully');
                 });
     }
 

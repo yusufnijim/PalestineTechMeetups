@@ -43,7 +43,9 @@ class SurveyController extends MyBaseController
         can('event.manage');
 
         $survey = SurveyModel::findOrfail($id);
-        return view("survey/edit")->with('survey', $survey);
+        return view("survey/edit")
+            ->with('survey', $survey)
+            ->with('edit', true);
     }
 
     public function putEdit($id)
@@ -55,6 +57,21 @@ class SurveyController extends MyBaseController
 
         return redirect('/survey');
     }
+
+
+    public function anySaveform($survey_id)
+    {
+        $request = request();
+
+        $survey = SurveyModel::find($survey_id)->first();
+        $survey->raw_form = request()->formdata;
+        $survey->save();
+
+        SurveyQuestionModel::insert($request, $survey_id);
+
+        return json_encode(true);
+    }
+
 
     public function getView($id)
     {
@@ -90,11 +107,4 @@ class SurveyController extends MyBaseController
             ->with("results", $results);
     }
 
-    public function anySaveform($survey_id = 1)
-    {
-        $request = request();
-        SurveyQuestionModel::insert($request, $survey_id);
-
-        return json_encode(true);
-    }
 }

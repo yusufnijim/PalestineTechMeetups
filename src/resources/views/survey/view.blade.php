@@ -2,39 +2,41 @@
 
 @section('content')
     <h2>{{ $survey->name }}</h2>
-    {{ $survey->description }} <br/> <br/>
+    {!! $survey->description !!} <br/> <br/>
 
 
-    Questions: <br/>
+    <h2>Questions: </h2><br/>
     {!! Form::open(['url'=>'/survey/answer/' . $survey->id]) !!} {{--['url'=>'/survey/answer/' . $survey->id]--}}
 
-    @foreach($survey->questions()->orderBy('order')->get() as $question)
-        {{$question}}
+    @foreach($survey->questions()->get() as $question)
+        {{--{{$question}} <br /><br /><br />--}}
 
+        <h4>{!! Form::label('', $question->title) !!}</h4>
         @if($question->type->name == 'Short answer')
-            {!! Form::text("answer[$question->id]", $question->choice) !!}
+
+            {!! Form::text("answer[$question->id]", unserialize($question->choice), unserialize($question->other)) !!}
         @endif
 
         @if($question->type->name == 'Paragraph')
-            {!! Form::textarea($question->id, $question->choice) !!}
+            {!! Form::textarea("answer[$question->id]", unserialize($question->choice)) !!}
         @endif
 
         @if($question->type->name == 'Multiple choice')
-            @foreach(unserialize($question->choices) as $choice)
-                {{ $choice }}: {!! Form::radio($question->id, $question->choice) !!}
+            @foreach(unserialize($question->choice) as $key => $value)
+                {{ $value }}: {!! Form::radio("answer[$question->id]", $key) !!}
             @endforeach
 
         @endif
 
         @if($question->type->name == 'Checkboxes')
-            @foreach(unserialize($question->choices) as $choice)
-                {{ $choice }}: {!! Form::checkbox($question->id, $question->choice) !!}
+            @foreach(unserialize($question->choice) as $choice)
+                {{ $choice }}: {!! Form::checkbox("answer[$question->id]", $question->choice) !!}
 
             @endforeach
         @endif
 
         @if($question->type->name == 'Dropdown')
-            {!! Form::select($question->id , unserialize($question->choice)) !!}
+            {!! Form::select("answer[$question->id]" , unserialize($question->choice)) !!}
         @endif
 
         {{--@if($question->type->name == 'Linear scale')--}}
@@ -46,11 +48,11 @@
         {{--@endif--}}
 
         @if($question->type->name == 'Date')
-            {!! Form::date($question->id, $question->choice) !!}
+            {!! Form::date("answer[$question->id]", unserialize($question->choice)) !!}
         @endif
 
         @if($question->type->name == 'Time')
-            {!! Form::date($question->id, $question->choice) !!}
+            {!! Form::date("answer[$question->id]", unserialize($question->choice)) !!}
         @endif
 
         <br/>
