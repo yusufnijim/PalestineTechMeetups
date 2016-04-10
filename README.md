@@ -39,7 +39,7 @@ $ docker-compose run web bash -c "php artisan migrate:refresh --seed"
 
 5- Configure Laravel permissions:
 ```
-$ sudo chmod 775 src/storage/ src/bootstrap/cache src/public/userimages -R
+$ sudo chmod 775 src/storage/ src/bootstrap/cache src/public/image -R
 ```
 
 Walla, you rock !

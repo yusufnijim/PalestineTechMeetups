@@ -23,7 +23,7 @@ php artisan migrate --seed
 4- Configure Laravel permissions:
 
 ```
-$ sudo chmod 775 storage/ bootstrap/cache public/userimages -R
+$ sudo chmod 775 storage/ bootstrap/cache public/image -R
 ```
 
 Walla, you rock !
