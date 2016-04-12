@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
-use App\Models\Survey\SurveyModel;
-use App\Models\Survey\SurveyQuestionModel;
-use App\Models\Survey\SurveyQuestionAnswerModel;
-use App\Models\User\UserModel;
+use App\Repositories\Contracts\Survey\SurveyRepository;
+
+//use App\Models\Survey\SurveyModel;
+//use App\Models\Survey\SurveyQuestionModel;
+//use App\Models\Survey\SurveyQuestionAnswerModel;
+//use App\Models\User\UserModel;
 
 /**
  * contains users functions, registration, login...etc
  */
 class SurveyController extends MyBaseController
 {
+    protected $survey_repo;
+
+    public function __construct(SurveyRepository $survey_repo)
+    {
+        $this->survey_repo = $survey_repo;
+    }
+
     public function anyIndex()
     {
         can('event.manage');
 
-        $surveys = SurveyModel::all();
+        $surveys = $this->survey_repo->all();
         return view('survey/index')->with('surveys', $surveys);
     }
 
@@ -25,14 +34,14 @@ class SurveyController extends MyBaseController
     {
         can('event.manage');
 
-        return view("survey/create")->with('survey', new SurveyModel());
+        return view("survey/create")->with('survey', $this->survey_repo->new());
     }
 
     public function postCreate()
     {
         can('event.manage');
 
-        SurveyModel::insert(request());
+        $this->survey_repo->create(request()->all());
         flash("survey created successfully", 'success');
 
         return redirect('/survey');
@@ -42,7 +51,7 @@ class SurveyController extends MyBaseController
     {
         can('event.manage');
 
-        $survey = SurveyModel::findOrfail($id);
+        $survey = $this->survey_repo->find($id);
         return view("survey/edit")
             ->with('survey', $survey)
             ->with('edit', true);
@@ -52,7 +61,7 @@ class SurveyController extends MyBaseController
     {
         can('event.manage');
 
-        SurveyModel::edit($id, request());
+        $this->survey_repo->update(request()->all(), $id);
         flash("survey updated successfully", 'success');
 
         return redirect('/survey');
@@ -63,7 +72,7 @@ class SurveyController extends MyBaseController
     {
         $request = request();
 
-        $survey = SurveyModel::find($survey_id)->first();
+        $survey = $this->survey_repo->find($survey_id);
         $survey->raw_form = request()->formdata;
         $survey->save();
 
@@ -76,8 +85,7 @@ class SurveyController extends MyBaseController
     public function getView($id)
     {
         can('event.manage');
-
-        $survey = SurveyModel::findOrFail($id);
+        $survey =$this->survey_repo->find($id);
         return view("survey/view")->with('survey', $survey);
     }
 

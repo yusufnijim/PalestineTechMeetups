@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Event;
 
 use App\Models\Survey\SurveyModel;
+use App\Models\BaseModel;
 
 class EventModel extends BaseModel
 {

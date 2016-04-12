@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Event;
 
-
+use App\Models\BaseModel;
 class RegistrationModel extends BaseModel
 {
     protected $table = 'event_registration';

@@ -35,8 +35,8 @@ class SurveyQuestionModel extends BaseModel
         if (isset($form_data)) {
             $fields = static::get_form_fields($form_data); //parse the xml
 
+
             foreach ($fields as $field) { //loop through the form fields
-                d($field);
 
                 $instance = new Static();
                 $instance->survey_id = $survey_id;
@@ -89,15 +89,17 @@ class SurveyQuestionModel extends BaseModel
         $xml = simplexml_load_string($form_data);
         $result = [];
 
-        if (isset($xml->fields) and isset($xml->fields->field)) {
-            foreach ($xml->fields->field as $record) {
-                $array = (array)$record;
-                $record = current($array);
-                $record['options'] = next($array);
+        if (isset($xml->fields) and isset($xml->fields->field)) {  // make sure the form is not empty !
+            foreach ($xml->fields->field as $record) { // loop through every field
+                $array = (array)$record; // covert it to an array
+
+                $record = current($array); // get the field
+                $record['options'] = next($array); //additional options, needed for radio buttons, select lists...etc
 
                 $result[] = $record;
             }
         }
+
         return $result;
     }
 //    public static function edit($id, $request)

@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Blog\CreateRequest as CreateRequest;
-use App\Models\BlogModel;
+use App\Repositories\Contracts\BlogRepository;
 
 class BlogController extends MyBaseController
 {
+    protected $blog_repo;
+
+    public function __construct(BlogRepository $blog_repo)
+    {
+        $this->blog_repo = $blog_repo;
+    }
 
     public function anyIndex()
     {
         can("blog.manage");
 
-        $blogs = BlogModel::all();
+        $blogs = $this->blog_repo->all();
 
         return view('blog/index')
             ->with('blogs', $blogs);
@@ -23,7 +29,7 @@ class BlogController extends MyBaseController
     {
         can("blog.manage");
 
-        $blog = new BlogModel();
+        $blog = $this->blog_repo->new();
         return view('blog/create')
             ->with('blog', $blog);
     }
@@ -41,7 +47,7 @@ class BlogController extends MyBaseController
 
     public function getView($id)
     {
-        $blog = BlogModel::findOrFail($id);
+        $blog = $this->blog_repo->find($id);
         return view('blog/view')->with('blog', $blog);
     }
 
@@ -49,15 +55,14 @@ class BlogController extends MyBaseController
     {
         can("blog.manage");
 
-        $blog = BlogModel::findOrFail($id);
+        $blog = $this->blog_repo->find($id);
         return view('blog/edit')->with('blog', $blog);
     }
 
     public function putEdit($id, CreateRequest $request)
     {
         can("blog.manage");
-
-        BlogModel::edit($id, $request);
+        $this->blog_repo->update($request->all(), $id);
         flash('blog updated successfully', 'success');
 
         return redirect("blog");

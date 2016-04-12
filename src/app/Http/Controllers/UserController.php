@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
-use App\Models\User\UserModel;
 use App\Http\Requests\User\CreateRequest;
+use App\Repositories\Contracts\User\UserRepository;
 
 
 /**
@@ -12,14 +12,20 @@ use App\Http\Requests\User\CreateRequest;
  */
 class UserController extends MyBaseController
 {
-
     use UserSocalLogin;
+
+    protected $user_repo;
+
+    public function __construct(UserRepository $user_repo)
+    {
+        $this->user_repo = $user_repo;
+    }
 
     public function anyIndex()
     {
         can("user.manage");
 
-        $users = UserModel::all();
+        $users = $this->user_repo->all();
         return view('user/index')
             ->with('users', $users);
     }
@@ -29,7 +35,7 @@ class UserController extends MyBaseController
     {
         can("user.manage");
 
-        $user = new UserModel();
+        $user = $this->user_repo->new();
         return view('/user/create')
             ->with('user', $user);
     }
@@ -47,7 +53,7 @@ class UserController extends MyBaseController
     {
         can("user.manage");
 
-        $user = UserModel::findOrFail($id);
+        $user = $this->user_repo->find($id);
         return view('/user/edit')
             ->with('user', $user);
     }
@@ -66,7 +72,7 @@ class UserController extends MyBaseController
     {
         can("user.manage");
 
-        $user = UserModel::findOrFail($id);
+        $user = $this->user_repo->find($id);
         return view('/user/view')
             ->with('user', $user);
     }

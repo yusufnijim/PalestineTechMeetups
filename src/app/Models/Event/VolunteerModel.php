@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Models;
-
+namespace App\Models\Event;
+use App\Models\BaseModel;
 
 class VolunteerModel extends BaseModel
 {
@@ -43,14 +43,9 @@ class VolunteerModel extends BaseModel
      * @param $event_id
      * @return static
      */
-    public static function insert($event_id)
-    {
-        $values_array = [
-            'event_id' => $event_id,
-            'user_id' => request()->user_id,
-            'type_id' => request()->type_id,
-        ];
-        $instance = Static::firstOrCreate($values_array);
-        return $instance;
-    }
+//    public static function insert($event_id)
+//    {
+//        $instance = Static::firstOrCreate($values_array);
+//        return $instance;
+//    }
 }

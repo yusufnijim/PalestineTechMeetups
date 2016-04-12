@@ -10,7 +10,8 @@
         "laravel/socialite": "^2.0",
         "laravelcollective/html": "5.2.*",
         "bestmomo/filemanager": "1.1.2",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "prettus/l5-repository": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

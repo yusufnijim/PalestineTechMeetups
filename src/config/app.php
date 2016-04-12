@@ -1,7 +1,6 @@
 <?php
 
 
-
 return [
 
     /*
@@ -174,7 +173,8 @@ return [
 //        Laracasts\Flash\FlashServiceProvider,
 
 //        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
-
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        App\Providers\DatabaseServiceProvider::class,
     ],
 
     /*

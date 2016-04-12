@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogModel;
-use App\Models\EventModel;
+//use App\Models\BlogModel;
+//use App\Models\EventModel;
 use App\Jobs\ChangeLocale;
 
 

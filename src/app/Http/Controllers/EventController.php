@@ -3,18 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Event\CreateRequest as CreateRequest;
-use App\Models\EventModel;
-use App\Models\User\UserModel;
-use App\Models\VolunteerModel;
-use App\Models\Survey\SurveyModel;
+
+use App\Repositories\Contracts\Event\EventRepository;
+use App\Repositories\Contracts\Event\VolunteerRepository;
+use App\Repositories\Contracts\User\UserRepository;
+use App\Repositories\Contracts\Survey\SurveyRepository;
+
 
 class EventController extends MyBaseController
 {
+    protected $event_repo;
+    protected $user_repo;
+    protected $volunteer_repo;
+
+    public function __construct(EventRepository $event_repo, UserRepository $user_repo,
+                                VolunteerRepository $volunteer_repo, SurveyRepository $survey_repo)
+    {
+        $this->event_repo = $event_repo;
+        $this->user_repo = $user_repo;
+        $this->volunteer_repo = $volunteer_repo;
+        $this->survey_repo = $survey_repo;
+    }
+
     public function anyIndex()
     {
         can("event.manage");
 
-        $events = EventModel::with('survey')->get();
+        $events = $this->event_repo->all();
 
         return view('event/index')
             ->with('events', $events);
@@ -26,19 +41,22 @@ class EventController extends MyBaseController
         can("event.manage");
 
         return view('event/create')
-            ->with("event", new EventModel())
-            ->with('surveys', SurveyModel::lists('name','id'));
+            ->with("event", $this->event_repo->new())
+            ->with('surveys', $this->survey_repo->lists('name', 'id'));
     }
 
-    public function getSurveys() {
+    public function getSurveys()
+    {
         can("event.manage");
-        return SurveyModel::lists('name','id');
+        return $this->survey_repo->lists('name', 'id');
     }
+
     public function postCreate(CreateRequest $request)
     {
         can("event.manage");
 
-        $event = EventModel::insert($request);
+        $event = $this->event_repo->create($request->all());
+
         flash('event created successfully', 'success');
         return redirect("event/edit/" . $event->id);
     }
@@ -48,17 +66,17 @@ class EventController extends MyBaseController
     {
         can("event.manage");
 
-        $event = EventModel::findOrFail($id);
+        $event = $this->event_repo->find($id);
         return view('event/edit')
             ->with('event', $event)
-            ->with('surveys', SurveyModel::lists('name','id'));
+            ->with('surveys', $this->survey_repo->lists('name', 'id'));
     }
 
     public function putEdit($id, CreateRequest $request)
     {
         can("event.manage");
 
-        EventModel::edit($id, $request);
+        $this->event_repo->update($request->all(), $id);
         flash('event updated successfully', 'success');
         return redirect("event");
     }
@@ -68,7 +86,7 @@ class EventController extends MyBaseController
     {
         can("event.manage");
 
-        EventModel::find($id)->delete();
+        $this->event_repo->delete($id);
         flash('event deleted successfully', 'success');
         return redirect("event");
     }
@@ -77,11 +95,11 @@ class EventController extends MyBaseController
     {
         can("event.manage");
 
-        $event = EventModel::findOrFail($id);
-        $users_list = UserModel::lists('first_name', 'id');
-        $volunteers_type_list = VolunteerModel::$type;
+        $event = $this->event_repo->find($id);
+        $users_list = $this->user_repo->all()->lists('first_name', 'id');
+        $volunteers_type_list = $this->volunteer_repo->type;
 
-        $volunteers = VolunteerModel::where('event_id', $id)->get();
+        $volunteers = $this->volunteer_repo->findByField('event_id', $id);
 
         return view('event/volunteer')
             ->with('event', $event)
@@ -91,21 +109,25 @@ class EventController extends MyBaseController
 
     }
 
-    public function postVolunteers($id)
+    public function postVolunteers($event_id)
     {
         can("event.manage");
 
-        $volunteer = VolunteerModel::insert($id);
+        $volunteer = $this->volunteer_repo->create([
+            'event_id' => $event_id,
+            'user_id' => request()->user_id,
+            'type_id' => request()->type_id,
+        ]);
         flash('volunteer added successfully', 'success');
 
-        return redirect("/event/volunteers/$id");
+        return redirect("/event/volunteers/$event_id");
     }
 
     public function deleteVolunteers($id)
     {
         can("event.manage");
 
-        VolunteerModel::find(request()->record_id)->delete();
+        $this->volunteer_repo->delete(request()->record_id);
         flash('volunteer deleted successfully', 'success');
         return redirect("/event/volunteers/$id");
     }
