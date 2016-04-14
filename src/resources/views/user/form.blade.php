@@ -38,7 +38,7 @@
     <div class="form-group">
         {!! Form::label('profession', 'Profession') !!}
 
-        imagetag
+
         : {!!  Form::select('profession', $user->professions(), @$user->professions(true)[$user->profession],[ 'class'=>'form-control'] ) !!}
         <br/>
     </div>
@@ -65,7 +65,8 @@
     </div>
 
     <div class="form-group">
-        {!! $user->imagetag !!}
+        <img class='image user-image' src="{{ $user->image }}"/>
+
         {!! Form::label('image', 'Image') !!}
 
         : {!! Form::file('image', ['onchange' => 'readURL(this, ".user_image")'] ) !!}

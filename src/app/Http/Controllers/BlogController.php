@@ -38,7 +38,7 @@ class BlogController extends MyBaseController
     {
         can("blog.manage");
 
-        BlogModel::insert($request);
+        $this->blog_repo->insert($request);
         flash('blog created successfully', 'success');
 
         return redirect("blog");
@@ -62,7 +62,7 @@ class BlogController extends MyBaseController
     public function putEdit($id, CreateRequest $request)
     {
         can("blog.manage");
-        $this->blog_repo->update($request->all(), $id);
+        $this->blog_repo->edit($id, $request);
         flash('blog updated successfully', 'success');
 
         return redirect("blog");
@@ -73,7 +73,7 @@ class BlogController extends MyBaseController
     {
         can("blog.manage");
 
-        BlogModel::find($id)->delete();
+        $this->blog_repo->delete($id);
         flash('blog deleted successfully', 'success');
         return redirect("blog");
     }

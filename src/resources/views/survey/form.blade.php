@@ -5,9 +5,8 @@
     @yield('form')
 
     <div>
-        {!! Form::hidden('survey_id', $survey->id, ['id' => 'survey_id']) !!}
         Title: {!! Form::text('name', $survey->name, ['required' => 'true']) !!} <br/>
-        Body: {!! Form::textarea('description2', $survey->description,
+        Body: {!! Form::textarea('description', $survey->description,
         ['class'=>'survey_body', 'id' => 'survey_body']) !!}
         <br/>
 

@@ -3,6 +3,7 @@ web:
   build: .
   ports:
     - "80:80"
+#    - "9000:9000"
   volumes:
     - ./src:/var/www/html/
     - ./conf/apache:/etc/apache2/sites-enabled/

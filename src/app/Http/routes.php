@@ -16,7 +16,7 @@ error_reporting(E_ALL);
 */
 
 
-Route::get('language/{lang}', 'HomeController@language')->where('lang', '[A-Za-z_-]+');
+Route::get('language/{lang}', 'FrontController@language')->where('lang', '[A-Za-z_-]+');
 
 
 // admin routes
@@ -43,7 +43,7 @@ Route::get('facebook', 'UserController@facebook');
 Route::get('facebook_callback', 'UserController@facebook_callback');
 
 // front end routes
-Route::controller('/', 'HomeController');
+Route::controller('/', 'FrontController');
 
 
 /**

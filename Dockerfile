@@ -13,10 +13,12 @@ RUN \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install mcrypt
 
+# xdebug, if you want to debug
+RUN pecl install xdebug
 
-# composer
-RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
-
-# apache configurations, mod rewrite
+# PHP composer
 RUN curl -sS https://getcomposer.org/installer | php -- --version=$(curl -s https://api.github.com/repos/composer/composer/releases/latest | grep -oP '"tag_name": "\K[^"]+')  --install-dir=/usr/bin --filename=composer
 
+
+# apache configurations, mod rewrite
+RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load

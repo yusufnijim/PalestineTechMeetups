@@ -87,6 +87,32 @@ function can($permission)
     return true;
 }
 
+function file_upload($file_name, $file_upload_directory, array $file_allowed_extension)
+{
+    $uploaded_file = request()->file($file_name);
+
+    if ($uploaded_file) { // if file has been uploaded
+
+        $original_name = $uploaded_file->getClientOriginalName(); // get original file name
+
+        $ext = get_extension($original_name); // check if extension is allowed or no check
+        if (in_array($ext, $file_allowed_extension) or empty($file_allowed_extension)) {
+
+            $new_file = $uploaded_file->getClientOriginalName();
+            $result = $uploaded_file
+                ->move(public_path() . $file_upload_directory,
+                    $new_file
+                );
+
+            return $new_file;
+        } else { // unkown image extension
+//            session()->flash('flash_message', 'unkown image file extension');
+            return NULL;
+        }
+    } // No file uploaded
+    return 0;
+}
+
 
 function getSegmentFromEnd($instance, $position_from_end = 1)
 {

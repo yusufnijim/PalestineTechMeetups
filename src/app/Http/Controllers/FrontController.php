@@ -5,14 +5,26 @@ namespace App\Http\Controllers;
 //use App\Models\BlogModel;
 //use App\Models\EventModel;
 use App\Jobs\ChangeLocale;
+use App\Repositories\Contracts\BlogRepository;
+use App\Repositories\Contracts\Event\EventRepository;
 
 
-class HomeController extends MyBaseController
+class FrontController extends MyBaseController
 {
+    protected $blog_repo, $event_repo;
+
+
+    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo)
+    {
+        $this->blog_repo = $blog_repo;
+        $this->event_repo = $event_repo;
+    }
+
     public function anyIndex()
     {
-        $blogs = BlogModel::published()->orderby('id', 'desc')->take(3)->get();
-        $events = EventModel::published()->orderby('id', 'desc')->take(3)->get();
+        $blogs = $this->blog_repo->published()->latest()->paginate(3);
+        $events = $this->event_repo->published()->latest()->paginate(3);
+
         return view("frontend.index")
             ->with('events', $events)
             ->with('blogs', $blogs);
@@ -42,8 +54,7 @@ class HomeController extends MyBaseController
         $results = [];
         return view("frontend.search")
             ->with('results', $results)
-            ->with('query', $query)
-            ;
+            ->with('query', $query);
     }
 
     /**
@@ -53,8 +64,8 @@ class HomeController extends MyBaseController
      * @param  String $lang
      * @return Response
      */
-    public function language( $lang,
-                              ChangeLocale $changeLocale)
+    public function language($lang,
+                             ChangeLocale $changeLocale)
     {
         $lang = in_array($lang, config('app.languages')) ? $lang : config('app.fallback_locale');
         $changeLocale->lang = $lang;

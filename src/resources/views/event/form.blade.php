@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-group">
-        {!! $event->featuredimagetag !!}
+        <img class='image event-image' src="{{ $event->featuredimage }}"/>
         {!! Form::label('featured_image', 'Featured image') !!}
 
         : {!! Form::file('featured_image', ['onchange' => 'readURL(this, ".event-image")'] ) !!}

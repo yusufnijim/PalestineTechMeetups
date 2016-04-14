@@ -30,4 +30,22 @@ class BaseRepositoryEloquent extends BaseRepository implements BaseRepositoryInt
     {
         return $this->model->newInstance([]);
     }
+
+    public function published()
+    {
+        $query = function ($query) {
+            return $query->where('is_published', 1);
+        };
+        $this->scopeQuery($query);
+        return $this;
+    }
+
+    public function latest()
+    {
+        $query = function ($query) {
+            return $query->orderBy('id', 'desc');
+        };
+        $this->scopeQuery($query);
+        return $this;
+    }
 }

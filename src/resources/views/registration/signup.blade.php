@@ -14,6 +14,11 @@
             <h4>Sorry registration for this event has been closed</h4>
         @elseif($status)
             <h4> You signed up for this event </h4>
+            If you wish to cancel your registration
+            {!! Form::open() !!}
+            {!! Form::hidden('cancel', 1) !!}
+            {!! Form::submit('press here', ['class' => 'btn btn-info']) !!}
+            {!! Form::close() !!}
         @else
 
             @if(!$event->require_addional_fields)
@@ -24,7 +29,7 @@
             @else
                 {!! Form::open() !!}
 
-                {!! Form::submit('register now') !!}
+                {!! Form::submit('Register now', ['class' => 'btn btn-success']) !!}
                 {!! Form::close() !!}
 
             @endif

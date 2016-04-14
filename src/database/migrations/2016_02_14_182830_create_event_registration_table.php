@@ -31,6 +31,7 @@ class CreateEventRegistrationTable extends Migration
             $table->tinyInteger('is_accepted')->default(0);
             $table->tinyInteger('is_confirmed')->default(0);
             $table->tinyInteger('is_attended')->default(0);
+            $table->tinyInteger('is_cancelled')->default(0);
 
 
             $table->timestamps();

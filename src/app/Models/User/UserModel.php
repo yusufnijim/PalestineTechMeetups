@@ -19,8 +19,8 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     use Authenticatable, Authorizable, CanResetPassword, HasRole;
     protected $table = "user";
 
-    static $image_upload_directory = '/image/user/';
     static $default_image = 'default.png';
+    static $image_upload_directory = '/image/user/';
     static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
@@ -53,20 +53,21 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         return $this->first_name . " " . $this->last_name;
     }
 
+
     /**
-     * Return HTML tag for user image
+     * Return image path
      * @param $value
      * @return string
      */
-    public function getImagetagAttribute($value)
+    public function getImageAttribute($value)
     {
-        if (!$this->image) {
-            $this->image = static::$default_image;
+        if (!isset($value)) {
+            $image = static::$default_image;
+        } else {
+            $image = $value;
         }
 
-        $value = $this->image;
-        $result = "<img class='image user-image' src='" . static::$image_upload_directory . "$value' />";
-
+        $result = static::$image_upload_directory . $image;
         return $result;
     }
 
@@ -140,7 +141,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      */
     public function events_registered()
     {
-        return $this->belongsToMany(\App\Models\EventModel::class, 'event_registration', 'user_id', 'event_id')->withPivot('is_attended');
+        return $this->belongsToMany(\App\Models\Event\EventModel::class, 'event_registration', 'user_id', 'event_id')->withPivot('is_attended');
     }
 
     /**
@@ -149,7 +150,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      */
     public function events_volunteered()
     {
-        return $this->belongsToMany(\App\Models\EventModel::class, 'event_volunteer', 'user_id', 'event_id')->withPivot('type_id');
+        return $this->belongsToMany(\App\Models\Event\EventModel::class, 'event_volunteer', 'user_id', 'event_id')->withPivot('type_id');
     }
 
     /**

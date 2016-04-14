@@ -6,8 +6,22 @@ namespace App\Http\Controllers;
 //use App\Models\Event\RegistrationModel;
 //use App\Models\User\UserModel;
 //
+use App\Repositories\Contracts\Event\EventRepository;
+use App\Repositories\Contracts\Event\RegistrationRepository;
+use App\Repositories\Contracts\User\UserRepository;
+
 class RegistrationController extends MyBaseController
 {
+    protected $event_repo;
+    protected $user_repo;
+    protected $registration_epo;
+
+    public function __construct(EventRepository $event_repo, UserRepository $user_repo, RegistrationRepository $registration_epo)
+    {
+        $this->event_repo = $event_repo;
+        $this->user_repo = $user_repo;
+        $this->registration_epo = $registration_epo;
+    }
 
     /**
      * This function will display the event page, with sign up details
@@ -16,14 +30,15 @@ class RegistrationController extends MyBaseController
      */
     public function getSignup($id)
     {
-        $event = EventModel::findOrFail($id);
+        $event = $this->event_repo->find($id);
         $user = auth()->user();
 
         if ($user) {
-            $status = RegistrationModel::where(
+            $status = $this->registration_epo->findWhere(
                 [
                     'user_id' => isset($user->id) ? $user->id : NULL,
-                    'event_id' => $id
+                    'event_id' => $id,
+                    'is_cancelled' => 0,
                 ]
             )->first();
         } else {
@@ -37,14 +52,34 @@ class RegistrationController extends MyBaseController
     public function postSignup($id)
     {
         $user = auth()->user();
+        $cancel = request()->cancel;
 
-        RegistrationModel::firstOrCreate(
+        $reg = $this->registration_epo->findWhere(
             [
                 'user_id' => $user->id,
                 'event_id' => $id,
             ]
-        );
-        flash('sign up complete', 'success');
+        )->first();
+        if ($reg AND count($reg->toArray())) { // user already registered
+            if ($cancel) {
+                $reg->is_cancelled = 1;
+                $reg->save();
+                flash('You cancelled your sign up', 'success');
+            } else {
+                $reg->is_cancelled = 0;
+                $reg->save();
+                flash('You re-signed up for this event', 'success');
+            }
+        } else {
+            $this->registration_epo->create(
+                [
+                    'user_id' => $user->id,
+                    'event_id' => $id,
+                ]
+            );
+            flash('sign up complete', 'success');
+        }
+
 
         return redirect("/registration/signup/$id");
     }
@@ -53,15 +88,15 @@ class RegistrationController extends MyBaseController
     {
         can("registrations.manage");
 
-        $event = EventModel::findOrFail($id);
-        $reg = RegistrationModel::where('event_id', $id)->get();
+        $event = $this->event_repo->find($id);
+        $reg = $this->registration_epo->findByField('event_id', $id);
 
         //ToDo:: perhaps improve ? or cache
         $number_of_registrars = $reg->count();
-        $number_of_accepted = RegistrationModel::where('event_id', $id)
-            ->where('is_accepted', 1)->get()->count();
-        $number_of_attended = RegistrationModel::where('event_id', $id)
-            ->where('is_attended', 1)->get()->count();
+        $number_of_accepted = $this->registration_epo->findWhere(['event_id' => $id])
+            ->where('is_accepted', 1)->count();
+        $number_of_attended = $this->registration_epo->findWhere(['event_id' => $id])
+            ->where('is_attended', 1)->count();
 
         return view("registration/view")
             ->with('event', $event)
@@ -75,7 +110,7 @@ class RegistrationController extends MyBaseController
     {
         can("registrations.manage");
 
-        $reg = RegistrationModel::where('event_id', $id)->get();
+        $reg = $this->registration_epo->findWhere(['event_id' => $id]);
         return export_to_excel($reg, "event_" . $id);
     }
 
@@ -84,9 +119,10 @@ class RegistrationController extends MyBaseController
     {
         can("registrations.manage");
 
-        $reg = RegistrationModel::where('event_id', $id)
-            ->where('user_id', request()['user_id'])
-            ->first();
+        $reg = $this->registration_epo->findWhere([
+            'event_id' => $id,
+            'user_id' => request()['user_id'],
+        ])->first();
         $reg->update([
             'is_accepted' => request()['is_accepted'] == 1 ? 0 : 1,
         ]);
@@ -99,21 +135,26 @@ class RegistrationController extends MyBaseController
     {
         can("registrations.manage");
 
-        $reg = RegistrationModel::where('event_id', $id)
-            ->where('user_id', request()['user_id'])
-            ->first();
+        $reg = $this->registration_epo->findWhere([
+            'event_id' => $id,
+            'user_id' => request()['user_id'],
+        ])->first();
         $reg->update([
             'is_attended' => request()['is_attended'] == 1 ? 0 : 1,
         ]);
+
 
         return redirect("/registration/view/$id");
     }
 
     public function anyConfirm($event_id, $user_id)
     {
-        $reg = RegistrationModel::where('event_id', $event_id)
-            ->where('user_id', $user_id)
-            ->first();
+//        $user_id = auth()->user()->id;
+
+        $reg = $this->registration_epo->findWhere([
+            'event_id' => $event_id,
+            'user_id' => $user_id,
+        ])->first();
 
         if ($reg) {
             $reg->update([

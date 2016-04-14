@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Eloquent\Event;
+
 use Prettus\Repository\Criteria\RequestCriteria;
 
+
+use App\Repositories\Contracts\Event\RegistrationRepository;
 use App\Repositories\Eloquent\BaseRepositoryEloquent;
-use App\Repositories\Contracts\BlogRepository;
-use App\Models\BlogModel;
+use App\Models\Event\RegistrationModel;
+
 
 /**
  * Class EventRepositoryEloquent
  * @package namespace App\Repositories\Elequent;
  */
-class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepository
+class RegistrationRepositoryEloquent extends BaseRepositoryEloquent implements RegistrationRepository
 {
-    static $image_upload_directory = '/image/blog/';
-    static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
      * Specify Model class name
@@ -23,7 +24,7 @@ class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepos
      */
     public function model()
     {
-        return BlogModel::class;
+        return RegistrationModel::class;
     }
 
 
@@ -39,10 +40,15 @@ class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepos
     {
         $fill_array = [
             'title' => $request->title,
-
-            'permalink' => $request->permalink,
             'body' => $request->body,
+            'permalink' => $request->permalink,
+            'is_registration_open' => $request->is_registration_open,
+            'max_registrars_count' => $request->max_registrars_count,
+            'location' => $request->location,
+            'date' => $request->date,
+            'require_additional_fields' => $request->max_registrars_count,
             'is_published' => $request->is_published,
+            'survey_id' => $request->survey_id
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {
@@ -56,15 +62,22 @@ class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepos
     {
         $fill_array = [
             'title' => $request->title,
-
-            'permalink' => $request->permalink,
             'body' => $request->body,
+            'permalink' => $request->permalink,
+            'is_registration_open' => $request->is_registration_open,
+            'max_registrars_count' => $request->max_registrars_count,
+            'location' => $request->location,
+            'date' => $request->date,
+            'require_additional_fields' => $request->max_registrars_count,
             'is_published' => $request->is_published,
+            'survey_id' => $request->survey_id
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {
             $fill_array['featured_image'] = $uploaded_file;
         }
+
         return $this->update($fill_array, $id);
     }
+
 }

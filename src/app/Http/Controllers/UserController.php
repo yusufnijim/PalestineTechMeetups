@@ -44,7 +44,7 @@ class UserController extends MyBaseController
     {
         can("user.manage");
 
-        UserModel::insert($request);
+        $this->user_repo->insert($request);
         flash('user created successfully', 'success');
         return redirect("/user/");
     }
@@ -62,7 +62,7 @@ class UserController extends MyBaseController
     {
         can("user.manage") OR auth()->user()->id != $id;
 
-        UserModel::edit($id, $request);
+        $this->user_repo->edit($id, $request);
         flash('profile edited successfully', 'success');
         return redirect("/user/edit/$id");
     }
@@ -104,7 +104,7 @@ class UserController extends MyBaseController
             )
         ) {
             Auth::login($user);
-            flash('welcome in ' . Auth::user()->username, 'success');
+            flash('welcome in ' . auth()->user()->username, 'success');
             return redirect('/user/');
         } else {
             flash('unable to login', 'danger');
@@ -116,7 +116,7 @@ class UserController extends MyBaseController
     {
         can("user.manage");
 
-        $user = UserModel::find($id)->delete();
+        $user = $this->user_repo->delete($id);
         flash('user deleted successfully', 'success');
         return redirect("/user");
     }
@@ -139,8 +139,10 @@ class UserController extends MyBaseController
 
     public function anyLogout()
     {
-        auth()->logout();
-        flash('User logged out successfully', 'success');
+        if (auth()->check()) {
+            auth()->logout();
+            flash('User logged out successfully', 'success');
+        }
         return redirect('/login');
     }
 }
@@ -166,8 +168,7 @@ trait UserSocalLogin
     public function facebook_callback()
     {
         $fb_user_object = \Socialite::with('facebook')->user();
-        $user = UserModel::where('fb_id', $fb_user_object->user['id'])
-            ->first();
+        $user = $this->user_repo->findByField('fb_id', $fb_user_object->user['id'])->first();
 
         if ($user) {
             auth()->login($user);
@@ -175,10 +176,9 @@ trait UserSocalLogin
             flash('welcome back', 'success');
             return redirect('/profile/');
         } else {
-            $new_user = UserModel::insert_fb($fb_user_object);
+            $new_user = $this->user_repo->insert_fb($fb_user_object);
 
             if ($new_user) {
-
                 flash('Welcome ' . $new_user->first_name . ' Account registered', 'success');
                 auth()->login($new_user);
                 return redirect('/profile/');

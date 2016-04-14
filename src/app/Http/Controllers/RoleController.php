@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 
-//use App\Models\User\UserModel;
-//use App\Models\User\RoleModel;
-//use App\Models\User\PermissionModel;
+use App\Models\User\UserModel;
+use App\Models\User\RoleModel;
+use App\Models\User\PermissionModel;
 
 use Illuminate\Http\Request;
 
@@ -34,7 +34,7 @@ class RoleController extends MyBaseController
         can("user.manage");
 
         $new_role = RoleModel::insert($request);
-        $request->session()->flash('flash_message', 'Role created successfully!');
+        flash('Role created successfully!', 'success');
 
         return redirect("/role");
     }
@@ -46,7 +46,7 @@ class RoleController extends MyBaseController
         $id = $request->input('id');
         $role = RoleModel::find($id)->delete();
 
-        $request->session()->flash('flash_message', 'Role deleted successfully!');
+        flash('Role deleted successfully!', 'success');
         return redirect("/role");
     }
 
@@ -98,6 +98,7 @@ class RoleController extends MyBaseController
 
         $user = UserModel::find($user_id);
         $role = RoleModel::find(request()->role_id);
+
         if ($user->hasRole($role)) {
             $user->revokeRole($role);
         } else {

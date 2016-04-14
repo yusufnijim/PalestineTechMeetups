@@ -1,5 +1,5 @@
 @extends('event.form')
 
 @section('form')
-    {!! Form::open(['method' => 'put', 'file' => true]) !!}
+    {!! Form::open(['method' => 'put', 'files' => true]) !!}
 @stop

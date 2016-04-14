@@ -21,7 +21,7 @@ $factory->define(App\Models\User\UserModel::class, function (Faker\Generator $fa
 });
 
 
-$factory->define(App\Models\EventModel::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Event\EventModel::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->text(10),
         'body' => $faker->text(400),

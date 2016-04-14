@@ -40,7 +40,6 @@ class SurveyController extends MyBaseController
     public function postCreate()
     {
         can('event.manage');
-
         $this->survey_repo->create(request()->all());
         flash("survey created successfully", 'success');
 

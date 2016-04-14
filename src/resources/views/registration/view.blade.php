@@ -31,8 +31,8 @@
             </thead>
             <tbody>
             @foreach($reg as $instance)
-                <tr>
-                    <td>{{ $instance->user->first_name }}</td>
+                <tr {{ $instance->is_cancelled ? 'title=cancelled' : '' }} style="{{ $instance->is_cancelled ? "color:red" : '' }}">
+                    <td> {{ $instance->user->first_name }}</td>
                     <td>{{ $instance->user->arabic_full_name }}</td>
                     <td>{{ $instance->created_at }}</td>
 

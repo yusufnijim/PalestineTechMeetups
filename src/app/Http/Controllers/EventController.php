@@ -45,17 +45,11 @@ class EventController extends MyBaseController
             ->with('surveys', $this->survey_repo->lists('name', 'id'));
     }
 
-    public function getSurveys()
-    {
-        can("event.manage");
-        return $this->survey_repo->lists('name', 'id');
-    }
-
     public function postCreate(CreateRequest $request)
     {
         can("event.manage");
 
-        $event = $this->event_repo->create($request->all());
+        $event = $this->event_repo->insert($request);
 
         flash('event created successfully', 'success');
         return redirect("event/edit/" . $event->id);
@@ -76,9 +70,16 @@ class EventController extends MyBaseController
     {
         can("event.manage");
 
-        $this->event_repo->update($request->all(), $id);
+        $this->event_repo->edit($id, $request);
+
         flash('event updated successfully', 'success');
         return redirect("event");
+    }
+
+    public function getSurveys()
+    {
+        can("event.manage");
+        return $this->survey_repo->lists('name', 'id');
     }
 
 
