@@ -31,13 +31,16 @@
     <div style="clear:left; clear:right">
         {{ $user }}
     </div>
+
     <h2>My events</h2>
 
     @foreach($user->events_registered as $event)
-        <h4>
-            <a href="/registration/signup/{{$event->id}}">{{ $event->title}} </a>
-            {{ $event->pivot->is_attended }}
-        </h4>
+        @if($event->is_attended AND !$event->is_cancelled)
+            <h4>
+                <a href="/registration/signup/{{$event->id}}">{{ $event->title}} </a>
+                {{ $event->pivot->is_attended }}
+            </h4>
+        @endif
     @endforeach
 
 

@@ -2,6 +2,18 @@
 
 
 /**
+ * This function is a small helper like dd() but doesn't actually die
+ * @param $var
+ */
+function d($var)
+{
+    array_map(function ($x) {
+        (new \Illuminate\Support\Debug\Dumper)->dump($x);
+    }, func_get_args());
+
+}
+
+/**
  * helper method, return file extension.
  * @param $file
  * @return bool|mixed

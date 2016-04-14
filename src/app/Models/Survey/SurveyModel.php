@@ -30,6 +30,11 @@ class SurveyModel extends BaseModel
         return $this->hasMany(SurveyQuestionModel::class, 'survey_id', 'id');
     }
 
+    public function submissions()
+    {
+        return $this->hasMany(SurveySubmissionModel::class, 'survey_id', 'id');
+    }
+
 //    public static function insert($request)
 //    {
 //        $instance = static::_handleCreateEdit(new Static(), $request);

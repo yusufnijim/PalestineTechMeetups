@@ -16,7 +16,7 @@ class BlogController extends MyBaseController
 
     public function anyIndex()
     {
-        can("blog.manage");
+        can("blog.view");
 
         $blogs = $this->blog_repo->all();
 
@@ -27,7 +27,7 @@ class BlogController extends MyBaseController
 
     public function getCreate()
     {
-        can("blog.manage");
+        can("blog.create");
 
         $blog = $this->blog_repo->new();
         return view('blog/create')
@@ -36,7 +36,7 @@ class BlogController extends MyBaseController
 
     public function postCreate(CreateRequest $request)
     {
-        can("blog.manage");
+        can("blog.create");
 
         $this->blog_repo->insert($request);
         flash('blog created successfully', 'success');
@@ -53,7 +53,7 @@ class BlogController extends MyBaseController
 
     public function getEdit($id)
     {
-        can("blog.manage");
+        can("blog.edit");
 
         $blog = $this->blog_repo->find($id);
         return view('blog/edit')->with('blog', $blog);
@@ -61,7 +61,7 @@ class BlogController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        can("blog.manage");
+        can("blog.edit");
         $this->blog_repo->edit($id, $request);
         flash('blog updated successfully', 'success');
 
@@ -69,9 +69,9 @@ class BlogController extends MyBaseController
     }
 
 
-    public function postDelete($id)
+    public function deleteDelete($id)
     {
-        can("blog.manage");
+        can("blog.delete");
 
         $this->blog_repo->delete($id);
         flash('blog deleted successfully', 'success');

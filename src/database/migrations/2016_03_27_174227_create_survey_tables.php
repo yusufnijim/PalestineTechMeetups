@@ -61,11 +61,32 @@ class CreateSurveyTables extends Migration
             $table->nullableTimestamps();
         });
 
+
+        // hold every submission
+        Schema::create('survey_submission', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id'); // user who submitted this answer
+
+            $table->integer('survey_id')->unsigned(); //survey this answer belongs to
+            $table->foreign('survey_id')
+                ->references('id')
+                ->on('survey')
+                ->onDelete('cascade');
+            $table->nullableTimestamps();
+        });
+
+
         // answers table
         Schema::create('survey_question_answer', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('user_id'); // user who submitted this answer
+
+            $table->integer('submission_id')->unsigned(); //survey this answer belongs to
+            $table->foreign('submission_id')
+                ->references('id')
+                ->on('survey_submission')
+                ->onDelete('cascade');
 
             $table->integer('survey_id')->unsigned(); //survey this answer belongs to
             $table->foreign('survey_id')
@@ -113,6 +134,7 @@ class CreateSurveyTables extends Migration
         Schema::drop('survey_question');
 
         Schema::drop('survey_question_type');
+        Schema::drop('survey_submission');
         Schema::drop('survey');
     }
 }

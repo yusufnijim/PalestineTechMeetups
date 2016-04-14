@@ -10,8 +10,8 @@
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
-            <th>View</th>
-            <th>Results</th>
+            <th>Filled</th>
+            <th>Submissions</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -23,7 +23,7 @@
                 <td>{{ $instance->name }}</td>
                 <td>{{ $instance->description }}</td>
                 <td><a href="{{ url("/survey/view/$instance->id") }}" class='btn btn-info'>View</a></td>
-                <td><a href="{{ url("/survey/results/$instance->id") }}" class='btn btn-info'>Results</a></td>
+                <td><a href="{{ url("/survey/results/$instance->id") }}" class='btn btn-info'>{{ $instance->submissions()->count() }}</a></td>
 
                 <td><a href="{{ url("survey/edit/$instance->id") }}">edit</a></td>
 

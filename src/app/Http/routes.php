@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -44,16 +40,3 @@ Route::get('facebook_callback', 'UserController@facebook_callback');
 
 // front end routes
 Route::controller('/', 'FrontController');
-
-
-/**
- * This function is a small helper like dd() but doesn't actually die
- * @param $var
- */
-function d($var)
-{
-    array_map(function ($x) {
-        (new \Illuminate\Support\Debug\Dumper)->dump($x);
-    }, func_get_args());
-
-}

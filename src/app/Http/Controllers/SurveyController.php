@@ -6,8 +6,10 @@ use App\Http\Controllers\BaseController;
 use App\Repositories\Contracts\Survey\SurveyRepository;
 
 //use App\Models\Survey\SurveyModel;
-//use App\Models\Survey\SurveyQuestionModel;
-//use App\Models\Survey\SurveyQuestionAnswerModel;
+use App\Models\Survey\SurveyQuestionModel;
+use App\Models\Survey\SurveyQuestionAnswerModel;
+use App\Models\Survey\SurveySubmissionModel;
+
 //use App\Models\User\UserModel;
 
 /**
@@ -24,22 +26,23 @@ class SurveyController extends MyBaseController
 
     public function anyIndex()
     {
-        can('event.manage');
+        can('event.survey');
 
         $surveys = $this->survey_repo->all();
-        return view('survey/index')->with('surveys', $surveys);
+        return view('survey/index')
+            ->with('surveys', $surveys);
     }
 
     public function getCreate()
     {
-        can('event.manage');
+        can('event.survey');
 
         return view("survey/create")->with('survey', $this->survey_repo->new());
     }
 
     public function postCreate()
     {
-        can('event.manage');
+        can('event.survey');
         $this->survey_repo->create(request()->all());
         flash("survey created successfully", 'success');
 
@@ -48,7 +51,7 @@ class SurveyController extends MyBaseController
 
     public function getEdit($id)
     {
-        can('event.manage');
+        can('event.survey');
 
         $survey = $this->survey_repo->find($id);
         return view("survey/edit")
@@ -58,9 +61,9 @@ class SurveyController extends MyBaseController
 
     public function putEdit($id)
     {
-        can('event.manage');
+        can('event.survey');
 
-        $this->survey_repo->update(request()->all(), $id);
+        $this->survey_repo->edit(request(), $id);
         flash("survey updated successfully", 'success');
 
         return redirect('/survey');
@@ -69,6 +72,7 @@ class SurveyController extends MyBaseController
 
     public function anySaveform($survey_id)
     {
+        can('event.survey');
         $request = request();
 
         $survey = $this->survey_repo->find($survey_id);
@@ -83,31 +87,45 @@ class SurveyController extends MyBaseController
 
     public function getView($id)
     {
-        can('event.manage');
-        $survey =$this->survey_repo->find($id);
+        can('event.survey');
+        $survey = $this->survey_repo->find($id);
         return view("survey/view")->with('survey', $survey);
+    }
+
+
+    public function getViewajax($id)
+    {
+        can('event.survey');
+        $survey = $this->survey_repo->find($id);
+        return view("survey/view_ajax")->with('survey', $survey);
     }
 
     public function postAnswer($survey_id)
     {
         can('event.manage');
+        $user_id = auth()->check() ? auth()->user()->id : 0;
 
-        $survey = SurveyQuestionAnswerModel::insert($survey_id, request()->input());
-        flash("thank you for submitting your asnwers", 'success');
+        $submission_id = SurveySubmissionModel::create([
+            'user_id' => $user_id,
+            'survey_id' => $survey_id,
+        ])->id;
+        $survey = SurveyQuestionAnswerModel::insert($survey_id, request()->input(), $submission_id);
+        flash("thank you for submitting your answers", 'success');
         return redirect('/survey/view/' . $survey_id);
     }
 
-
     public function getResults($survey_id)
     {
-        $results = SurveyQuestionAnswerModel::where('survey_id', $survey_id)->get();
+        can('event.survey');
+        $survey = $this->survey_repo->find($survey_id);
 
         return view('survey/result')
-            ->with("results", $results);
+            ->with("survey", $survey);
     }
 
     public function getResult($survey_id, $user_id)
     {
+        can('event.survey');
         $results = SurveyQuestionAnswerModel::where('survey_id', $survey_id)->where('user_id', $user_id)->get();
 
         return view('survey/result')

@@ -27,7 +27,7 @@ class EventController extends MyBaseController
 
     public function anyIndex()
     {
-        can("event.manage");
+        can("event.view");
 
         $events = $this->event_repo->all();
 
@@ -38,7 +38,7 @@ class EventController extends MyBaseController
 
     public function getCreate()
     {
-        can("event.manage");
+        can("event.create");
 
         return view('event/create')
             ->with("event", $this->event_repo->new())
@@ -47,7 +47,7 @@ class EventController extends MyBaseController
 
     public function postCreate(CreateRequest $request)
     {
-        can("event.manage");
+        can("event.create");
 
         $event = $this->event_repo->insert($request);
 
@@ -58,7 +58,7 @@ class EventController extends MyBaseController
 
     public function getEdit($id)
     {
-        can("event.manage");
+        can("event.edit");
 
         $event = $this->event_repo->find($id);
         return view('event/edit')
@@ -68,7 +68,7 @@ class EventController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        can("event.manage");
+        can("event.edit");
 
         $this->event_repo->edit($id, $request);
 
@@ -78,14 +78,14 @@ class EventController extends MyBaseController
 
     public function getSurveys()
     {
-        can("event.manage");
+        can("event.survey");
         return $this->survey_repo->lists('name', 'id');
     }
 
 
-    public function postDelete($id)
+    public function deleteDelete($id)
     {
-        can("event.manage");
+        can("event.delete");
 
         $this->event_repo->delete($id);
         flash('event deleted successfully', 'success');
@@ -94,7 +94,7 @@ class EventController extends MyBaseController
 
     public function getVolunteers($id)
     {
-        can("event.manage");
+        can("event.volunteer");
 
         $event = $this->event_repo->find($id);
         $users_list = $this->user_repo->all()->lists('first_name', 'id');
@@ -112,7 +112,7 @@ class EventController extends MyBaseController
 
     public function postVolunteers($event_id)
     {
-        can("event.manage");
+        can("event.volunteer");
 
         $volunteer = $this->volunteer_repo->create([
             'event_id' => $event_id,
@@ -126,7 +126,7 @@ class EventController extends MyBaseController
 
     public function deleteVolunteers($id)
     {
-        can("event.manage");
+        can("event.volunteer");
 
         $this->volunteer_repo->delete(request()->record_id);
         flash('volunteer deleted successfully', 'success');

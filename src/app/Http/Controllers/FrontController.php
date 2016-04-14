@@ -6,18 +6,22 @@ namespace App\Http\Controllers;
 //use App\Models\EventModel;
 use App\Jobs\ChangeLocale;
 use App\Repositories\Contracts\BlogRepository;
+use App\Repositories\Contracts\ContactRepository;
 use App\Repositories\Contracts\Event\EventRepository;
 
 
 class FrontController extends MyBaseController
 {
-    protected $blog_repo, $event_repo;
+    protected $blog_repo;
+    protected $event_repo;
+    protected $contact_repo;
 
 
-    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo)
+    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo)
     {
         $this->blog_repo = $blog_repo;
         $this->event_repo = $event_repo;
+        $this->contact_repo = $contact_repo;
     }
 
     public function anyIndex()
@@ -43,6 +47,7 @@ class FrontController extends MyBaseController
 
     public function postContact()
     {
+        $this->contact_repo->insert(request());
         flash('thank you for contacting us', 'success');
         return redirect('/contact');
     }

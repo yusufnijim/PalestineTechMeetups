@@ -86,7 +86,7 @@ class RegistrationController extends MyBaseController
 
     public function getView($id)
     {
-        can("registrations.manage");
+        can("registration.view");
 
         $event = $this->event_repo->find($id);
         $reg = $this->registration_epo->findByField('event_id', $id);
@@ -108,7 +108,7 @@ class RegistrationController extends MyBaseController
 
     public function getExport($id)
     {
-        can("registrations.manage");
+        can("registrations.view");
 
         $reg = $this->registration_epo->findWhere(['event_id' => $id]);
         return export_to_excel($reg, "event_" . $id);
@@ -117,7 +117,7 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateaccepted($id)
     {
-        can("registrations.manage");
+        can("registration.edit");
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $id,
@@ -133,7 +133,7 @@ class RegistrationController extends MyBaseController
 
     public function postUpdateattended($id)
     {
-        can("registrations.manage");
+        can("registration.update");
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $id,
@@ -167,14 +167,14 @@ class RegistrationController extends MyBaseController
 
     public function getSendemail($event_id)
     {
-        can("registrations.manage");
+        can("registration.email");
 
         return view("registration/email")->with('event', EventModel::findOrfail($event_id));
     }
 
     public function postSendemail($event_id)
     {
-        can("registrations.manage");
+        can("registration.email");
 
         // fetch users
         $reg = RegistrationModel::where('event_id', $event_id);
@@ -217,6 +217,8 @@ class RegistrationController extends MyBaseController
 
     public function postSendemailcount($event_id)
     {
+        can("registration.email");
+
         // fetch users
         $reg = RegistrationModel::where('event_id', $event_id)
             ->where('is_confirmed', request()->is_confirmed)

@@ -9,18 +9,23 @@
     {!! Form::open() !!}
 
     <div class="form-group">
-        {!! Form::label('title', 'Title') !!}
-        : {!! Form::text('title', '', ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('message', 'Message') !!}
-        : {!! Form::textarea('message', '', ['required'=> 'true', 'class'=>'event_body', 'id' => 'message', 'class' => 'form-control']) !!}
+        {!! Form::label('name', 'Name') !!}
+        : {!! Form::text('name', '', ['required' => 'true', 'id' => 'name', 'class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
         {!! Form::label('email', 'Email') !!}
         : {!! Form::email('email', '', ['required' => 'true', 'id' => 'email', 'class' => 'form-control']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('title', 'Title') !!}
+        : {!! Form::text('title', '', ['required' => 'true', 'id' => 'title', 'class' => 'form-control']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('body', 'Message') !!}
+        : {!! Form::textarea('body', '', ['required'=> 'true', 'class'=>'body', 'id' => 'message', 'class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">

@@ -72,10 +72,10 @@
                             class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="/emails">Emails</a>
+                        <a href="/backend/message">Messages</a>
                     </li>
                     <li>
-                        <a href="/notifications">Notifications</a>
+                        <a href="/backend/notifications">Notifications</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

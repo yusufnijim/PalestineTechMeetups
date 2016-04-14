@@ -27,6 +27,9 @@ use App\Repositories\Contracts\Event\VolunteerRepository;
 use App\Repositories\Eloquent\Event\VolunteerRepositoryEloquent;
 
 
+use App\Repositories\Contracts\ContactRepository;
+use App\Repositories\Eloquent\ContactRepositoryEloquent;
+
 class DatabaseServiceProvider extends ServiceProvider
 {
     /**
@@ -52,5 +55,6 @@ class DatabaseServiceProvider extends ServiceProvider
         $this->app->bind(BlogRepository::class, BlogRepositoryEloquent::class);
         $this->app->bind(SurveyRepository::class, SurveyRepositoryEloquent::class);
         $this->app->bind(RegistrationRepository::class, RegistrationRepositoryEloquent::class);
+        $this->app->bind(ContactRepository::class, ContactRepositoryEloquent::class);
     }
 }
