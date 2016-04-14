@@ -34,7 +34,8 @@ class CreateRequest extends Request
             'profession' => 'max:255',
             'profession_location' => 'max:255',
             'gender' => '',
-            'image' => 'image'
+            'bio' => 'max:1000',
+//            'image' => 'image' // handle image validation during CRUD
         ];
     }
 }

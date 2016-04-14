@@ -48,7 +48,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      * @param $value
      * @return string
      */
-    public function getNameAttribute($value)
+    public function getFullnameAttribute($value)
     {
         return $this->first_name . " " . $this->last_name;
     }
@@ -61,7 +61,7 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      */
     public function getImageAttribute($value)
     {
-        if (!isset($value)) {
+        if (!isset($value) or !$value) {
             $image = static::$default_image;
         } else {
             $image = $value;
@@ -152,115 +152,115 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     {
         return $this->belongsToMany(\App\Models\Event\EventModel::class, 'event_volunteer', 'user_id', 'event_id')->withPivot('type_id');
     }
-
-    /**
-     * insert new user
-     * @param $request
-     * @return mixed
-     */
-    public static function insert($request)
-    {
-        $instance = static::_handleInsertEdit(new Static(), $request);
-        return $instance;
-    }
-
-    /**
-     * Edit user attributes
-     * @param $id
-     * @param $request
-     * @return mixed
-     */
-    public static function edit($id, $request)
-    {
-        $instance = static::_handleInsertEdit(Static::findOrFail($id), $request);
-        return $instance;
-    }
-
-    /**
-     * This function will handle user attributes, creating or editing
-     * @param $user
-     * @param $request
-     * @return mixed
-     */
-    private static function _handleInsertEdit($user, $request)
-    {
-        $user->fill([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'location' => $request->location,
-
-            'arabic_full_name' => $request->arabic_full_name,
-            'profession' => $request->profession,
-            'profession_location' => $request->profession_location,
-
-            'phone_number' => $request->phone_number,
-            'gender' => $request->gender,
-            'profession' => $request->profession,
-        ]);
-        $user->gender = $request->gender;
-
-        $user->save();
-
-
-        static::_uploadImage($user, $request, 'image');
-
-        $user->save();
-        return $user;
-    }
-
-    /**
-     * handle user image uploads
-     * @param $user
-     * @param $request
-     * @return mixed
-     */
-    private static function _uploadImage($user, $request, $name)
-    {
-        $image = $request->file($name);
-        if ($image) {
-            $original_name = $image->getClientOriginalName();
-
-            $ext = get_extension($original_name);
-            if (in_array($ext, static::$image_allowed_extension)) {
-
-                $new_file = $user->id . $request->file($name)->getClientOriginalName();
-                $result = $request->file($name)
-                    ->move(public_path() . static::$image_upload_directory,
-                        $new_file
-                    );
-
-                $user->$name = $new_file;
-            } else {
-                session()->flash('flash_message', 'unkown image file extension');
-            }
-        }
-
-        return $user;
-    }
-
-    /**
-     * insert user from FB login
-     * @param $fb_user_object
-     * @return static
-     */
-    public static function insert_fb($fb_user_object)
-    {
-        $instance = new Static();
-        $instance->fill([
-            'email' => $fb_user_object->email,
-            'first_name' => $fb_user_object->user['name'],
-//            'last_name' => $fb_user_object->user['last_name'],
-
-            'fb_id' => $fb_user_object->user['id'],
-            'fb_token' => $fb_user_object->token,
-
-//                'image' => $fb_user_object->avatar,
-        ]);
-
-        $instance->save();
-        return $instance;
-
-    }
+//
+//    /**
+//     * insert new user
+//     * @param $request
+//     * @return mixed
+//     */
+//    public static function insert($request)
+//    {
+//        $instance = static::_handleInsertEdit(new Static(), $request);
+//        return $instance;
+//    }
+//
+//    /**
+//     * Edit user attributes
+//     * @param $id
+//     * @param $request
+//     * @return mixed
+//     */
+//    public static function edit($id, $request)
+//    {
+//        $instance = static::_handleInsertEdit(Static::findOrFail($id), $request);
+//        return $instance;
+//    }
+//
+//    /**
+//     * This function will handle user attributes, creating or editing
+//     * @param $user
+//     * @param $request
+//     * @return mixed
+//     */
+//    private static function _handleInsertEdit($user, $request)
+//    {
+//        $user->fill([
+//            'first_name' => $request->first_name,
+//            'last_name' => $request->last_name,
+//            'location' => $request->location,
+//
+//            'arabic_full_name' => $request->arabic_full_name,
+//            'profession' => $request->profession,
+//            'profession_location' => $request->profession_location,
+//
+//            'phone_number' => $request->phone_number,
+//            'gender' => $request->gender,
+//            'profession' => $request->profession,
+//        ]);
+//        $user->gender = $request->gender;
+//
+//        $user->save();
+//
+//
+//        static::_uploadImage($user, $request, 'image');
+//
+//        $user->save();
+//        return $user;
+//    }
+//
+//    /**
+//     * handle user image uploads
+//     * @param $user
+//     * @param $request
+//     * @return mixed
+//     */
+//    private static function _uploadImage($user, $request, $name)
+//    {
+//        $image = $request->file($name);
+//        if ($image) {
+//            $original_name = $image->getClientOriginalName();
+//
+//            $ext = get_extension($original_name);
+//            if (in_array($ext, static::$image_allowed_extension)) {
+//
+//                $new_file = $user->id . $request->file($name)->getClientOriginalName();
+//                $result = $request->file($name)
+//                    ->move(public_path() . static::$image_upload_directory,
+//                        $new_file
+//                    );
+//
+//                $user->$name = $new_file;
+//            } else {
+//                session()->flash('flash_message', 'unkown image file extension');
+//            }
+//        }
+//
+//        return $user;
+//    }
+//
+//    /**
+//     * insert user from FB login
+//     * @param $fb_user_object
+//     * @return static
+//     */
+//    public static function insert_fb($fb_user_object)
+//    {
+//        $instance = new Static();
+//        $instance->fill([
+//            'email' => $fb_user_object->email,
+//            'first_name' => $fb_user_object->user['name'],
+////            'last_name' => $fb_user_object->user['last_name'],
+//
+//            'fb_id' => $fb_user_object->user['id'],
+//            'fb_token' => $fb_user_object->token,
+//
+////                'image' => $fb_user_object->avatar,
+//        ]);
+//
+//        $instance->save();
+//        return $instance;
+//
+//    }
 
     public function accessMediasAll()
     {

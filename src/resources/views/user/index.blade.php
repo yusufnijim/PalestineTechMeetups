@@ -22,7 +22,7 @@
                 <td>{{ $user->first_name }}</td>
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{!! $user->imagetag !!}</td>
+                <td><img src="{{ $user->image }}"/></td>
                 <td><a href="{{ url("user/edit/$user->id") }}" class='btn btn-info'>edit</a></td>
                 <td>
                     {!! Form::open( [

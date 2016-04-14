@@ -50,6 +50,7 @@ class UserRepositoryEloquent extends BaseRepositoryEloquent implements UserRepos
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
             'profession' => $request->profession,
+            'bio' => $request->bio,
         ];
 
         if ($uploaded_file = file_upload('image', static::$image_upload_directory, static::$image_allowed_extension)) {
@@ -73,6 +74,7 @@ class UserRepositoryEloquent extends BaseRepositoryEloquent implements UserRepos
             'phone_number' => $request->phone_number,
             'gender' => $request->gender,
             'profession' => $request->profession,
+            'bio' => $request->bio,
         ];
 
         if ($uploaded_file = file_upload('image', static::$image_upload_directory, static::$image_allowed_extension)) {
