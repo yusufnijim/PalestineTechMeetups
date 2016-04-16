@@ -41,7 +41,7 @@ class EventController extends MyBaseController
         can("event.create");
 
         return view('event/create')
-            ->with("event", $this->event_repo->new())
+            ->with("event", $this->event_repo->newInstance())
             ->with('surveys', $this->survey_repo->lists('name', 'id'));
     }
 

@@ -37,7 +37,7 @@ class SurveyController extends MyBaseController
     {
         can('event.survey');
 
-        return view("survey/create")->with('survey', $this->survey_repo->new());
+        return view("survey/create")->with('survey', $this->survey_repo->newInstance());
     }
 
     public function postCreate()

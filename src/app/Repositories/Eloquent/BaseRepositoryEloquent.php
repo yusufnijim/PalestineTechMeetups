@@ -26,7 +26,7 @@ class BaseRepositoryEloquent extends BaseRepository implements BaseRepositoryInt
 //        $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function new()
+    public function newInstance()
     {
         return $this->model->newInstance([]);
     }

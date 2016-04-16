@@ -29,7 +29,7 @@ class BlogController extends MyBaseController
     {
         can("blog.create");
 
-        $blog = $this->blog_repo->new();
+        $blog = $this->blog_repo->newInstance();
         return view('blog/create')
             ->with('blog', $blog);
     }

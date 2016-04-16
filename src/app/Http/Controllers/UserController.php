@@ -35,7 +35,7 @@ class UserController extends MyBaseController
     {
         can("user.manage");
 
-        $user = $this->user_repo->new();
+        $user = $this->user_repo->newInstance();
         return view('/user/create')
             ->with('user', $user);
     }
