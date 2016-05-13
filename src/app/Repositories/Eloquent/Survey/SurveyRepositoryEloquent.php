@@ -33,13 +33,24 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function edit($request, $id)
+    public function insert($request)
     {
         $fill_array = [
             'name' => $request['name'],
             'description' => $request['description2'],
         ];
 
+        $this->create($fill_array);
+    }
+
+    public function edit($request, $id)
+    {
+        $fill_array = [
+            'name' => $request['name'],
+            'description' => $request['description'],
+        ];
+
         $this->update($fill_array, $id);
     }
+
 }

@@ -12,7 +12,7 @@
     </div>
 
     <div>
-        <img style='float:right' src="{{ $user->image }}"/>
+        <img style='float:right' class='user-image' src="{{ $user->image }}"/>
     </div>
     <div>
         Joined at: {{ $user->created_at }}
