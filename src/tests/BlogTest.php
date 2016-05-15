@@ -9,10 +9,15 @@ class BlogTest extends TestCase
 
     protected $blog;
 
+    function __construct()
+    {
+        parent::setUp();
+    }
+
     public function setUp()
     {
 //        $this->blog = new \App\Repositories\Eloquent\BlogRepositoryEloquent();
-        factory(App\Models\User\UserModel::class, 3)->create();
+        $this->blog = factory(App\Models\User\UserModel::class)->create();
     }
 
     /**
@@ -22,6 +27,7 @@ class BlogTest extends TestCase
      */
     public function testCreateBlogTest()
     {
+        $this->assertEquals(123, 123);
         $this->assertEquals(123, 123);
 
         // Given

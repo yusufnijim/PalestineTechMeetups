@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\Event\EventModel;
-//use App\Models\Event\RegistrationModel;
-//use App\Models\User\UserModel;
+use App\Models\Event\EventModel;
+use App\Models\Event\RegistrationModel;
+use App\Models\User\UserModel;
 //
 use App\Repositories\Contracts\Event\EventRepository;
 use App\Repositories\Contracts\Event\RegistrationRepository;
