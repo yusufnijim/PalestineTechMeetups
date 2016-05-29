@@ -51,6 +51,8 @@ class RegistrationController extends MyBaseController
 
     public function postSignup($id)
     {
+        $event = $this->event_repo->find($id);
+
         $user = auth()->user();
         $cancel = request()->cancel;
 
@@ -71,13 +73,18 @@ class RegistrationController extends MyBaseController
                 flash('You re-signed up for this event', 'success');
             }
         } else {
-            $this->registration_epo->create(
-                [
-                    'user_id' => $user->id,
-                    'event_id' => $id,
-                ]
-            );
-            flash('sign up complete', 'success');
+            if ($event->require_additional_fields AND $event->survey_id) {
+
+                return redirect('/survey/view/' . $event->survey_id);
+            } else {
+                $this->registration_epo->create(
+                    [
+                        'user_id' => $user->id,
+                        'event_id' => $id,
+                    ]
+                );
+                flash('sign up complete', 'success');
+            }
         }
 
 
@@ -197,13 +204,13 @@ class RegistrationController extends MyBaseController
         // loop through those users
         foreach ($reg as $instance) {
             $user = UserModel::find($instance->user_id);
-            \Mail::send('email/custom', [
+            \Mail::send('email / custom', [
                 'confirm_attendance' => request()->confirm_attendance,
                 'event_id' => $event_id,
                 'user' => $user,
                 'body' => request()->body,
             ], function ($m) use ($user) {
-                $m->from('noreply@NablusTechMeetups.com', 'Nablus Tech Meetups');
+                $m->from('noreply@NablusTechMeetups . com', 'Nablus Tech Meetups');
 
                 $m->to($user->email, $user->name)->subject(request()->subject);
             });
@@ -211,8 +218,8 @@ class RegistrationController extends MyBaseController
         }
 
         // done!
-        flash('emails in-queued for ' . $count, 'success');
-        return redirect('/registration/view/' . $event_id);
+        flash('emails in - queued for ' . $count, 'success');
+        return redirect(' / registration / view / ' . $event_id);
     }
 
     public function postSendemailcount($event_id)

@@ -122,8 +122,13 @@ class EventModel extends BaseModel
         }
         $image = $this->toArray()['featured_image'];
 
-        $result = static::$image_upload_directory . $image ;
+        $result = static::$image_upload_directory . $image;
         return $result;
+    }
+
+    public function getEventtypeAttribute()
+    {
+        return $this->type == 0 ? "One time" : "Hands on";
     }
 
 }

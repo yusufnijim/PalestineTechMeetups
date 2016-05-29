@@ -62,13 +62,17 @@ class UserModel extends BaseModel implements AuthenticatableContract,
     public function getImageAttribute($value)
     {
         if (!isset($value) or !$value) {
-            $image = static::$default_image;
+            if (isset($this->fb_id) AND $this->fb_id) {
+//                d($this);
+                $image = "//graph.facebook.com/" . $this->fb_id . "/picture?type=large";
+            } else {
+                $image = static::$image_upload_directory . static::$default_image;
+            }
         } else {
-            $image = $value;
+            $image = static::$image_upload_directory . $value;
         }
 
-        $result = static::$image_upload_directory . $image;
-        return $result;
+        return $image;
     }
 
     /**

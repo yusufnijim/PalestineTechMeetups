@@ -32,6 +32,7 @@ class CreateEventTable extends Migration
             $table->string('location');
 
             $table->tinyInteger('require_additional_fields')->nullable();
+            $table->tinyInteger('type')->nullable();
             $table->integer('survey_id')->nullable();
 
             $table->nullableTimestamps();

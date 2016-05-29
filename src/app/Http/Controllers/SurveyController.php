@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
+use App\Repositories\Contracts\Event\EventRepository;
+use App\Repositories\Contracts\Event\RegistrationRepository;
 use App\Repositories\Contracts\Survey\SurveyRepository;
 
 //use App\Models\Survey\SurveyModel;
@@ -17,11 +19,13 @@ use App\Models\Survey\SurveySubmissionModel;
  */
 class SurveyController extends MyBaseController
 {
-    protected $survey_repo;
+    protected $survey_repo, $event_repo, $registration_epo;
 
-    public function __construct(SurveyRepository $survey_repo)
+    public function __construct(SurveyRepository $survey_repo, EventRepository $event_repo, RegistrationRepository $registration_epo)
     {
         $this->survey_repo = $survey_repo;
+        $this->event_repo = $event_repo;
+        $this->registration_epo = $registration_epo;
     }
 
     public function anyIndex()
@@ -43,10 +47,11 @@ class SurveyController extends MyBaseController
     public function postCreate()
     {
         can('event.survey');
-        $this->survey_repo->insert(request()->all());
+        $survey = $this->survey_repo->insert(request()->all());
+        $survey_id = $survey->id;
         flash("survey created successfully", 'success');
 
-        return redirect('/survey');
+        return redirect('/survey/edit/' . $survey_id);
     }
 
     public function getEdit($id)
@@ -110,8 +115,28 @@ class SurveyController extends MyBaseController
             'survey_id' => $survey_id,
         ])->id;
         $survey = SurveyQuestionAnswerModel::insert($survey_id, request()->input(), $submission_id);
-        flash("thank you for submitting your answers", 'success');
-        return redirect('/survey/view/' . $survey_id);
+
+        $event = $this->event_repo->findWhere(
+            [
+                'survey_id' => $survey_id,
+            ]
+        )->first();
+
+        if ($event) {
+            $event_id = $event->id;
+
+            $this->registration_epo->create(
+                [
+                    'user_id' => $user_id,
+                    'event_id' => $event_id,
+                ]
+            );
+            flash("thank you for submitting your answers", 'success');
+
+            flash('sign up complete', 'success');
+
+            return redirect("/registration/signup/$event_id");
+        }
     }
 
     public function getResults($survey_id)
@@ -123,13 +148,26 @@ class SurveyController extends MyBaseController
             ->with("survey", $survey);
     }
 
-    public function getResult($survey_id, $user_id)
+    public function getResult($survey_id, $user_id = 0)
     {
         can('event.survey');
-        $results = SurveyQuestionAnswerModel::where('survey_id', $survey_id)->where('user_id', $user_id)->get();
-
+        if ($user_id) {
+            global $survey_user_id;
+            $survey_user_id = $user_id;
+            $survey = $this->survey_repo->findWhere(['id' => $survey_id])->first();
+            $survey = $survey->whereHas('submissions', function ($query) {
+                global $survey_user_id;
+                $query->where('user_id', $survey_user_id);
+            })->where('id', $survey_id)->first();
+//        SurveyQuestionAnswerModel::where('survey_id', $survey_id)->where('user_id', $user_id)->get();
+        } else {
+            $survey = $this->survey_repo->find($survey_id);
+        }
+        if (!$survey) {
+            return abort(404);
+        }
         return view('survey/result')
-            ->with("results", $results);
+            ->with("survey", $survey);
     }
 
 }

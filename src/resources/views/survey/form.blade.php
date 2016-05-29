@@ -21,7 +21,13 @@
                 <br/>
 
 
-                {!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
+                @if(!isset($edit))
+                    {!! Form::submit('next', ['class' => 'btn btn-default']) !!}
+                @else
+                    {!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
+
+                @endif
+
                 {!! Form::close() !!}
 
                 @if(isset($edit))
@@ -45,8 +51,7 @@
     <script>
         function survey_fetch() {
             survey_id = $('#survey_id').val();
-            $.get('/survey/viewajax/' + survey_id, [], function (data)
-            {
+            $.get('/survey/viewajax/' + survey_id, [], function (data) {
                 $("#view").html(data);
             });
         }

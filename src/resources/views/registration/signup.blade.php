@@ -6,6 +6,7 @@
         <h2>{{ $event->title }} </h2><br/> <br/> <br/>
 
         {!!  $event->featuredimagetag !!} <br/>
+        Event Type: {!!  $event->eventtype !!}<br/>
         Event description{!!  $event->body !!}
 
         @if(!auth()->check())

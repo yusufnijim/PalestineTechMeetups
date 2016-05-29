@@ -46,6 +46,11 @@
         : {!! Form::date('date', $event->date, ['class'=> 'event_date']) !!} <br/>
     </div>
     <div class="form-group">
+        {!! Form::label('type', 'Event type') !!}
+        : {!! Form::select('type', ['One time', 'Hands on', 'Other'], $event->type, ['class' => 'form-event-type-list'])  !!}
+
+    </div>
+    <div class="form-group">
         {!! Form::label('location', 'Location') !!}
 
         : {!! Form::textarea('location', $event->location, ['size' => '30x2']) !!} <br/>

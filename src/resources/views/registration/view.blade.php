@@ -11,6 +11,10 @@
 
         <button onclick="window.open('/registration/sendemail/{!! $event->id !!}')">Send email</button>
         <button onclick="window.open('/registration/export/{!! $event->id !!}')">Export to excel</button>
+        @if($event->require_additional_fields AND $event->survey_id)
+            <button onclick="window.open('/survey/result/{{ $event->survey_id }}')">All survey submissions
+            </button>
+        @endif
 
         <table border="1" class="event_registration_index table table-striped table-bordered table-hover"
                id="dataTables-example">
@@ -38,7 +42,8 @@
 
                     @if($event->require_additional_fields AND $event->survey_id)
                         <td>
-                            <a href="/survey/answer/{{$event->survey_id}}/{{$instance->user->id}}">View</a>
+                            <a href="/survey/result/{{$event->survey_id}}/{{$instance->user->id}}"
+                               target="_blank">View</a>
                         </td>
                     @endif
 

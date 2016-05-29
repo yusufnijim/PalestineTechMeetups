@@ -50,7 +50,8 @@ class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRep
             'date' => $request->date,
             'require_additional_fields' => $request->max_registrars_count,
             'is_published' => $request->is_published,
-            'survey_id' => $request->survey_id
+            'survey_id' => $request->survey_id,
+            'type' => $request->type
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {
@@ -72,7 +73,8 @@ class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRep
             'date' => $request->date,
             'require_additional_fields' => $request->max_registrars_count,
             'is_published' => $request->is_published,
-            'survey_id' => $request->survey_id
+            'survey_id' => $request->survey_id,
+            'type' => $request->type
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {

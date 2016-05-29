@@ -40,7 +40,7 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
             'description' => $request['description2'],
         ];
 
-        $this->create($fill_array);
+        return $this->create($fill_array);
     }
 
     public function edit($request, $id)
@@ -50,7 +50,7 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
             'description' => $request['description'],
         ];
 
-        $this->update($fill_array, $id);
+        return $this->update($fill_array, $id);
     }
 
 }
