@@ -15,7 +15,7 @@ return [
     |
     */
     'pagination' => [
-        'limit' => 15
+        'limit' => 15,
     ],
 
     /*
@@ -32,9 +32,9 @@ return [
     */
     'fractal' => [
         'params' => [
-            'include' => 'include'
+            'include' => 'include',
         ],
-        'serializer' => League\Fractal\Serializer\DataArraySerializer::class
+        'serializer' => League\Fractal\Serializer\DataArraySerializer::class,
     ],
 
     /*
@@ -106,7 +106,7 @@ return [
                 'create' => true,
                 'update' => true,
                 'delete' => true,
-            ]
+            ],
         ],
 
         'params' => [
@@ -119,7 +119,7 @@ return [
             | Ex: http://prettus.local/?search=lorem&skipCache=true
             |
             */
-            'skipCache' => 'skipCache'
+            'skipCache' => 'skipCache',
         ],
 
         /*
@@ -138,9 +138,9 @@ return [
        | 'except'  =>['find'],
        */
         'allowed' => [
-            'only' => null,
-            'except' => null
-        ]
+            'only'   => null,
+            'except' => null,
+        ],
     ],
 
     /*
@@ -168,7 +168,7 @@ return [
         |
         */
         'acceptedConditions' => [
-            '=', 'like'
+            '=', 'like',
         ],
         /*
         |--------------------------------------------------------------------------
@@ -203,13 +203,13 @@ return [
         |
         */
         'params' => [
-            'search' => 'search',
+            'search'       => 'search',
             'searchFields' => 'searchFields',
-            'filter' => 'filter',
-            'orderBy' => 'orderBy',
-            'sortedBy' => 'sortedBy',
-            'with' => 'with'
-        ]
+            'filter'       => 'filter',
+            'orderBy'      => 'orderBy',
+            'sortedBy'     => 'sortedBy',
+            'with'         => 'with',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -218,15 +218,15 @@ return [
     |
     */
     'generator' => [
-        'basePath' => app_path(),
+        'basePath'      => app_path(),
         'rootNamespace' => 'App\\',
-        'paths' => [
-            'models' => 'Models',
+        'paths'         => [
+            'models'       => 'Models',
             'repositories' => 'Repositories\\Elequent',
-            'interfaces' => 'Repositories\\Contracts',
+            'interfaces'   => 'Repositories\\Contracts',
             'transformers' => 'Transformers',
-            'presenters' => 'Presenters',
-            'validators' => 'Validators',
-        ]
-    ]
+            'presenters'   => 'Presenters',
+            'validators'   => 'Validators',
+        ],
+    ],
 ];

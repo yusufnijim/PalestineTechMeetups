@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSurveyTables extends Migration
 {
@@ -109,17 +109,17 @@ class CreateSurveyTables extends Migration
 
         // default question types, supported already
         DB::table('survey_question_type')->insert(
-            array(
-                array('name' => 'Short answer'),
-                array('name' => 'Paragraph'),
-                array('name' => 'Multiple choice'),
-                array('name' => 'Checkboxes'),
-                array('name' => 'Dropdown'),
-                array('name' => 'Linear scale'),
-                array('name' => 'Multiple choice grid'),
-                array('name' => 'Date'),
-                array('name' => 'Time'),
-            ));
+            [
+                ['name' => 'Short answer'],
+                ['name' => 'Paragraph'],
+                ['name' => 'Multiple choice'],
+                ['name' => 'Checkboxes'],
+                ['name' => 'Dropdown'],
+                ['name' => 'Linear scale'],
+                ['name' => 'Multiple choice grid'],
+                ['name' => 'Date'],
+                ['name' => 'Time'],
+            ]);
     }
 
     /**

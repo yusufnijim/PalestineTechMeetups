@@ -2,14 +2,14 @@
 
 namespace App\Models\Event;
 
-use App\Models\Survey\SurveyModel;
 use App\Models\BaseModel;
+use App\Models\Survey\SurveyModel;
 
 class EventModel extends BaseModel
 {
     protected $table = 'event';
-    static $default_image = 'default.png';
-    static $image_upload_directory = '/image/event/';
+    public static $default_image = 'default.png';
+    public static $image_upload_directory = '/image/event/';
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +32,7 @@ class EventModel extends BaseModel
     {
         return $this->hasOne(SurveyModel::class, 'id', 'survey_id');
     }
+
 ////
 ////    public static function insert($request)
 ////    {
@@ -102,8 +103,10 @@ class EventModel extends BaseModel
     public function getSummaryAttribute($value)
     {
         $summary = substr($this->body, 0, 500);
+
         return $summary;
     }
+
 //
 //    public function scopePublished($query, $flag = true)
 //    {
@@ -111,8 +114,10 @@ class EventModel extends BaseModel
 //    }
 
     /**
-     * Return image path
+     * Return image path.
+     *
      * @param $value
+     *
      * @return string
      */
     public function getFeaturedimageAttribute($value)
@@ -122,13 +127,13 @@ class EventModel extends BaseModel
         }
         $image = $this->toArray()['featured_image'];
 
-        $result = static::$image_upload_directory . $image;
+        $result = static::$image_upload_directory.$image;
+
         return $result;
     }
 
     public function getEventtypeAttribute()
     {
-        return $this->type == 0 ? "One time" : "Hands on";
+        return $this->type == 0 ? 'One time' : 'Hands on';
     }
-
 }

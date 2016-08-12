@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Event;
+
 use App\Models\BaseModel;
 
 class VolunteerModel extends BaseModel
@@ -21,7 +22,6 @@ class VolunteerModel extends BaseModel
         3 => 'Mentor',
     ];
 
-
     public function getTypeAttribute($value)
     {
         return static::$type[$this->type_id];
@@ -30,7 +30,6 @@ class VolunteerModel extends BaseModel
     protected $guarded = [];
 
     /**
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne UserModel
      */
     public function user()
@@ -38,7 +37,7 @@ class VolunteerModel extends BaseModel
         return $this->hasOne('App\Models\User\UserModel', 'id', 'user_id');
     }
 
-    /**
+    /*
      * add user as a volunteer to event
      * @param $event_id
      * @return static

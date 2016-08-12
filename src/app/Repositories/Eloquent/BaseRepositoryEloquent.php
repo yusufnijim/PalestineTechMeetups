@@ -2,28 +2,27 @@
 
 namespace App\Repositories\Eloquent;
 
-use Prettus\Repository\Eloquent\BaseRepository;
 use App\Repositories\Contracts\BaseRepository as BaseRepositoryInterface;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 class BaseRepositoryEloquent extends BaseRepository implements BaseRepositoryInterface
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
     public function model()
     {
-//        return EventModel::class;
+        //        return EventModel::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
-//        $this->pushCriteria(app(RequestCriteria::class));
+        //        $this->pushCriteria(app(RequestCriteria::class));
     }
 
     public function newInstance()
@@ -37,6 +36,7 @@ class BaseRepositoryEloquent extends BaseRepository implements BaseRepositoryInt
             return $query->where('is_published', 1);
         };
         $this->scopeQuery($query);
+
         return $this;
     }
 
@@ -46,6 +46,7 @@ class BaseRepositoryEloquent extends BaseRepository implements BaseRepositoryInt
             return $query->orderBy('id', 'desc');
         };
         $this->scopeQuery($query);
+
         return $this;
     }
 }

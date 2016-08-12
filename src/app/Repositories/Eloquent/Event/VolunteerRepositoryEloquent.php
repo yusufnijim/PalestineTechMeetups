@@ -1,17 +1,14 @@
 <?php
 
 namespace App\Repositories\Eloquent\Event;
-use App\Repositories\Contracts\Event\VolunteerRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-
-use App\Repositories\Eloquent\BaseRepositoryEloquent;
-use App\Repositories\Contracts\User\UserRepository;
 
 use App\Models\Event\VolunteerModel;
+use App\Repositories\Contracts\Event\VolunteerRepository;
+use App\Repositories\Eloquent\BaseRepositoryEloquent;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
- * Class EventRepositoryEloquent
- * @package namespace App\Repositories\Elequent;
+ * Class EventRepositoryEloquent.
  */
 class VolunteerRepositoryEloquent extends BaseRepositoryEloquent implements VolunteerRepository
 {
@@ -23,7 +20,7 @@ class VolunteerRepositoryEloquent extends BaseRepositoryEloquent implements Volu
     ];
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -32,9 +29,8 @@ class VolunteerRepositoryEloquent extends BaseRepositoryEloquent implements Volu
         return VolunteerModel::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {

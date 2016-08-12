@@ -2,26 +2,25 @@
 
 namespace App\Models\User;
 
-use App\Models\User\HasRole;
-
 use App\Models\BaseModel;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 
-class UserModel extends BaseModel implements AuthenticatableContract,
+class UserModel extends BaseModel implements
+AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, HasRole;
-    protected $table = "user";
+    protected $table = 'user';
 
-    static $default_image = 'default.png';
-    static $image_upload_directory = '/image/user/';
-    static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
+    public static $default_image = 'default.png';
+    public static $image_upload_directory = '/image/user/';
+    public static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
      * The attributes that are mass assignable.
@@ -46,45 +45,48 @@ class UserModel extends BaseModel implements AuthenticatableContract,
      * return user's full name.
      *
      * @param $value
+     *
      * @return string
      */
     public function getFullnameAttribute($value)
     {
-        return $this->first_name . " " . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
-
     /**
-     * Return image path
+     * Return image path.
+     *
      * @param $value
+     *
      * @return string
      */
     public function getImageAttribute($value)
     {
         if (!isset($value) or !$value) {
-            if (isset($this->fb_id) AND $this->fb_id) {
-//                d($this);
-                $image = "//graph.facebook.com/" . $this->fb_id . "/picture?type=large";
+            if (isset($this->fb_id) and $this->fb_id) {
+                //                d($this);
+                $image = '//graph.facebook.com/'.$this->fb_id.'/picture?type=large';
             } else {
-                $image = static::$image_upload_directory . static::$default_image;
+                $image = static::$image_upload_directory.static::$default_image;
             }
         } else {
-            $image = static::$image_upload_directory . $value;
+            $image = static::$image_upload_directory.$value;
         }
 
         return $image;
     }
 
     /**
-     * return display name for gender, male/female
+     * return display name for gender, male/female.
+     *
      * @return int|string
      */
     public function getGenderNameAttribute()
     {
         if ($this->gender == 1) {
-            return "Male";
+            return 'Male';
         } elseif ($this->gender == 2) {
-            return "Female";
+            return 'Female';
         } else {
             return 1;
         }
@@ -102,18 +104,18 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 //    }
 
     /**
-     *
      * @param $value
+     *
      * @return string
      */
     public function getProfessionAttribute($value)
     {
         if ($value == 1) {
-            return "student";
+            return 'student';
         } elseif ($value == 2) {
-            return "employed";
+            return 'employed';
         } elseif ($value == 3) {
-            return "unemployed";
+            return 'unemployed';
         } else {
             return $value;
         }
@@ -121,10 +123,12 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 
     /**
      * return user profession name or value.
+     *
      * @param null $rev
+     *
      * @return array
      */
-    public static function professions($rev = NULL)
+    public static function professions($rev = null)
     {
         $array = [
             1 => 'student',
@@ -138,9 +142,9 @@ class UserModel extends BaseModel implements AuthenticatableContract,
         }
     }
 
-
     /**
      * Return events this user registered in.
+     *
      * @return $this
      */
     public function events_registered()
@@ -150,12 +154,14 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 
     /**
      * return events this user volunteered in.
+     *
      * @return $this
      */
     public function events_volunteered()
     {
         return $this->belongsToMany(\App\Models\Event\EventModel::class, 'event_volunteer', 'user_id', 'event_id')->withPivot('type_id');
     }
+
 //
 //    /**
 //     * insert new user
@@ -268,8 +274,9 @@ class UserModel extends BaseModel implements AuthenticatableContract,
 
     public function accessMediasAll()
     {
-        if (can('blog.edit'))
+        if (can('blog.edit')) {
             return true;
+        }
         // return true for access to all medias
     }
 }
