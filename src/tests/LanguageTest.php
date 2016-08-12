@@ -1,7 +1,7 @@
 <?php
 
-class LanguageTest extends TestCase {
-
+class LanguageTest extends TestCase
+{
     protected $baseUrl = 'http://localhost';
 
     /**
@@ -15,6 +15,7 @@ class LanguageTest extends TestCase {
             ->see('Events')
             ->dontSee('welcome');
     }
+
     /**
      * A basic functional test should return a home page with english language.
      *
@@ -26,8 +27,7 @@ class LanguageTest extends TestCase {
             ->see('Welcome');
     }
 
-
-    /**
+    /*
      * A basic functional test should return a 404 error page, because we are trying access an invalid language url
      * made with a number language argument.
      *

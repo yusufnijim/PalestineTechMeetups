@@ -2,11 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Repositories\Contracts\BaseRepository;
-
 /**
- * Interface EventRepository
- * @package namespace App\Repositories\Contracts;
+ * Interface EventRepository.
  */
 interface ContactRepository extends BaseRepository
 {

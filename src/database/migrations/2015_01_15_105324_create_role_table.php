@@ -1,6 +1,7 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRoleTable extends Migration
 {
@@ -20,15 +21,14 @@ class CreateRoleTable extends Migration
         });
 
         DB::table('role')->insert([
-            'name' => 'administrator',
+            'name'  => 'administrator',
             'label' => 'Administrator',
 
         ]);
         DB::table('role')->insert([
-            'name' => 'volunteer',
+            'name'  => 'volunteer',
             'label' => 'Volunteer',
         ]);
-
     }
 
     /**

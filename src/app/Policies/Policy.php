@@ -2,16 +2,16 @@
 
 namespace App\Policies;
 
-use App\Models\User\UserModel;
 use App\Models\EventModel;
 
-class PostPolicy
+class Policy
 {
     /**
      * Grant all abilities to administrator.
      *
-     * @param  \App\Models\User $user
-     * @param  string $ability
+     * @param \App\Models\User $user
+     * @param string           $ability
+     *
      * @return bool
      */
     public function before(User $user, $ability)
@@ -25,12 +25,12 @@ class PostPolicy
     /**
      * Determine if the given post can be changed by the user.
      *
-     * @param  \App\Models\User $user
+     * @param \App\Models\User $user
+     *
      * @return bool
      */
     public function change(EventModel $event)
     {
         return true;
     }
-
 }

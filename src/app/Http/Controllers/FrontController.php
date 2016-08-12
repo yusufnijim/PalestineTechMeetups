@@ -9,13 +9,11 @@ use App\Repositories\Contracts\BlogRepository;
 use App\Repositories\Contracts\ContactRepository;
 use App\Repositories\Contracts\Event\EventRepository;
 
-
 class FrontController extends MyBaseController
 {
     protected $blog_repo;
     protected $event_repo;
     protected $contact_repo;
-
 
     public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo)
     {
@@ -29,35 +27,35 @@ class FrontController extends MyBaseController
         $blogs = $this->blog_repo->published()->latest()->paginate(3);
         $events = $this->event_repo->published()->latest()->paginate(3);
 
-        return view("frontend.index")
+        return view('frontend.index')
             ->with('events', $events)
             ->with('blogs', $blogs);
     }
 
     public function getAbout()
     {
-        return view("frontend.about");
+        return view('frontend.about');
     }
-
 
     public function getContact()
     {
-        return view("frontend.contact");
+        return view('frontend.contact');
     }
 
     public function postContact()
     {
         $this->contact_repo->insert(request());
         flash('thank you for contacting us', 'success');
+
         return redirect('/contact');
     }
-
 
     public function anySearch()
     {
         $query = request()->q;
         $results = [];
-        return view("frontend.search")
+
+        return view('frontend.search')
             ->with('results', $results)
             ->with('query', $query);
     }
@@ -65,8 +63,9 @@ class FrontController extends MyBaseController
     /**
      * Change language.
      *
-     * @param  App\Jobs\ChangeLocaleCommand $changeLocale
-     * @param  String $lang
+     * @param App\Jobs\ChangeLocaleCommand $changeLocale
+     * @param string                       $lang
+     *
      * @return Response
      */
     public function language($lang,
@@ -78,5 +77,4 @@ class FrontController extends MyBaseController
 
         return redirect()->back();
     }
-
 }

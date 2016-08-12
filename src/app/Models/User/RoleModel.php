@@ -6,15 +6,14 @@ use App\Models\BaseModel;
 
 class RoleModel extends BaseModel
 {
-    protected $table = "role";
-
+    protected $table = 'role';
 
     public static function insert($request)
     {
         $role = new static();
         $role->create([
-            'name' => $request->input('name'),
-            'label' => $request->input('name'),
+            'name'        => $request->input('name'),
+            'label'       => $request->input('name'),
             'description' => $request->input('description'),
         ]);
 
@@ -34,7 +33,8 @@ class RoleModel extends BaseModel
     /**
      * Grant the given permission to a role.
      *
-     * @param  Permission $permission
+     * @param Permission $permission
+     *
      * @return mixed
      */
     public function givePermissionTo($permission, $save = true)
@@ -48,7 +48,7 @@ class RoleModel extends BaseModel
         }
 
         // if role already has the permission, return true.
-        if ($save AND $this->permissions()->find([$permission->id])->count()) {
+        if ($save and $this->permissions()->find([$permission->id])->count()) {
             return $permission;
         }
 

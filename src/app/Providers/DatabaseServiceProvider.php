@@ -2,33 +2,21 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-
-
-use App\Repositories\Contracts\Event\RegistrationRepository;
-use App\Repositories\Eloquent\Event\RegistrationRepositoryEloquent;
-
-use App\Repositories\Contracts\Survey\SurveyRepository;
-use App\Repositories\Eloquent\Survey\SurveyRepositoryEloquent;
-
 use App\Repositories\Contracts\BlogRepository;
-use App\Repositories\Eloquent\BlogRepositoryEloquent;
-
-
-use App\Repositories\Contracts\Event\EventRepository;
-use App\Repositories\Eloquent\Event\EventRepositoryEloquent;
-
-
-use App\Repositories\Contracts\User\UserRepository;
-use App\Repositories\Eloquent\User\UserRepositoryEloquent;
-
-
-use App\Repositories\Contracts\Event\VolunteerRepository;
-use App\Repositories\Eloquent\Event\VolunteerRepositoryEloquent;
-
-
 use App\Repositories\Contracts\ContactRepository;
+use App\Repositories\Contracts\Event\EventRepository;
+use App\Repositories\Contracts\Event\RegistrationRepository;
+use App\Repositories\Contracts\Event\VolunteerRepository;
+use App\Repositories\Contracts\Survey\SurveyRepository;
+use App\Repositories\Contracts\User\UserRepository;
+use App\Repositories\Eloquent\BlogRepositoryEloquent;
 use App\Repositories\Eloquent\ContactRepositoryEloquent;
+use App\Repositories\Eloquent\Event\EventRepositoryEloquent;
+use App\Repositories\Eloquent\Event\RegistrationRepositoryEloquent;
+use App\Repositories\Eloquent\Event\VolunteerRepositoryEloquent;
+use App\Repositories\Eloquent\Survey\SurveyRepositoryEloquent;
+use App\Repositories\Eloquent\User\UserRepositoryEloquent;
+use Illuminate\Support\ServiceProvider;
 
 class DatabaseServiceProvider extends ServiceProvider
 {
@@ -39,7 +27,6 @@ class DatabaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**

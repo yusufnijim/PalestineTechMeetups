@@ -3,6 +3,7 @@
 namespace App\Models\Event;
 
 use App\Models\BaseModel;
+
 class RegistrationModel extends BaseModel
 {
     protected $table = 'event_registration';
@@ -27,6 +28,4 @@ class RegistrationModel extends BaseModel
     {
         return $this->hasOne('App\Models\User\UserModel', 'id', 'user_id');
     }
-
-
 }
