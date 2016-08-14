@@ -7,12 +7,12 @@ To run this site:
 1- Download source code:
 
 ```
-$ git clone https://github.com/NablusTechMeetups/web.git
+$ git clone https://github.com/AminMkh/PalestineTechMeetups.git
 ```
 
 2- Install third party packages using composer:
 ```
-$ composer install -vvv -n
+$ composer install -n
 ```
 
 3- Create the database using artisan:
