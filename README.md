@@ -19,7 +19,7 @@ To run this site:
 
 1- Download source code:
 ```
-$ git clone https://github.com/NablusTechMeetups/web.git
+$ git clone https://github.com/AminMkh/PalestineTechMeetups.git
 ```
 
 2- Fire up the docker containers
@@ -29,12 +29,12 @@ $ docker-compose up -d
 
 3- Install third party packages using composer:
 ```
-$ docker-compose run web bash -c "./composer install -vvv -n"
+$ docker-compose run web bash -c "./composer install -n"
 ```
 
 4- Create the database using artisan:
 ```
-$ docker-compose run web bash -c "php artisan migrate:refresh --seed"
+$ docker-compose run web bash -c "php artisan migrate --seed"
 ```
 
 5- Configure Laravel permissions:
