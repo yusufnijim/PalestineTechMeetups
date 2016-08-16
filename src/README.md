@@ -26,4 +26,4 @@ php artisan migrate --seed
 $ sudo chmod 775 storage/ bootstrap/cache public/image -R
 ```
 
-Walla, you rock !
+Walla, you rock !   
