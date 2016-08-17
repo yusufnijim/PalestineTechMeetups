@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePermissionTable extends Migration
 {
@@ -15,73 +15,73 @@ class CreatePermissionTable extends Migration
         $permissions = [
             // events
             [
-                'name'     => 'event.edit',
+                'name' => 'event.edit',
                 'category' => 'Events',
             ],
             [
-                'name'     => 'event.create',
+                'name' => 'event.create',
                 'category' => 'Events',
             ],
             [
-                'name'     => 'event.delete',
+                'name' => 'event.delete',
                 'category' => 'Events',
             ],
             [
-                'name'     => 'event.view',
+                'name' => 'event.view',
                 'category' => 'Events',
             ],
 
             // blogs
             [
-                'name'     => 'blog.create',
+                'name' => 'blog.create',
                 'category' => 'Blogs',
             ],
             [
-                'name'     => 'blog.view',
+                'name' => 'blog.view',
                 'category' => 'Blogs',
             ],
             [
-                'name'     => 'blog.edit',
+                'name' => 'blog.edit',
                 'category' => 'Blogs',
             ],
             [
-                'name'     => 'blog.delete',
+                'name' => 'blog.delete',
                 'category' => 'Blogs',
             ],
 
             // users
             [
-                'name'     => 'user.create',
+                'name' => 'user.create',
                 'category' => 'Users',
             ],
             [
-                'name'     => 'user.view',
+                'name' => 'user.view',
                 'category' => 'Users',
             ],
             [
-                'name'     => 'user.edit',
+                'name' => 'user.edit',
                 'category' => 'Users',
             ],
             [
-                'name'     => 'user.delete',
+                'name' => 'user.delete',
                 'category' => 'Users',
             ],
 
             // roles
             [
-                'name'     => 'role.create',
+                'name' => 'role.create',
                 'category' => 'Roles',
             ],
             [
-                'name'     => 'role.view',
+                'name' => 'role.view',
                 'category' => 'Roles',
             ],
             [
-                'name'     => 'role.edit',
+                'name' => 'role.edit',
                 'category' => 'Roles',
             ],
             [
-                'name'     => 'role.delete',
+                'name' => 'role.delete',
                 'category' => 'Roles',
             ],
 
@@ -97,10 +97,11 @@ class CreatePermissionTable extends Migration
 
         foreach ($permissions as $permission) {
             DB::table('permission')->insert([
-                'name'     => $permission['name'],
+                'name' => $permission['name'],
                 'category' => $permission['category'],
             ]);
         }
+
     }
 
     /**

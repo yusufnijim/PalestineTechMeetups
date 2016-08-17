@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventModel;
 use App\Repositories\Contracts\ContactRepository;
 
 class BackendController extends MyBaseController
@@ -14,7 +15,6 @@ class BackendController extends MyBaseController
     public function anyIndex()
     {
         can('event.manage');
-
         return view('backend/index');
     }
 
@@ -22,7 +22,6 @@ class BackendController extends MyBaseController
     {
         can('message.view');
         $messages = $this->contact_repo->all();
-
         return view('backend/message')
             ->with('messages', $messages);
     }
@@ -32,7 +31,6 @@ class BackendController extends MyBaseController
         can('message.delete');
         flash('message deleted successfully', 'success');
         $this->contact_repo->delete($id);
-
         return redirect('/backend/message');
     }
 }

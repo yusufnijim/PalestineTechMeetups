@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 class ContactModel extends BaseModel
 {
     protected $table = 'contact';
@@ -22,4 +23,6 @@ class ContactModel extends BaseModel
      */
     protected $hidden = [
     ];
+
+
 }

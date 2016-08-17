@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,4 +25,6 @@ class BaseModel extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
 }

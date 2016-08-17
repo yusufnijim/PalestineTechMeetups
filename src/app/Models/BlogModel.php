@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+
 class BlogModel extends BaseModel
 {
     protected $table = 'blog';
-    public static $default_image = 'default.png';
+    static $default_image = 'default.png';
 
-    public static $image_upload_directory = '/image/blog/';
-    public static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
+    static $image_upload_directory = '/image/blog/';
+    static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
      * The attributes that are mass assignable.
@@ -58,11 +59,9 @@ class BlogModel extends BaseModel
 //    }
 
     /**
-     * handle user image uploads.
-     *
+     * handle user image uploads
      * @param $user
      * @param $request
-     *
      * @return mixed
      */
 //    private static function _uploadImage($instance, $request, $name)
@@ -94,10 +93,8 @@ class BlogModel extends BaseModel
     public function getSummaryAttribute($value)
     {
         $summary = substr($this->body, 0, 500);
-
         return $summary;
     }
-
 //
 //    public function scopePublished($query, $flag = true)
 //    {
@@ -105,10 +102,8 @@ class BlogModel extends BaseModel
 //    }
 
     /**
-     * Return image path.
-     *
+     * Return image path
      * @param $value
-     *
      * @return string
      */
     public function getFeaturedimageAttribute($value)
@@ -118,8 +113,8 @@ class BlogModel extends BaseModel
         }
         $image = $this->toArray()['featured_image'];
 
-        $result = static::$image_upload_directory.$image;
-
+        $result = static::$image_upload_directory . $image ;
         return $result;
     }
+
 }

@@ -1,6 +1,7 @@
 @extends ("layout/frontend")
 
 @section("content")
+<div class="container">
     <h3>Hello, send us a message and we'll get back to you ASAP :)</h3>
     <br/>
     <br/>
@@ -31,6 +32,6 @@
     <div class="form-group">
         {!! Form::submit('send', ['class' => 'btn btn-default']) !!}
     </div>
-
+</div>
     {!! Form::close() !!}
 @endsection

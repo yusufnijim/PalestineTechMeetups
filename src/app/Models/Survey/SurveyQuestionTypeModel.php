@@ -25,21 +25,23 @@ class SurveyQuestionTypeModel extends BaseModel
     protected $hidden = [
     ];
 
+
     public static function insert($request)
     {
-        return static::create([
-            'title'        => $request->title,
-            'body'         => $request->body,
+        return Static::create([
+            'title' => $request->title,
+            'body' => $request->body,
             'is_published' => $request->is_published,
         ]);
     }
 
     public static function edit($id, $request)
     {
-        return static::find($id)->update([
-            'title'        => $request->title,
-            'body'         => $request->body,
+        return Static::find($id)->update([
+            'title' => $request->title,
+            'body' => $request->body,
             'is_published' => $request->is_published,
         ]);
     }
+
 }

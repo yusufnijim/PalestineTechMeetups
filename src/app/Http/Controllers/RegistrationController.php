@@ -24,10 +24,8 @@ class RegistrationController extends MyBaseController
     }
 
     /**
-     * This function will display the event page, with sign up details.
-     *
+     * This function will display the event page, with sign up details
      * @param $id
-     *
      * @return mixed
      */
     public function getSignup($id)
@@ -38,15 +36,14 @@ class RegistrationController extends MyBaseController
         if ($user) {
             $status = $this->registration_epo->findWhere(
                 [
-                    'user_id'      => isset($user->id) ? $user->id : null,
-                    'event_id'     => $id,
+                    'user_id' => isset($user->id) ? $user->id : NULL,
+                    'event_id' => $id,
                     'is_cancelled' => 0,
                 ]
             )->first();
         } else {
             $status = -1;
         }
-
         return view('registration/signup')
             ->with('event', $event)
             ->with('status', $status);
@@ -61,11 +58,11 @@ class RegistrationController extends MyBaseController
 
         $reg = $this->registration_epo->findWhere(
             [
-                'user_id'  => $user->id,
+                'user_id' => $user->id,
                 'event_id' => $id,
             ]
         )->first();
-        if ($reg and count($reg->toArray())) { // user already registered
+        if ($reg AND count($reg->toArray())) { // user already registered
             if ($cancel) {
                 $reg->is_cancelled = 1;
                 $reg->save();
@@ -76,12 +73,13 @@ class RegistrationController extends MyBaseController
                 flash('You re-signed up for this event', 'success');
             }
         } else {
-            if ($event->require_additional_fields and $event->survey_id) {
-                return redirect('/survey/view/'.$event->survey_id);
+            if ($event->require_additional_fields AND $event->survey_id) {
+
+                return redirect('/survey/view/' . $event->survey_id);
             } else {
                 $this->registration_epo->create(
                     [
-                        'user_id'  => $user->id,
+                        'user_id' => $user->id,
                         'event_id' => $id,
                     ]
                 );
@@ -95,7 +93,7 @@ class RegistrationController extends MyBaseController
 
     public function getView($id)
     {
-        can('registration.view');
+        can("registration.view");
 
         $event = $this->event_repo->find($id);
         $reg = $this->registration_epo->findByField('event_id', $id);
@@ -107,7 +105,7 @@ class RegistrationController extends MyBaseController
         $number_of_attended = $this->registration_epo->findWhere(['event_id' => $id])
             ->where('is_attended', 1)->count();
 
-        return view('registration/view')
+        return view("registration/view")
             ->with('event', $event)
             ->with('reg', $reg)
             ->with('number_of_registrars', $number_of_registrars)
@@ -117,20 +115,20 @@ class RegistrationController extends MyBaseController
 
     public function getExport($id)
     {
-        can('registrations.view');
+        can("registrations.view");
 
         $reg = $this->registration_epo->findWhere(['event_id' => $id]);
-
-        return export_to_excel($reg, 'event_'.$id);
+        return export_to_excel($reg, "event_" . $id);
     }
+
 
     public function postUpdateaccepted($id)
     {
-        can('registration.edit');
+        can("registration.edit");
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $id,
-            'user_id'  => request()['user_id'],
+            'user_id' => request()['user_id'],
         ])->first();
         $reg->update([
             'is_accepted' => request()['is_accepted'] == 1 ? 0 : 1,
@@ -139,13 +137,14 @@ class RegistrationController extends MyBaseController
         return redirect("/registration/view/$id");
     }
 
+
     public function postUpdateattended($id)
     {
-        can('registration.update');
+        can("registration.update");
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $id,
-            'user_id'  => request()['user_id'],
+            'user_id' => request()['user_id'],
         ])->first();
         $reg->update([
             'is_attended' => request()['is_attended'] == 1 ? 0 : 1,
@@ -157,11 +156,11 @@ class RegistrationController extends MyBaseController
 
     public function anyConfirm($event_id, $user_id)
     {
-        //        $user_id = auth()->user()->id;
+//        $user_id = auth()->user()->id;
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $event_id,
-            'user_id'  => $user_id,
+            'user_id' => $user_id,
         ])->first();
 
         if ($reg) {
@@ -170,20 +169,19 @@ class RegistrationController extends MyBaseController
             ]);
         }
         flash('Thank you for confirming your attendance', 'success');
-
-        return redirect('/');
+        return redirect("/");
     }
 
     public function getSendemail($event_id)
     {
-        can('registration.email');
+        can("registration.email");
 
-        return view('registration/email')->with('event', EventModel::findOrfail($event_id));
+        return view("registration/email")->with('event', EventModel::findOrfail($event_id));
     }
 
     public function postSendemail($event_id)
     {
-        can('registration.email');
+        can("registration.email");
 
         // fetch users
         $reg = RegistrationModel::where('event_id', $event_id);
@@ -208,9 +206,9 @@ class RegistrationController extends MyBaseController
             $user = UserModel::find($instance->user_id);
             \Mail::send('email / custom', [
                 'confirm_attendance' => request()->confirm_attendance,
-                'event_id'           => $event_id,
-                'user'               => $user,
-                'body'               => request()->body,
+                'event_id' => $event_id,
+                'user' => $user,
+                'body' => request()->body,
             ], function ($m) use ($user) {
                 $m->from('noreply@NablusTechMeetups . com', 'Nablus Tech Meetups');
 
@@ -220,21 +218,20 @@ class RegistrationController extends MyBaseController
         }
 
         // done!
-        flash('emails in - queued for '.$count, 'success');
-
-        return redirect(' / registration / view / '.$event_id);
+        flash('emails in - queued for ' . $count, 'success');
+        return redirect(' / registration / view / ' . $event_id);
     }
 
     public function postSendemailcount($event_id)
     {
-        can('registration.email');
+        can("registration.email");
 
         // fetch users
         $reg = RegistrationModel::where('event_id', $event_id)
             ->where('is_confirmed', request()->is_confirmed)
             ->where('is_accepted', request()->is_accepted)
             ->where('is_attended', request()->is_attended)
-            ->get();
+            ->get();;
         dd($reg);
     }
 }

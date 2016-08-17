@@ -2,17 +2,21 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\ContactModel;
 use App\Repositories\Contracts\ContactRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
+use App\Repositories\Eloquent\BaseRepositoryEloquent;
+
+use App\Models\ContactModel;
+
 /**
- * Class EventRepositoryEloquent.
+ * Class EventRepositoryEloquent
+ * @package namespace App\Repositories\Elequent;
  */
 class ContactRepositoryEloquent extends BaseRepositoryEloquent implements ContactRepository
 {
     /**
-     * Specify Model class name.
+     * Specify Model class name
      *
      * @return string
      */
@@ -21,8 +25,9 @@ class ContactRepositoryEloquent extends BaseRepositoryEloquent implements Contac
         return ContactModel::class;
     }
 
+
     /**
-     * Boot up the repository, pushing criteria.
+     * Boot up the repository, pushing criteria
      */
     public function boot()
     {
@@ -32,13 +37,14 @@ class ContactRepositoryEloquent extends BaseRepositoryEloquent implements Contac
     public function insert($request)
     {
         $fill_array = [
-            'name'  => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
             'title' => $request->title,
-            'body'  => $request->body,
+            'body' => $request->body,
         ];
 
 
         return $this->create($fill_array);
     }
+
 }

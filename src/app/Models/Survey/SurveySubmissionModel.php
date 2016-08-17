@@ -26,10 +26,12 @@ class SurveySubmissionModel extends BaseModel
     protected $hidden = [
     ];
 
+
     public function user()
     {
         return $this->belongsTo(UserModel::class, 'user_id', 'id');
     }
+
 
     public function answers()
     {
@@ -38,5 +40,7 @@ class SurveySubmissionModel extends BaseModel
 
     public static function insert($request, $survey_id)
     {
+
     }
+
 }

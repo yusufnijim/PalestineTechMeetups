@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\User\CreateRequest;
 use App\Repositories\Contracts\User\UserRepository;
 
+
 /**
- * contains users functions, registration, login...etc.
+ * contains users functions, registration, login...etc
  */
 class UserController extends MyBaseController
 {
@@ -21,69 +23,65 @@ class UserController extends MyBaseController
 
     public function anyIndex()
     {
-        can('user.manage');
+        can("user.manage");
 
         $users = $this->user_repo->all();
-
         return view('user/index')
             ->with('users', $users);
     }
 
+
     public function getCreate()
     {
-        can('user.manage');
+        can("user.manage");
 
         $user = $this->user_repo->newInstance();
-
         return view('/user/create')
             ->with('user', $user);
     }
 
     public function postCreate(CreateRequest $request)
     {
-        can('user.manage');
+        can("user.manage");
 
         $this->user_repo->insert($request);
         flash('user created successfully', 'success');
-
-        return redirect('/user/');
+        return redirect("/user/");
     }
 
     public function getEdit($id)
     {
-        can('user.manage');
+        can("user.manage");
 
         $user = $this->user_repo->find($id);
-
         return view('/user/edit')
             ->with('user', $user);
     }
 
     public function putEdit($id, CreateRequest $request)
     {
-        can('user.manage') or auth()->user()->id != $id;
+        can("user.manage") OR auth()->user()->id != $id;
 
         $this->user_repo->edit($id, $request);
         flash('profile edited successfully', 'success');
-
         return redirect("/user/edit/$id");
     }
 
+
     public function getView($id)
     {
-        can('user.manage');
+        can("user.manage");
 
         $user = $this->user_repo->find($id);
-
         return view('/user/view')
             ->with('user', $user);
     }
+
 
     public function getProfile()
     {
         if (auth()->check()) {
             $user = auth()->user();
-
             return redirect("/user/view/$user->id");
         } else {
             abort(404);
@@ -101,29 +99,26 @@ class UserController extends MyBaseController
         $user = UserModel::where('email', \Input::get('email'))->first();
         // dd($user);
 
-        if ($user and \Hash::check(
+        if ($user AND \Hash::check(
                 \Input::get('password'), $user->password
             )
         ) {
             Auth::login($user);
-            flash('welcome in '.auth()->user()->username, 'success');
-
+            flash('welcome in ' . auth()->user()->username, 'success');
             return redirect('/user/');
         } else {
             flash('unable to login', 'danger');
-
             return redirect('/user/login');
         }
     }
 
     public function deleteDelete($id)
     {
-        can('user.manage');
+        can("user.manage");
 
         $user = $this->user_repo->delete($id);
         flash('user deleted successfully', 'success');
-
-        return redirect('/user');
+        return redirect("/user");
     }
 
     /**
@@ -141,13 +136,13 @@ class UserController extends MyBaseController
      *
      * @return Response
      */
+
     public function anyLogout()
     {
         if (auth()->check()) {
             auth()->logout();
             flash('User logged out successfully', 'success');
         }
-
         return redirect('/login');
     }
 }
@@ -155,9 +150,9 @@ class UserController extends MyBaseController
 
 trait UserSocalLogin
 {
+
     /**
-     * This function will redirect the user to facebook login.
-     *
+     * This function will redirect the user to facebook login
      * @return mixed
      */
     public function facebook()
@@ -166,7 +161,7 @@ trait UserSocalLogin
     }
 
     /**
-     * this function will handle social login with facebook using socialite package.
+     * this function will handle social login with facebook using socialite package
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -179,21 +174,19 @@ trait UserSocalLogin
             auth()->login($user);
 
             flash('welcome back', 'success');
-
             return redirect('/profile/');
         } else {
             $new_user = $this->user_repo->insert_fb($fb_user_object);
 
             if ($new_user) {
-                flash('Welcome '.$new_user->first_name.' Account registered', 'success');
+                flash('Welcome ' . $new_user->first_name . ' Account registered', 'success');
                 auth()->login($new_user);
-
                 return redirect('/profile/');
             } else {
                 flash('some error occurred', 'danger');
-
                 return redirect('/login');
             }
+
         }
     }
 }
