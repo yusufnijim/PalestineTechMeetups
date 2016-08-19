@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Event\CreateRequest as CreateRequest;
+
 use App\Repositories\Contracts\Event\EventRepository;
 use App\Repositories\Contracts\Event\VolunteerRepository;
-use App\Repositories\Contracts\Survey\SurveyRepository;
 use App\Repositories\Contracts\User\UserRepository;
+use App\Repositories\Contracts\Survey\SurveyRepository;
+
 
 class EventController extends MyBaseController
 {
@@ -25,7 +27,7 @@ class EventController extends MyBaseController
 
     public function anyIndex()
     {
-        can('event.view');
+        can("event.view");
 
         $events = $this->event_repo->all();
 
@@ -33,32 +35,32 @@ class EventController extends MyBaseController
             ->with('events', $events);
     }
 
+
     public function getCreate()
     {
-        can('event.create');
+        can("event.create");
 
         return view('event/create')
-            ->with('event', $this->event_repo->newInstance())
+            ->with("event", $this->event_repo->newInstance())
             ->with('surveys', $this->survey_repo->lists('name', 'id'));
     }
 
     public function postCreate(CreateRequest $request)
     {
-        can('event.create');
+        can("event.create");
 
         $event = $this->event_repo->insert($request);
 
         flash('event created successfully', 'success');
-
-        return redirect('event/edit/'.$event->id);
+        return redirect("event/edit/" . $event->id);
     }
+
 
     public function getEdit($id)
     {
-        can('event.edit');
+        can("event.edit");
 
         $event = $this->event_repo->find($id);
-
         return view('event/edit')
             ->with('event', $event)
             ->with('surveys', $this->survey_repo->lists('name', 'id'));
@@ -66,35 +68,33 @@ class EventController extends MyBaseController
 
     public function putEdit($id, CreateRequest $request)
     {
-        can('event.edit');
+        can("event.edit");
 
         $this->event_repo->edit($id, $request);
 
         flash('event updated successfully', 'success');
-
-        return redirect('event');
+        return redirect("event");
     }
 
     public function getSurveys()
     {
-        can('event.survey');
-
+        can("event.survey");
         return $this->survey_repo->lists('name', 'id');
     }
 
+
     public function deleteDelete($id)
     {
-        can('event.delete');
+        can("event.delete");
 
         $this->event_repo->delete($id);
         flash('event deleted successfully', 'success');
-
-        return redirect('event');
+        return redirect("event");
     }
 
     public function getVolunteers($id)
     {
-        can('event.volunteer');
+        can("event.volunteer");
 
         $event = $this->event_repo->find($id);
         $users_list = $this->user_repo->all()->lists('first_name', 'id');
@@ -107,16 +107,17 @@ class EventController extends MyBaseController
             ->with('volunteers_type_list', $volunteers_type_list)
             ->with('volunteers', $volunteers)
             ->with('users_list', $users_list);
+
     }
 
     public function postVolunteers($event_id)
     {
-        can('event.volunteer');
+        can("event.volunteer");
 
         $volunteer = $this->volunteer_repo->create([
             'event_id' => $event_id,
-            'user_id'  => request()->user_id,
-            'type_id'  => request()->type_id,
+            'user_id' => request()->user_id,
+            'type_id' => request()->type_id,
         ]);
         flash('volunteer added successfully', 'success');
 
@@ -125,11 +126,12 @@ class EventController extends MyBaseController
 
     public function deleteVolunteers($id)
     {
-        can('event.volunteer');
+        can("event.volunteer");
 
         $this->volunteer_repo->delete(request()->record_id);
         flash('volunteer deleted successfully', 'success');
-
         return redirect("/event/volunteers/$id");
     }
+
+
 }

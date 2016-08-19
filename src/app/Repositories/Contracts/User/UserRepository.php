@@ -5,7 +5,8 @@ namespace App\Repositories\Contracts\User;
 use App\Repositories\Contracts\BaseRepository;
 
 /**
- * Interface EventRepository.
+ * Interface EventRepository
+ * @package namespace App\Repositories\Contracts;
  */
 interface UserRepository extends BaseRepository
 {

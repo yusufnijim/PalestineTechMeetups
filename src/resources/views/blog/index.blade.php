@@ -6,6 +6,7 @@
     <table border="1" class="blog_index table table-striped table-bordered table-hover" id="dataTables-example">
         <thead>
         <tr>
+        
             <th>ID</th>
             <th>Title</th>
             <th>View</th>

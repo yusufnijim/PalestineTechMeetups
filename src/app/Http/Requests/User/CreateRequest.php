@@ -23,17 +23,18 @@ class CreateRequest extends Request
      */
     public function rules()
     {
+
         return [
-            'first_name'          => 'required|max:255',
-            'email'               => 'required|max:255|unique:user,email,'.getSegmentFromEnd($this).',id',
-            'last_name'           => 'max:255',
-            'arabic_full_name'    => 'required|max:255',
-            'location'            => 'max:255',
-            'phone_number'        => 'numeric|digits_between:8,12',
-            'profession'          => 'max:255',
+            'first_name' => 'required|max:255',
+            'email' => 'required|max:255|unique:user,email,' . getSegmentFromEnd($this) . ',id',
+            'last_name' => 'max:255',
+            'arabic_full_name' => 'required|max:255',
+            'location' => 'max:255',
+            'phone_number' => 'numeric|digits_between:8,12',
+            'profession' => 'max:255',
             'profession_location' => 'max:255',
-            'gender'              => '',
-            'bio'                 => 'max:1000',
+            'gender' => '',
+            'bio' => 'max:1000',
 //            'image' => 'image' // handle image validation during CRUD
         ];
     }

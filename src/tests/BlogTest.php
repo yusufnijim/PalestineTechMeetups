@@ -1,6 +1,7 @@
 <?php
 
 use \Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Models\User\UserModel;
 
 class BlogTest extends TestCase
 {
@@ -8,14 +9,14 @@ class BlogTest extends TestCase
 
     protected $blog;
 
-    public function __construct()
+    function __construct()
     {
         parent::setUp();
     }
 
     public function setUp()
     {
-        //        $this->blog = new \App\Repositories\Eloquent\BlogRepositoryEloquent();
+//        $this->blog = new \App\Repositories\Eloquent\BlogRepositoryEloquent();
         $this->blog = factory(App\Models\User\UserModel::class)->create();
     }
 
@@ -34,5 +35,7 @@ class BlogTest extends TestCase
 
         // When
         // Then
+
     }
+
 }

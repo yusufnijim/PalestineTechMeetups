@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 
 class PermissionModel extends BaseModel
 {
-    protected $table = 'permission';
+    protected $table = "permission";
 
     /**
      * A permission can be applied to roles.
@@ -15,7 +15,7 @@ class PermissionModel extends BaseModel
      */
     public function roles()
     {
-        //        return $this->belongsToMany(\App\Models\User\RoleModel::class, "permission_role", 'user_id', 'role_id');
+//        return $this->belongsToMany(\App\Models\User\RoleModel::class, "permission_role", 'user_id', 'role_id');
         return $this->belongsToMany(RoleModel::class, 'permission_role', 'permission_id', 'role_id');
     }
 }
