@@ -39,9 +39,10 @@
 
 <div id="wrapper">
 
-    
-	@include('partial/_backendprofile_sidebar')
     @include('partial/_backendmenu_sidebar')
+	@include('partial/_backendprofile_sidebar')
+    
+    
             <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">

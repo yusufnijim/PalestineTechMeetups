@@ -15,8 +15,11 @@
     <title>{{ isset($title) ? $title . " | " : ""  }} Nablus Tech Meetups</title>
 
     <!-- Bootstrap Core CSS -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+
+    <!-- I have changed the url to reach the css files -->
+
+      <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/styles.css">
 
     <!-- link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" -->
 

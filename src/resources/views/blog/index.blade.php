@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <table border="1" class="blog_index table table-striped table-bordered table-hover" id="dataTables-example">
         <thead>
         <tr>
