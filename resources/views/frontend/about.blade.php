@@ -1,40 +1,83 @@
 @extends ("layout/frontend")
 
 @section("content")
-<h2 class="text-center" >About US</h2>
-<div class="container">
-  <div class="row">
-    <section class="col-sm-6">
+<div class="container-fluid">
+<div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+            <div class="text-center margin-top-4x">
+            <h1>About Us</h1>
+    Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
-<p>This website is developed by Yamama :D :D with a little bit help from Amin
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
-Wisdom Pet Medicine strives to blend the best in traditional and alternative medicine in the diagnosis and treatment of companion animals including dogs, cats, birds, reptiles, rodents, and fish. We apply the wisdom garnered in the centuries old tradition of veterinary medicine, to find the safest treatments and cures.</p>
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank youHello, Laravel
+    you are really complicated and I hate you
+    Thank you
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank youHello, Laravel
+    you are really complicated and I hate you
+    Thank you
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank youHello, Laravel
+    you are really complicated and I hate you
+    Thank you
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
-    </section>
-     <section class="col-sm-6">
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
 
-
-<p>Wisdom Pet Medicine strives to blend the best in traditional and alternative medicine in the diagnosis and treatment of companion animals including dogs, cats, birds, reptiles, rodents, and fish. We apply the wisdom garnered in the centuries old tradition of veterinary medicine, to find the safest treatments and cures.</p>
-
-
-
-    </section>
-  </div><!-- row -->
-</div><!-- content container -->
-<!-- end of About -->
-
-</div><!-- row -->
-</div><!-- content container -->
-<!-- end of contact -->
-@include('partial/_footer')
+     Hello, Laravel
+    you are really complicated and I hate you
+    Thank you
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="dividor"></div>
 @endsection
-
-
-
-

@@ -1,205 +1,382 @@
 @extends ("layout/frontend")
 
 @section("content")
-	{{ trans('frontend/index.Welcome') }}
 
-<!-- youtube -->
+<!-- div id="wrapper" -->
+      <!-- //Header and nav -->
+      <!-- slider and carousel -->
+      @include('partial/_index_slider')
+      <!-- //slider and carousel -->
+<div class="dividor"></div>
+      <!-- About -->
+      <section class="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <h2 class="title-uppercase text-center margin-bottom-4x">About</h2>
+              <div class="content text-justify">
+         
+              {{$aboutus}}
+               
+              </div>
+              <div class="text-center margin-top-4x">
+                <a class="button large-btn green-btn radiused" href="/about">Read More About Us</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- //About -->
+      <div class="dividor"></div>
+      <!-- Programs -->
+      <section class="programs backgrounded-section">
+        <div class="container-fluid">
+          <h2 class="title-uppercase text-center margin-bottom-6x">Programs</h2>
+          <div class="row text-center">
+            <div class="col-sm-4">
+              <div class="f45 purple">
+                <i class="fa fa-users" aria-hidden="true"></i>
+              </div>
+              <div class="subtitle-uppercase ">
+                Monthly Meetups
+              </div>
+              <div class="content text-justify padding-4x">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="#">more</a>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="f45 purple">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+              </div>
+              <div class="subtitle-uppercase ">
+                Hands-on
+              </div>
+              <div class="content text-justify padding-4x">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/handson">more</a>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="f45 purple">
+                <i class="fa fa-tachometer" aria-hidden="true"></i>
+              </div>
+              <div class="subtitle-uppercase ">
+                More Awesomeness
+              </div>
+              <div class="content text-justify padding-4x">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="#">more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+        <!-- //Programs -->
+        <div class="dividor"></div>
+      <!-- Events -->
+      <section class="events">
+        <div class="container">
+          <h2 class="title-uppercase text-center margin-bottom-6x">Events</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- block -->
+               @foreach($events as $pos=>$event)
+   
+      @if($event->is_registration_open)
+      <?php
+      $date=date("M, Y,d", strtotime('$event->date;'));
+$fulldate=explode(",",$date);
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-   <!-- div class="row">
-  <div class="col-sm-10 col-sm-offset-1" -->
-<div class="embed-responsive embed-responsive-16by9">
-    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/3zGxmcqXRCk"></iframe>
+ ?>
+              <div class="block block--vert">
+                <a href="/registration/signup/{{ $event->id }}">
+                  <div class="block--img_container image-bg">
+                    <img src="{{ $event->featured_image }}" alt="" />
+                  </div>
+                  <div class="block--calendar_date">
+                    <div class="block--calendar_date_number">{{$fulldate[2]}}</div>
+                    <div class="">
+                      {{$fulldate[0]}}
+                    </div>
+                  </div>
+                  <div class="block--open">
+                    Open
+                  </div>
+                  <div class="block--more">
+                    MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                  </div>
+                  <div class="padding-2x block--content-wrapper">
+                    <div class="block--title subtitle">
+                   {{ $event->title }}
+                    </div>
+                    <div class="block--content content">
+{{ strip_tags(mb_substr($event->body,0,300,"UTF-8"))}}
+                    </div>
+                  </div>
+                </a>
+              </div>
+              @endif
+              @endforeach
+              <!-- //block -->
+            </div>
+
+            <div class="col-sm-6">
+           
+      @foreach($events as $pos=>$event)
+      <!-- block -->
+       
+      @if(!($event->is_registration_open))
+      <?php
+      $date=date("M, Y,d", strtotime('$event->date;'));
+$fulldate=explode(",",$date);?>
 
 
-    <!-- /div -->
-    </div>
+              <div class="block block--hori">
+                <a href="/registration/signup/{{ $event->id }}">
+                  <div class="block--img_container image-bg">
+                    <img src="{{ $event->featured_image }}" alt="" />
+                  </div>
+                  <div class="block--calendar_date">
 
-</div>
-    </div>
+                    <div class="block--calendar_date_number">{{$fulldate[2]}}</div>
+                    <div class="">
+                      {{$fulldate[0]}}
+                    </div>
+                  </div>
+                  <div class="block--closed">
+                    Closed
+                  </div>
+                  <div class="block--more">
+                    MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                  </div>
+                  <div class="block--content-wrapper padding-2x">
+                    <div class="block--title subtitle">
+                    {{ $event->title }}
+                    </div>
+                    <div class="block--content content">
+                    {{ strip_tags(mb_substr($event->body,0,300,"UTF-8"))}}
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <!-- //block -->
+          
+    @endif
+    @if($pos!=2)
+          <div class="dividor"></div>
+@endif
+             
+          @endforeach
+          </div>
+          </div>
+          <div class="dividor"></div>
+          <div class="more-btn-cont">
+            <a class="green-btn button radiused" href="/timeline">
+              More Events
+              &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- //Events -->
+      <div class="dividor"></div>
+      <!-- news -->
+      <section class="news backgrounded-section">
+        <div class="container">
+          <h2 class="title-uppercase text-center margin-bottom-6x">News</h2>
+          <div class="row">
+         
+             @foreach($blogs as $pos=>$blog)
 
-  </div>
-</div>
+<div class="col-sm-6 margin-bottom-6x">
+              <!-- block -->
+              <div class="block block--hori">
+                <a href="/blog/view/{{ $blog->id }}">
+                  <div class="block--img_container image-bg">
+                    <img src=" {{$blog->featured_image}}" alt="" />
+                  </div>
+                  <div class="block--more">
+                    MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                  </div>
+                  <div class="block--content-wrapper padding-2x">
+                    <div class="block--title subtitle">
+                    {{$blog->title}}
+                    </div>
+                    <div class="block--content content">
+                  
+{{ strip_tags(mb_substr($blog->body,0,300,"UTF-8"))}}
 
-<!-- end of youtube -->
-   <div class="container">
- <h2 class="text-center" >Programs (ana jaybeh al events )</h2>
-	<div class="row">
-	@foreach($events as $event)
-		
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <!-- //block -->
+            </div>
 
-<section class="col-sm-4">
-  <img src="{{ $event->featured_image }}"  class="img-responsive center-block"
-	alt="Dr Winthrop Photo">
-  <a href="/registration/signup/{{$event->id}}"><h3 class="text-center" >{{ $event->title }}</h3> </a>
+             @endforeach
+           
+          </div>
+          <div class="more-btn-cont margin-bottom-4x">
+            <a class="green-btn button radiused" href="/news">
+              More News &nbsp;
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- //News -->
+       <div class="dividor"></div>
+      <!-- Thank you -->
+      <section class="thanks">
+        <div class="container">
+          <h2 class="title-uppercase text-center margin-bottom-3x">Well Done!</h2>
+          <h2 class="subtitle-uppercase text-center margin-bottom-6x">Thanks to our awesome volunteers for the amazing work</h2>
+          <div class="row">
+            <div class="col-sm-12">
+              <ul class="team">
+                <li>
+                  <div class="team--member">
+                    <div class="team--member_img image-bg">
+                      <img src="assets/frontend/images/team1.jpg" alt="" />
+                    </div>
+                    <div class="team--member_name">
+                      Jafar Hajeer
+                    </div>
+                    <div class="team--member_social">
+                      <a class="purple" href="#">
+                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="team--member">
+                    <div class="team--member_img image-bg">
+                      <img src="assets/frontend/images/team2.jpg" alt="" />
+                    </div>
+                    <div class="team--member_name">
+                      Salahuddin Assi
+                    </div>
+                    <div class="team--member_social">
+                      <a class="purple" href="#">
+                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="team--member">
+                    <div class="team--member_img image-bg">
+                      <img src="assets/frontend/images/team3.jpg" alt="" />
+                    </div>
+                    <div class="team--member_name">
+                      Adel Jodallah
+                    </div>
+                    <div class="team--member_social">
+                      <a class="purple" href="#">
+                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="team--member">
+                    <div class="team--member_img image-bg">
+                      <img src="assets/frontend/images/team1.jpg" alt="" />
+                    </div>
+                    <div class="team--member_name">
+                      Jafar Hajeer
+                    </div>
+                    <div class="team--member_social">
+                      <a class="purple" href="#">
+                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="team--member">
+                    <div class="team--member_img image-bg">
+                      <img src="assets/frontend/images/team2.jpg" alt="" />
+                    </div>
+                    <div class="team--member_name">
+                      Salah Assi
+                    </div>
+                    <div class="team--member_social">
+                      <a class="purple" href="#">
+                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="purple" href="#">
+                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- //Thank you -->
+<div class="dividor"></div>
+      
+ 
+@endsection
 
-  <!-- monthly meetups , hands-on , others -->
-</section>
 
-	@endforeach
-</div></div>
-   <div class="container">
- <h2 class="text-center" >Events</h2>
-	<div class="row">
-	@foreach($events as $event)
-		
+<!--
+@section("content")
+    {{ trans('frontend/index.Welcome') }}
 
-<section class="col-sm-4">
-  <img src="{{ $event->featured_image }}"  class="img-responsive center-block"
-	alt="Dr Winthrop Photo">
-  <a href="/registration/signup/{{$event->id}}"><h3 class="text-center" >{{ $event->title }}</h3> </a>
+    <h2>Events</h2>
+    <hr/>
+    @foreach($events as $event)
+        <h3>{{ $event->title }}</h3>
+        <img src="{{ $event->featured_image }}" class='event-image' />
+        {!! $event->summary  !!}<br/>
+        <a href="/registration/signup/{{$event->id}}">Read more...</a>
+        <br/>
+        <br/>
+    @endforeach
+    <h2>Blogs</h2>
+    <hr/>
 
-  <!-- monthly meetups , hands-on , others -->
-</section>
+    @foreach($blogs as $blog)
+        <h3>{{ $blog->title }}</h3>
+        <img src="{{ $blog->featured_image }}" class='blog-image' />
 
-	@endforeach
-  </div></div>
+        {!! $blog->summary  !!}<br/>
 
-  
-<!-- home about -->
-<h2 class="text-center" >About US</h2>
-<div class="container">
-  <div class="row">
-	<section class="col-sm-6">
-
-
-
-<p>Wisdom Pet Medicine strives to blend the best in traditional and alternative medicine in the diagnosis and treatment of companion animals including dogs, cats, birds, reptiles, rodents, and fish. We apply the wisdom garnered in the centuries old tradition of veterinary medicine, to find the safest treatments and cures.</p>
-
-
-
-
-
-	</section>
-	 <section class="col-sm-6">
-
-
-<p>Wisdom Pet Medicine strives to blend the best in traditional and alternative medicine in the diagnosis and treatment of companion animals including dogs, cats, birds, reptiles, rodents, and fish. We apply the wisdom garnered in the centuries old tradition of veterinary medicine, to find the safest treatments and cures.</p>
-
-
-
-	</section>
-  </div><!-- row -->
-</div><!-- content container -->
-<!-- end of About -->
-
-</div><!-- row -->
-</div><!-- content container -->
-
-
-<!-- end of home about -->
-<!-- team slider -->
-
-
-<h2 class="text-center" >Team</h2>
-<div class="container">
-  <div class="row">
-<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden; visibility: hidden;">
-		<!-- Loading Screen -->
-		<div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-			<div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-			<div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-		</div>
-		<div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
-			<div style="display: none;">
-				<img data-u="image" src="img/005.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/006.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/011.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/013.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/014.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/019.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/020.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/021.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/022.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/024.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/025.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/027.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/029.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/030.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/031.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/030.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/034.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/038.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/039.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/043.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/044.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/047.jpg" />
-			</div>
-			<div style="display: none;">
-				<img data-u="image" src="img/050.jpg" />
-			</div>
-			<a data-u="add" href="http://www.jssor.com" style="display:none">Jssor Slider</a>
-		
-		</div>
-		<!-- Bullet Navigator -->
-		<div data-u="navigator" class="jssorb03" style="bottom:10px;right:10px;">
-			<!-- bullet navigator item prototype -->
-			<div data-u="prototype" style="width:21px;height:21px;">
-				<div data-u="numbertemplate"></div>
-			</div>
-		</div>
-		<!-- Arrow Navigator -->
-		<span data-u="arrowleft" class="jssora03l" style="top:0px;left:8px;width:55px;height:55px;" data-autocenter="2"></span>
-		<span data-u="arrowright" class="jssora03r" style="top:0px;right:8px;width:55px;height:55px;" data-autocenter="2"></span>
-	</div>
-	<script>
-		jssor_1_slider_init();
-	</script>
-
-	<!-- #endregion Jssor Slider End -->
-  
-  
-  </div>
-  
-  </div>
-
-  <!-- end of team slider -->
-<!-- end of team slider -->
-@include('partial/_footer')
+        <a href="/blog/view/{{$blog->id}}">Read more...</a>
+        <br/>
+        <br/>
+    @endforeach
+    <hr/>
 
 
 @endsection

@@ -20,6 +20,8 @@ Route::controller('event', 'EventController');
 Route::controller('blog', 'BlogController');
 
 Route::controller('/registration', 'RegistrationController');
+
+
 Route::controller('/backend', 'BackendController');
 
 
@@ -40,3 +42,5 @@ Route::get('facebook_callback', 'UserController@facebook_callback');
 
 // front end routes
 Route::controller('/', 'FrontController');
+
+//Route::controller('/about','FrontController@getAbout');

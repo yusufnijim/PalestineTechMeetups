@@ -1,23 +1,21 @@
 <?php
 
 namespace App\Repositories\Eloquent;
+
+use App\Models\BlogModel;
+use App\Repositories\Contracts\BlogRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
-use App\Repositories\Eloquent\BaseRepositoryEloquent;
-use App\Repositories\Contracts\BlogRepository;
-use App\Models\BlogModel;
-
 /**
- * Class EventRepositoryEloquent
- * @package namespace App\Repositories\Elequent;
+ * Class EventRepositoryEloquent.
  */
 class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepository
 {
-    static $image_upload_directory = '/image/blog/';
-    static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
+    public static $image_upload_directory = '/image/blog/';
+    public static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -26,9 +24,8 @@ class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepos
         return BlogModel::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
@@ -40,8 +37,8 @@ class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepos
         $fill_array = [
             'title' => $request->title,
 
-            'permalink' => $request->permalink,
-            'body' => $request->body,
+            'permalink'    => $request->permalink,
+            'body'         => $request->body,
             'is_published' => $request->is_published,
         ];
 
@@ -57,14 +54,15 @@ class BlogRepositoryEloquent extends BaseRepositoryEloquent implements BlogRepos
         $fill_array = [
             'title' => $request->title,
 
-            'permalink' => $request->permalink,
-            'body' => $request->body,
+            'permalink'    => $request->permalink,
+            'body'         => $request->body,
             'is_published' => $request->is_published,
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {
             $fill_array['featured_image'] = $uploaded_file;
         }
+
         return $this->update($fill_array, $id);
     }
 }

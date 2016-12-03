@@ -9,13 +9,11 @@ use App\Repositories\Contracts\BlogRepository;
 use App\Repositories\Contracts\ContactRepository;
 use App\Repositories\Contracts\Event\EventRepository;
 
-
 class FrontController extends MyBaseController
 {
     protected $blog_repo;
     protected $event_repo;
     protected $contact_repo;
-
 
     public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo)
     {
@@ -26,47 +24,84 @@ class FrontController extends MyBaseController
 
     public function anyIndex()
     {
-        $blogs = $this->blog_repo->published()->latest()->paginate(3);
+        $blogs = $this->blog_repo->published()->latest()->paginate(4);
         $events = $this->event_repo->published()->latest()->paginate(3);
-
-        return view("frontend.index")
+            $aboutus="  Hello, Laravel
+    you are really complicated and I hate you
+    Thank you Hello, Laravel
+    you are really complicated and I hate you
+    Thank youHello, Laravel
+    you are really complicated and I hate you
+    Thank youHello, Laravel
+    you are really complicated and I hate you
+    Thank youHello, Laravel
+    you are really complicated and I hate you
+    Thank you Hello, Laravel
+    you are really complicated and I hate you
+    Thank you Hello, Laravel
+    you are really complicated and I hate you
+    Thank you Hello, Laravel
+    you are really complicated and I hate you
+    Thank you";
+        return view('frontend.index')
             ->with('events', $events)
-            ->with('blogs', $blogs);
+            ->with('blogs', $blogs)
+            ->with('aboutus',$aboutus);
     }
 
     public function getAbout()
     {
-        return view("frontend.about");
+        return view('frontend.about');
     }
-
 
     public function getContact()
     {
-        return view("frontend.contact");
+        return view('frontend.contact');
     }
+//by yamama
+ public function getTimeline()
+    {
+         $events = $this->event_repo->published()->latest()->paginate(7);
+        return view('frontend.timeline')
 
+        ->with('events', $events);
+    }
+     public function getNews()
+    {
+         $blogs = $this->blog_repo->published()->latest()->paginate(12);
+        return view('frontend.news')
+
+        ->with('blogs', $blogs);
+    }
+    
+    //end yamama
     public function postContact()
     {
         $this->contact_repo->insert(request());
         flash('thank you for contacting us', 'success');
+
         return redirect('/contact');
     }
-
 
     public function anySearch()
     {
         $query = request()->q;
         $results = [];
-        return view("frontend.search")
+
+        return view('frontend.search')
             ->with('results', $results)
             ->with('query', $query);
     }
-
+public function handson()
+    {
+        return view('frontend/handson');
+    }
     /**
      * Change language.
      *
-     * @param  App\Jobs\ChangeLocaleCommand $changeLocale
-     * @param  String $lang
+     * @param App\Jobs\ChangeLocaleCommand $changeLocale
+     * @param string                       $lang
+     *
      * @return Response
      */
     public function language($lang,
@@ -78,5 +113,4 @@ class FrontController extends MyBaseController
 
         return redirect()->back();
     }
-
 }

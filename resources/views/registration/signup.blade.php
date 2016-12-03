@@ -1,227 +1,301 @@
-@extends('layout.frontend')
+ @extends('layout.articlepage')
+ @section('title')
+ <title>  {{ $event->title }}</title>
+ @stop
+ @section('content')
+ <!-- Article -->
+      <?php
+      $date=date("M, Y,d", strtotime('$event->date;'));
+$fulldate=explode(",",$date);?>
 
-@section('content')
-      <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-
-                <!-- Blog Post -->
-
-                <!-- Title -->
-                <h1>{{ $event->title }}</h1>
-
-                <!-- Author -->
-                <p class="lead">
-                    by <a href="#">Start Bootstrap</a>
-                </p>
-
-                <hr>
-
-                <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM
-                <br>{!!  $event->eventtype !!}
-                
-                </p>
-
-                <hr>
-
-                <!-- Preview Image -->
-                <img class="img-responsive" src="{{ $event->featured_image }}" alt="">
-                 {!!  $event->featuredimagetag !!}
-
-                <hr>
-
-                <!-- Post Content -->
-                <p class="lead">{!!  $event->body !!}
-                
-                
-                </p>
-<div class="container">
-                <hr>
-
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                @if(!auth()->check())
-            <h4>Login to sign up now !</h4>
-        @elseif(! $event->is_registration_open)
-            <h4>Sorry registration for this event has been closed</h4>
-        @elseif($status)
-            <h4> You signed up for this event </h4>
-            If you wish to cancel your registration
-            {!! Form::open() !!}
-            {!! Form::hidden('cancel', 1) !!}
-            {!! Form::submit('press here', ['class' => 'btn btn-info']) !!}
-            {!! Form::close() !!}
-        @else
-
-            @if(!$event->require_addional_fields)
-                {!! Form::open() !!}
-
-                {!! Form::submit('register now') !!}
-                {!! Form::close() !!}
-            @else
-                {!! Form::open() !!}
-
-                {!! Form::submit('Register now', ['class' => 'btn btn-success']) !!}
-                {!! Form::close() !!}
-
-            @endif
-        @endif
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+      <article class="article">
+        <section class="article--head image-bg">
+          <img src="{{ $event->featured_image }}" alt="" />
+          <div class="container">
+            <div class="article--head_calendar_container">
+              <div class="article--head_calendar">
+                <div class="article--head_calendar_number">{{$fulldate[2]}}</div>
+                <div class="">
+                 {{$fulldate[0]}}
                 </div>
+              </div>
+              <div class="article--head_open">
+                Open
+              </div>
+              <!-- <div class="article--head_closed">
+                closed
+              </div> -->
 
-                <hr>
-
-                <!-- Posted Comments -->
-
-               </div> <!-- end of comment container -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+              <div class="article--social_links_container">
+                <ul class="article--social_links">
+                  <li>
+                    <a class="article--social_links-facebook" href="#">
+                      <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <!-- Nested Comment -->
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                        <!-- End Nested Comment -->
-                    </div>
-                </div>
-
+                  </li>
+                  <li>
+                    <a class="article--social_links-twitter" href="#">
+                      <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="article--social_links-linkedin" href="#">
+                      <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+          <div class="article--head_title">
+            <div class="container">
+              <div class="with-calendar">
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
-
+              </div>
+              <h1>
+               {{strip_tags($event->title)}} 
+              </h1>
             </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
+          </div>
+        </section>
+        <div class="dividor"></div>
+        <!-- article content -->
+        <section class="article--content">
+          <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+              <!-- main col -->
+              <div class="col-sm-8">
+                <!-- description -->
+                <div class="description">
+                  <h3 class="subtitle-uppercase">Description</h3>
+                  <p>
+                   
+{{ strip_tags($event->body,"UTF-8")}}
+                  </p>
+                  <p>
+                    <img src="{{url('/assets/frontend/images/speaker.png')}}" alt="" />
+                  </p>
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                  </p>
                 </div>
+                <!-- //description -->
+                <!-- volunteers -->
+                <div class="volunteers">
+                  <h3 class="subtitle-uppercase margin-bottom-3x">Volunteers</h3>
+                  <ul class="team small-team">
+                    <li>
+                      <div class="team--member">
+                        <div class="team--member_img image-bg">
+                          <img src="../../assets/frontend/images/team1.jpg" alt="" />
+                        </div>
+                        <div class="team--member_name">
+                          Jafar Hajeer
+                        </div>
+                        <div class="team--member_social">
+                          <a class="purple" href="#">
+                            <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="team--member">
+                        <div class="team--member_img image-bg">
+                          <img src="../../assets/frontend/images/team2.jpg" alt="" />
+                        </div>
+                        <div class="team--member_name">
+                          Salahuddin Assi
+                        </div>
+                        <div class="team--member_social">
+                          <a class="purple" href="#">
+                            <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="team--member">
+                        <div class="team--member_img image-bg">
+                          <img src="../../assets/frontend/images/team3.jpg" alt="" />
+                        </div>
+                        <div class="team--member_name">
+                          Adel Jodallah
+                        </div>
+                        <div class="team--member_social">
+                          <a class="purple" href="#">
+                            <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="team--member">
+                        <div class="team--member_img image-bg">
+                          <img src="../../assets/frontend/images/team2.jpg" alt="" />
+                        </div>
+                        <div class="team--member_name">
+                          Salah Assi
+                        </div>
+                        <div class="team--member_social">
+                          <a class="purple" href="#">
+                            <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                          <a class="purple" href="#">
+                            <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- //volunteers -->
+                <!-- images -->
+                <section class="images">
+                  <h3 class="subtitle-uppercase margin-bottom-3x">Images</h3>
+
+                  <ul class="images-list">
+                    <li class="images-list--item">
+                      <a onClick="return false;" class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news1.jpg">
+                        <img src="../../assets/frontend/images/news1.jpg" alt="" />
+                      </a>
+                    </li>
+                    <li class="images-list--item">
+                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news2.jpg">
+                        <img src="../../assets/frontend/images/news2.jpg" alt="" />
+                      </a>
+                    </li>
+                    <li class="images-list--item">
+                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news3.jpg">
+                        <img src="../../assets/frontend/images/news3.jpg" alt="" />
+                      </a>
+                    </li>
+                    <li class="images-list--item">
+                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news4.jpg">
+                        <img src="../../assets/frontend/images/news4.jpg" alt="" />
+                      </a>
+                    </li>
+                    <li class="images-list--item">
+                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news5.jpg">
+                        <img src="../../assets/frontend/images/news5.jpg" alt="" />
+                      </a>
+                    </li>
+                    <li class="images-list--item">
+                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news6.jpg">
+                        <img src="../../assets/frontend/images/news6.jpg" alt="" />
+                      </a>
+                    </li>
+                  </ul>
+                </section>
+                <!-- //images -->
+              </div>
+              <!-- //main col -->
+              <!-- side col -->
+              <div class="col-sm-4">
+                <div class="dividor"></div>
+                <div class="margin-bottom-3x">
+                  <a href="#" class="button green-btn green-btn radiused full-width large-btn text-center">Attend this event</a>
+                </div>
+                <div class="content margin-bottom-2x">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;
+                    Sun. 22/10/2016, 10:00 AM - 03:00 PM
+                </div>
+                <div class="content">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
+                    Engineers Syndicate / Al-mraij Str. / Nablus
+                </div>
+                <div class="dividor"></div>
+                <!-- more articles -->
+                <div class="more_articles">
+                  <!-- block -->
+                  <div class="subtitle-uppercase margin-bottom-2x">More Events</div>
+                  <div class="block block--vert margin-bottom-6x">
+                    <a href="#">
+                      <div class="block--img_container image-bg">
+                        <img src="../../assets/frontend/images/event1.jpg" alt="" />
+                      </div>
+                      <div class="block--calendar_date">
+                        <div class="block--calendar_date_number">16</div>
+                        <div class="">
+                          NOV
+                        </div>
+                      </div>
+                      <div class="block--open">
+                        Open
+                      </div>
+                      <div class="block--more">
+                        MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                      </div>
+                      <div class="padding-2x block--content-wrapper">
+                        <div class="block--title subtitle">
+                          Contrary to popular belief, Lorem Ipsum is
+                        </div>
+                        <div class="block--content content">
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's...
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="block block--vert margin-bottom-6x">
+                    <a href="#">
+                      <div class="block--img_container image-bg">
+                        <img src="../../assets/frontend/images/event2.png" alt="" />
+                      </div>
+                      <div class="block--calendar_date">
+                        <div class="block--calendar_date_number">16</div>
+                        <div class="">
+                          NOV
+                        </div>
+                      </div>
+                      <div class="block--closed">
+                        Closed
+                      </div>
+                      <div class="block--more">
+                        MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                      </div>
+                      <div class="padding-2x block--content-wrapper">
+                        <div class="block--title subtitle">
+                          Contrary to popular belief, Lorem Ipsum is
+                        </div>
+                        <div class="block--content content">
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's...
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <!-- //block -->
+                </div>
+                <!-- //more articles -->
+              </div>
+              <!-- //side col -->
             </div>
-            <!-- /.row -->
-        </footer>
+          </div>
+        </section>
+        <!-- //article content -->
+      </article>
+      <!-- //Article -->
+      <div class="dividor"></div>
+      <!-- Footer -->
+     @stop
 
-    </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-   <div id="disqus_thread"></div>
-    <script>
-        /**
-         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-         */
-//        /*
-         var disqus_config = function () {
-         this.page.url = '{{ url('/') }}' ;  // Replace PAGE_URL with your page's canonical URL variable
-         this.page.identifier = 1; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-         };
-//         */
-        (function() {  // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-
-            s.src = '//nablustm.disqus.com/embed.js';
-
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-    {{--<script id="dsq-count-scr" src="//nablustm.disqus.com/count.js" async></script>--}}
-    {{--<a href="http://example.com/bar.html#disqus_thread">Link</a>--}}
-
-
-
-@stop
-   

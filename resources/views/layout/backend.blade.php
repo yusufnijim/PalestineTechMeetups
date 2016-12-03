@@ -39,17 +39,15 @@
 
 <div id="wrapper">
 
-    @include('partial/_backendmenu_sidebar')
-	@include('partial/_backendprofile_sidebar')
-    
-    
+    @include('partial/_profile_sidebar') 
+    @include('partial/_menu_sidebar')
             <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">{{ @$title }}</h1>
-
+yamama
 
                     @include('partial/_error')
                     @include('partial/_flash')

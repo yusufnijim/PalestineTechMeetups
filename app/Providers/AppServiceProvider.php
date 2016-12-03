@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\Validation;
 use Illuminate\Support\ServiceProvider;
 use Validator;
-use App\Services\Validation;
-
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +27,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }

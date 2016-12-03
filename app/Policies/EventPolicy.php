@@ -23,5 +23,4 @@ class EventPolicy
     {
         return true;
     }
-
 }

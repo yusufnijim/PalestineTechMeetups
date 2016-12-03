@@ -2,25 +2,21 @@
 
 namespace App\Repositories\Eloquent\Event;
 
-use Prettus\Repository\Criteria\RequestCriteria;
-
-
+use App\Models\Event\EventModel;
 use App\Repositories\Contracts\Event\EventRepository;
 use App\Repositories\Eloquent\BaseRepositoryEloquent;
-use App\Models\Event\EventModel;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
- * Class EventRepositoryEloquent
- * @package namespace App\Repositories\Elequent;
+ * Class EventRepositoryEloquent.
  */
 class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRepository
 {
-    static $image_upload_directory = '/image/event/';
-    static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
-
+    public static $image_upload_directory = '/image/event/';
+    public static $image_allowed_extension = ['jpeg', 'jpg', 'png', 'bmp', 'gif', 'svg'];
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -29,9 +25,8 @@ class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRep
         return EventModel::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
@@ -41,17 +36,17 @@ class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRep
     public function insert($request)
     {
         $fill_array = [
-            'title' => $request->title,
-            'body' => $request->body,
-            'permalink' => $request->permalink,
-            'is_registration_open' => $request->is_registration_open,
-            'max_registrars_count' => $request->max_registrars_count,
-            'location' => $request->location,
-            'date' => $request->date,
+            'title'                     => $request->title,
+            'body'                      => $request->body,
+            'permalink'                 => $request->permalink,
+            'is_registration_open'      => $request->is_registration_open,
+            'max_registrars_count'      => $request->max_registrars_count,
+            'location'                  => $request->location,
+            'date'                      => $request->date,
             'require_additional_fields' => $request->max_registrars_count,
-            'is_published' => $request->is_published,
-            'survey_id' => $request->survey_id,
-            'type' => $request->type
+            'is_published'              => $request->is_published,
+            'survey_id'                 => $request->survey_id,
+            'type'                      => $request->type,
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {
@@ -64,17 +59,17 @@ class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRep
     public function edit($id, $request)
     {
         $fill_array = [
-            'title' => $request->title,
-            'body' => $request->body,
-            'permalink' => $request->permalink,
-            'is_registration_open' => $request->is_registration_open,
-            'max_registrars_count' => $request->max_registrars_count,
-            'location' => $request->location,
-            'date' => $request->date,
+            'title'                     => $request->title,
+            'body'                      => $request->body,
+            'permalink'                 => $request->permalink,
+            'is_registration_open'      => $request->is_registration_open,
+            'max_registrars_count'      => $request->max_registrars_count,
+            'location'                  => $request->location,
+            'date'                      => $request->date,
             'require_additional_fields' => $request->max_registrars_count,
-            'is_published' => $request->is_published,
-            'survey_id' => $request->survey_id,
-            'type' => $request->type
+            'is_published'              => $request->is_published,
+            'survey_id'                 => $request->survey_id,
+            'type'                      => $request->type,
         ];
 
         if ($uploaded_file = file_upload('featured_image', static::$image_upload_directory, static::$image_allowed_extension)) {
@@ -83,5 +78,4 @@ class EventRepositoryEloquent extends BaseRepositoryEloquent implements EventRep
 
         return $this->update($fill_array, $id);
     }
-
 }

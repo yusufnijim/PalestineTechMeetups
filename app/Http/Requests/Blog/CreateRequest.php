@@ -24,9 +24,9 @@ class CreateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'permalink' => 'required|unique:event,permalink,' . getSegmentFromEnd($this) . ',id',
-            'body' => 'required',
+            'title'        => 'required|max:255',
+            'permalink'    => 'required|unique:event,permalink,'.getSegmentFromEnd($this).',id',
+            'body'         => 'required',
             'is_published' => 'bool',
         ];
     }

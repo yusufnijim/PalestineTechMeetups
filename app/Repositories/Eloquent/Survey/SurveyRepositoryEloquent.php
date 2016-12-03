@@ -2,20 +2,18 @@
 
 namespace App\Repositories\Eloquent\Survey;
 
+use App\Models\Survey\SurveyModel;
+use App\Repositories\Contracts\Survey\SurveyRepository;
+use App\Repositories\Eloquent\BaseRepositoryEloquent;
 use Prettus\Repository\Criteria\RequestCriteria;
 
-use App\Repositories\Eloquent\BaseRepositoryEloquent;
-use App\Repositories\Contracts\Survey\SurveyRepository;
-use App\Models\Survey\SurveyModel;
-
 /**
- * Class EventRepositoryEloquent
- * @package namespace App\Repositories\Elequent;
+ * Class EventRepositoryEloquent.
  */
 class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -24,9 +22,8 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
         return SurveyModel::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {
@@ -36,7 +33,7 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
     public function insert($request)
     {
         $fill_array = [
-            'name' => $request['name'],
+            'name'        => $request['name'],
             'description' => $request['description2'],
         ];
 
@@ -46,11 +43,10 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
     public function edit($request, $id)
     {
         $fill_array = [
-            'name' => $request['name'],
+            'name'        => $request['name'],
             'description' => $request['description'],
         ];
 
         return $this->update($fill_array, $id);
     }
-
 }

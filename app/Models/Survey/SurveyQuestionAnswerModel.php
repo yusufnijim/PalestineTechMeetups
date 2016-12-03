@@ -3,7 +3,6 @@
 namespace App\Models\Survey;
 
 use App\Models\BaseModel;
-use App\Models\User\UserModel;
 
 class SurveyQuestionAnswerModel extends BaseModel
 {
@@ -35,11 +34,11 @@ class SurveyQuestionAnswerModel extends BaseModel
     {
         $user_id = auth()->check() ? auth()->user()->id : 0;
         foreach ($request['answer'] as $question_id => $answer) {
-            $instance = Static::create([
-                'survey_id' => $survey_id,
-                'question_id' => $question_id,
-                'answer' => $answer,
-                'user_id' => $user_id,
+            $instance = static::create([
+                'survey_id'     => $survey_id,
+                'question_id'   => $question_id,
+                'answer'        => $answer,
+                'user_id'       => $user_id,
                 'submission_id' => $submission_id,
             ]);
         }
@@ -55,6 +54,4 @@ class SurveyQuestionAnswerModel extends BaseModel
 //            'is_published' => $request->is_published,
 //        ]);
 //    }
-
-
 }

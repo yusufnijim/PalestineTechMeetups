@@ -1,103 +1,84 @@
-<h2 class="text-center"> Contact US </h2>
-		
-<footer>
-    <div class="footer" id="footer">
-        <div class="container">
+   <section class="footer">
+        <div class="top-footer">
+          <div class="container">
             <div class="row">
-
-
-
-                <div class="col-lg-6  col-xs-12">
-                     <form id="contact-form" method="post" action="contact.php" role="form">
-
-                        <div class="messages"></div>
-
-                        <div class="controls">
- <div class="row">
-                                <div class="col-md-12">
-                                    <p class="text-muted">Contact Form</p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-
-							<div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="form_phone">Name</label>
-                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_email">Email *</label>
-                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                    <div class="form-group">
-                                        <label for="form_message">Message *</label>
-                                        <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="submit" class="btn btn-success btn-send" value="Send message">
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </form>
-
+              <div class="col-sm-6">
+                <div class="footer--subscribe">
+                  <span class="footer--input envelop">
+                    <input type="text" class="" placeholder="Subscribe to our newsletter"/>
+                  </span>
+                  <button type="button" class="button green-btn">
+                    Subscribe
+                  </button>
                 </div>
-                <div class="col-lg-6 col-xs-12 ">
-                    <h3>Social Media </h3>
-
-                    <ul class="social">
-                        <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
-                        <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
-                    </ul>
+              </div>
+              <div class="col-sm-6">
+                <div class="footer--social_links">
+                  <ul>
+                    <li>
+                      <a class="footer--social_links-facebook" href="#">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="footer--social_links-twitter" href="#">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="footer--social_links-youtube" href="#">
+                        <i class="fa fa-youtube" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
-            <!--/.row-->
+          </div>
         </div>
-        <!--/.container-->
-    </div>
-    <!--/.footer-->
-
-    <div class="footer-bottom">
-        <div class="container">
-            <p class="pull-left"> Copyright © Yamama Shakaa :D :D </p>
-            <div class="pull-right">
-                <ul class="nav nav-pills payments">
-                	<li><i class="fa fa-cc-visa"></i></li>
-                    <li><i class="fa fa-cc-mastercard"></i></li>
-                    <li><i class="fa fa-cc-amex"></i></li>
-                    <li><i class="fa fa-cc-paypal"></i></li>
+        <div class="bottom-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="footer--logo">
+                  <div class="margin-bottom-3x">
+                    <img src="{{url('assets/frontend/images/logo-light.png')}}" class="full-width " alt="" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 hidden-xs">
+                <ul class="footer--links">
+                  <li><a href="#">Programs</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Teams</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Contact</a></li>
                 </ul>
+              </div>
+              <div class="col-sm-4">
+
+                <div class="footer--contact">
+                  <div class="footer--input name full-width margin-bottom-2x">
+                    <input type="text" class="full-width" placeholder="Your Name">
+                  </div>
+                  <div class="footer--input envelop full-width margin-bottom-2x">
+                    <input type="text" class="full-width" placeholder="Your Email">
+                  </div>
+                  <div class="footer--input message full-width margin-bottom-2x">
+                    <textarea class="full-width" placeholder="Type your message here"></textarea>
+                  </div>
+                  <div class="footer--contact_button">
+                    <button type="button" class="button green-btn large-btn">
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="footer--legal">
+            Copyright (c) 2016 Palestine Technical Meetups All Rights Reserved.
+          </div>
         </div>
-    </div>
-    <!--/.footer-bottom-->
-</footer>
-
-
-
-<!-- end of footer -->
-
-
-
-
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
+      </section>

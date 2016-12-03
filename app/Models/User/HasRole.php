@@ -2,7 +2,6 @@
 
 namespace App\Models\User;
 
-
 trait HasRole
 {
     /**
@@ -18,7 +17,8 @@ trait HasRole
     /**
      * Assign the given role to the user.
      *
-     * @param  string $role
+     * @param string $role
+     *
      * @return mixed
      */
     public function assignRole($role, $save = true)
@@ -29,7 +29,7 @@ trait HasRole
         }
 
         // if user already has the role, return true.
-        if ($save AND ($this->roles()->find([$role->id])->count())) {
+        if ($save and ($this->roles()->find([$role->id])->count())) {
             return $role;
         }
 
@@ -46,12 +46,12 @@ trait HasRole
         return $this->assignRole($role, $save);
     }
 
-
     /**
      * Determine if the user has the given role.
      *
-     * @param  mixed $role
-     * @return boolean
+     * @param mixed $role
+     *
+     * @return bool
      */
     public function hasRole($role)
     {
@@ -59,9 +59,9 @@ trait HasRole
             return $this->roles->contains('name', $role);
         }
 //        dd($role->name);
-        if ($role)
+        if ($role) {
             return $this->roles()->find([])->count();
-        else {
+        } else {
             return false;
         }
 //        return !!$role->intersect($this->roles)->count();
@@ -70,8 +70,9 @@ trait HasRole
     /**
      * Determine if the user may perform the given permission.
      *
-     * @param  Permission $permission
-     * @return boolean
+     * @param Permission $permission
+     *
+     * @return bool
      */
     public function hasPermission($permission)
     {
@@ -79,7 +80,7 @@ trait HasRole
         if (is_string($permission)) {
             $permission = PermissionModel::whereName($permission)->first();
             if (!$permission) {
-                return False;
+                return false;
             }
         }
 
