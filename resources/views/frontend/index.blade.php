@@ -76,16 +76,17 @@
         <div class="container">
           <h2 class="title-uppercase text-center margin-bottom-6x">Events</h2>
           <div class="row">
-            <div class="col-sm-6">
-              <!-- block -->
-               @foreach($events as $pos=>$event)
-   
-      @if($event->is_registration_open)
-      <?php
+          
+      @foreach($events as $pos=>$event)
+         <?php
       $date=date("M, Y,d", strtotime('$event->date;'));
 $fulldate=explode(",",$date);
 
  ?>
+      <!-- block -->
+        @if($pos==0)
+         <div class="col-sm-6">
+   
               <div class="block block--vert">
                 <a href="/registration/signup/{{ $event->id }}">
                   <div class="block--img_container image-bg">
@@ -97,9 +98,16 @@ $fulldate=explode(",",$date);
                       {{$fulldate[0]}}
                     </div>
                   </div>
-                  <div class="block--open">
-                    Open
-                  </div>
+                  @if($event->is_registration_open)
+                        <div class="block--open">
+                          Open
+                        </div>
+            
+                        @else
+                         <div class="block--closed">
+                         Closed
+                         </div>
+                           @endif
                   <div class="block--more">
                     MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                   </div>
@@ -113,21 +121,11 @@ $fulldate=explode(",",$date);
                   </div>
                 </a>
               </div>
+                 </div>
               @endif
-              @endforeach
-              <!-- //block -->
-            </div>
-
-            <div class="col-sm-6">
-           
-      @foreach($events as $pos=>$event)
-      <!-- block -->
-       
-      @if(!($event->is_registration_open))
-      <?php
-      $date=date("M, Y,d", strtotime('$event->date;'));
-$fulldate=explode(",",$date);?>
-
+      @if($pos>0)
+      @if($pos==1)<div class="col-sm-6"> @endif
+      
 
               <div class="block block--hori">
                 <a href="/registration/signup/{{ $event->id }}">
@@ -141,9 +139,16 @@ $fulldate=explode(",",$date);?>
                       {{$fulldate[0]}}
                     </div>
                   </div>
-                  <div class="block--closed">
-                    Closed
-                  </div>
+                  @if($event->is_registration_open)
+                        <div class="block--open">
+                          Open
+                        </div>
+            
+                        @else
+                         <div class="block--closed">
+                         Closed
+                         </div>
+                           @endif
                   <div class="block--more">
                     MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                   </div>
@@ -157,17 +162,16 @@ $fulldate=explode(",",$date);?>
                   </div>
                 </a>
               </div>
+                <div class="dividor"></div>
               <!-- //block -->
           
     @endif
-    @if($pos!=2)
-          <div class="dividor"></div>
-@endif
-             
+   
+     
           @endforeach
           </div>
           </div>
-          <div class="dividor"></div>
+          
           <div class="more-btn-cont">
             <a class="green-btn button radiused" href="/timeline">
               More Events

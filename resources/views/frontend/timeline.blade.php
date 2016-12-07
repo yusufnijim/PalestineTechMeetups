@@ -15,10 +15,15 @@
        
       
       <?php
+
       $date=date("M, Y,d", strtotime('$event->date;'));
 $fulldate=explode(",",$date);?>
                   <li class="timeline--item">
+                  @if($pos==0)
                     <div class="block block--vert">
+                    @else
+                    <div class="block block--hori">
+                    @endif
                       <a href="/registration/signup/{{ $event->id }}">
                         <div class="block--img_container image-bg">
                           <img src="{{ $event->featured_image }}" alt="" />
@@ -29,7 +34,7 @@ $fulldate=explode(",",$date);?>
                            {{$fulldate[0]}}
                           </div>
                         </div>
-                        @if(!($event->is_registration_open))
+                        @if($event->is_registration_open)
                         <div class="block--open">
                           Open
                         </div>
