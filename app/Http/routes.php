@@ -44,3 +44,4 @@ Route::get('facebook_callback', 'UserController@facebook_callback');
 Route::controller('/', 'FrontController');
 
 //Route::controller('/about','FrontController@getAbout');
+//Route::get('/timeline', 'TimeLineController@paging');

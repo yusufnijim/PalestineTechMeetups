@@ -68,21 +68,48 @@ $fulldate=explode(",",$date);?>
                 <nav class="pagination-container">
                   <ul class="pagination pagination-sm">
                     <li>
-                      <a href="#" aria-label="Previous">
+@if(isset($_GET['page']) && $_GET['page']>1)
+                      <a href="timeline?page={{$_GET['page']-1}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
+@else
+<a href="\timeline" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                      @endif
                     </li>
+@if((!(isset($_GET['page']))) || $_GET['page']==1)
                     <li class="active">
                       <span>1 <span class="sr-only">(current)</span></span>
                     </li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
+                    @else
+                    <li><a href="/timeline">1</a></li>
+                    @endif
+              @for($i=2;$i<=5;$i++)
+                    @if( (isset($_GET['page'])) && $_GET['page']==$i)
+
+                    <li class="active">
+                      <span>{{$i}} <span class="sr-only">(current)</span></span>
+                    </li>
+                    @else
+                    <li><a href="/timeline?page={{$i}}"> {{$i}}</a></li>
+                    @endif
+                    @endfor
+                      <li>
+                      @if(isset($_GET['page'])&& $_GET['page']==5)
                       <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
+                      @else
+                      @if(isset($_GET['page']))
+                      <a href="timeline?page={{$_GET['page']+1}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      @else
+                      <a href="timeline?page=2" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      @endif
+                      </a>
+                      @endif
                     </li>
                   </ul>
                 </nav>

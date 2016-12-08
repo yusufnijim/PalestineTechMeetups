@@ -48,30 +48,57 @@ $fulldate=explode(",",$date);?>
                  @endforeach
                 </div>
                 <!-- //news -->
-                <nav class="pagination-container">
+                 <nav class="pagination-container">
                   <ul class="pagination pagination-sm">
                     <li>
-                      <a href="#" aria-label="Previous">
+@if(isset($_GET['page']) && $_GET['page']>1)
+                      <a href="/news?page={{$_GET['page']-1}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
+@else
+<a href="\news" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                      @endif
                     </li>
+@if((!(isset($_GET['page']))) || $_GET['page']==1)
                     <li class="active">
                       <span>1 <span class="sr-only">(current)</span></span>
                     </li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
+                    @else
+                    <li><a href="/news">1</a></li>
+                    @endif
+              @for($i=2;$i<=5;$i++)
+                    @if( (isset($_GET['page'])) && $_GET['page']==$i)
+
+                    <li class="active">
+                      <span>{{$i}} <span class="sr-only">(current)</span></span>
+                    </li>
+                    @else
+                    <li><a href="/news?page={{$i}}"> {{$i}}</a></li>
+                    @endif
+                    @endfor
+                      <li>
+                      @if(isset($_GET['page'])&& $_GET['page']==5)
                       <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
+                      @else
+                      @if(isset($_GET['page']))
+                      <a href="news?page={{$_GET['page']+1}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      @else
+                      <a href="news?page=2" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      @endif
+                      </a>
+                      @endif
                     </li>
                   </ul>
                 </nav>
             </div>
-            <!-- //timeline-container -->
+            <!-- //news-container -->
         </section>
-        <!-- //timeline -->
+        <!-- //news -->
         <div class="dividor"></div>
        @endsection
