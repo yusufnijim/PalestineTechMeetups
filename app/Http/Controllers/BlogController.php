@@ -47,8 +47,10 @@ class BlogController extends MyBaseController
     public function getView($id)
     {
         $blog = $this->blog_repo->find($id);
+         $latestBlogs = $this->blog_repo->published()->latest()->paginate(2);
 
-        return view('blog/view')->with('blog', $blog);
+        return view('blog/view')->with('blog', $blog)
+        ->with('latestBlogs',$latestBlogs);
     }
 
     public function getEdit($id)

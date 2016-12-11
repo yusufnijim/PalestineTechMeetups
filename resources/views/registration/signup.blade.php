@@ -215,49 +215,64 @@ $fulldate=explode(",",$date);?>
               <div class="col-sm-4">
                 <div class="dividor"></div>
                 <div class="margin-bottom-3x">
-                  <a href="#" class="button green-btn green-btn radiused full-width large-btn text-center">Attend this event</a>
+                  <a href="../attend/{{ $event->id }}" class="button green-btn green-btn radiused full-width large-btn text-center">Attend this event</a>
                 </div>
                 <div class="content margin-bottom-2x">
                     <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;
-                    Sun. 22/10/2016, 10:00 AM - 03:00 PM
+                    {{ $event->date }}
                 </div>
                 <div class="content">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
-                    Engineers Syndicate / Al-mraij Str. / Nablus
+                      {{ $event->location }}
                 </div>
                 <div class="dividor"></div>
                 <!-- more articles -->
                 <div class="more_articles">
                   <!-- block -->
+                  
                   <div class="subtitle-uppercase margin-bottom-2x">More Events</div>
+                  @foreach($latestEvents as $pos=>$latestEvent)
+                  <?php
+      $date=date("M, Y,d", strtotime('$latestEvent->date;'));
+$fulldate=explode(",",$date);
+
+ ?>
                   <div class="block block--vert margin-bottom-6x">
-                    <a href="#">
+                     <a href="/registration/signup/{{ $latestEvent->id }}">
                       <div class="block--img_container image-bg">
-                        <img src="../../assets/frontend/images/event1.jpg" alt="" />
+                        <img src={{$latestEvent->featured_image}} alt="" />
                       </div>
-                      <div class="block--calendar_date">
-                        <div class="block--calendar_date_number">16</div>
-                        <div class="">
-                          NOV
+                       <div class="block--calendar_date">
+                    <div class="block--calendar_date_number">{{$fulldate[2]}}</div>
+                    <div class="">
+                      {{$fulldate[0]}}
+                    </div>
+                  </div>
+                  @if($latestEvent->is_registration_open)
+                        <div class="block--open">
+                          Open
                         </div>
-                      </div>
-                      <div class="block--open">
-                        Open
-                      </div>
+            
+                        @else
+                         <div class="block--closed">
+                         Closed
+                         </div>
+                           @endif
                       <div class="block--more">
                         MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                       </div>
                       <div class="padding-2x block--content-wrapper">
                         <div class="block--title subtitle">
-                          Contrary to popular belief, Lorem Ipsum is
+                          {{$latestEvent->title}}
                         </div>
                         <div class="block--content content">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's...
+                         {{ strip_tags(mb_substr($latestEvent->body,0,300,"UTF-8"))}}
                         </div>
                       </div>
                     </a>
                   </div>
-                  <div class="block block--vert margin-bottom-6x">
+                  @endforeach
+                  <!--div class="block block--vert margin-bottom-6x">
                     <a href="#">
                       <div class="block--img_container image-bg">
                         <img src="../../assets/frontend/images/event2.png" alt="" />
@@ -283,7 +298,7 @@ $fulldate=explode(",",$date);?>
                         </div>
                       </div>
                     </a>
-                  </div>
+                  </div -->
                   <!-- //block -->
                 </div>
                 <!-- //more articles -->

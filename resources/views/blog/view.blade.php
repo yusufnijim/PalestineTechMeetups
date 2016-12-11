@@ -216,7 +216,7 @@ $fulldate=explode(",",$date);?>
               <!-- side col -->
               <div class="col-sm-4">
                 <div class="dividor"></div>
-                <div class="margin-bottom-3x">
+                <!-- div class="margin-bottom-3x">
                   <a href="#" class="button green-btn green-btn radiused full-width large-btn text-center">Attend this event</a>
                 </div>
                 <div class="content margin-bottom-2x">
@@ -226,40 +226,39 @@ $fulldate=explode(",",$date);?>
                 <div class="content">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
                     Engineers Syndicate / Al-mraij Str. / Nablus
-                </div>
+                </div -->
                 <div class="dividor"></div>
                 <!-- more articles -->
                 <div class="more_articles">
                   <!-- block -->
-                  <div class="subtitle-uppercase margin-bottom-2x">More Events</div>
+                  <div class="subtitle-uppercase margin-bottom-2x">More News</div>
+                  @foreach($latestBlogs as $pos=>$latestBlog)
+                  <?php
+      $date=date("M, Y,d", strtotime('$latestBlog->date;'));
+$fulldate=explode(",",$date);
+
+ ?>
                   <div class="block block--vert margin-bottom-6x">
-                    <a href="#">
+                    <a href="/blog/view/{{ $latestBlog->id }}" >
                       <div class="block--img_container image-bg">
-                        <img src="../../assets/frontend/images/event1.jpg" alt="" />
+                        <img src={{$latestBlog->featured_image}} alt="" />
                       </div>
-                      <div class="block--calendar_date">
-                        <div class="block--calendar_date_number">16</div>
-                        <div class="">
-                          NOV
-                        </div>
-                      </div>
-                      <div class="block--open">
-                        Open
-                      </div>
+                     
                       <div class="block--more">
                         MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                       </div>
                       <div class="padding-2x block--content-wrapper">
                         <div class="block--title subtitle">
-                          Contrary to popular belief, Lorem Ipsum is
+                         {{$latestBlog->title}}
                         </div>
                         <div class="block--content content">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's...
+                          {{ strip_tags(mb_substr($latestBlog->body,0,300,"UTF-8"))}}
                         </div>
                       </div>
                     </a>
                   </div>
-                  <div class="block block--vert margin-bottom-6x">
+                  @endforeach
+                  <!-- div class="block block--vert margin-bottom-6x">
                     <a href="#">
                       <div class="block--img_container image-bg">
                         <img src="../../assets/frontend/images/event2.png" alt="" />
@@ -285,7 +284,7 @@ $fulldate=explode(",",$date);?>
                         </div>
                       </div>
                     </a>
-                  </div>
+                  </div -->
                   <!-- //block -->
                 </div>
                 <!-- //more articles -->

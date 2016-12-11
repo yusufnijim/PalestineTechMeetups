@@ -34,6 +34,7 @@ class RegistrationController extends MyBaseController
     {
         $event = $this->event_repo->find($id);
         $user = auth()->user();
+        $latestEvents = $this->event_repo->published()->latest()->paginate(2);
 
         if ($user) {
             $status = $this->registration_epo->findWhere(
@@ -49,9 +50,34 @@ class RegistrationController extends MyBaseController
 
         return view('registration/signup')
             ->with('event', $event)
+            ->with('status', $status)
+            ->with('latestEvents',$latestEvents);
+    }
+//yamama test
+
+    public function getAttend($id)
+    {
+        $event = $this->event_repo->find($id);
+        $user = auth()->user();
+
+        if ($user) {
+            $status = $this->registration_epo->findWhere(
+                [
+                    'user_id'      => isset($user->id) ? $user->id : null,
+                    'event_id'     => $id,
+                    'is_cancelled' => 0,
+                ]
+            )->first();
+        } else {
+            $status = -1;
+        }
+
+        return view('registration/attend')
+            ->with('event', $event)
             ->with('status', $status);
     }
 
+    //yamama test
     public function postSignup($id)
     {
         $event = $this->event_repo->find($id);
