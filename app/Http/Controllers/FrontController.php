@@ -62,16 +62,23 @@ class FrontController extends MyBaseController
  public function getTimeline()
     {
          $events = $this->event_repo->published()->latest()->paginate(7);
+           $numberOfevents =$this->event_repo->all()->count();
+           $numberOfPages= ceil($numberOfevents/7);
         return view('frontend.timeline')
-
-        ->with('events', $events);
+        ->with('events', $events)
+        ->with('numberOfPages',$numberOfPages)
+        ->with('numberOfEvents',$numberOfevents);
     }
      public function getNews()
     {
+        $numberOfNews =$this->blog_repo->all()->count();
+           $numberOfPages= ceil($numberOfNews/12);
          $blogs = $this->blog_repo->published()->latest()->paginate(12);
         return view('frontend.news')
 
-        ->with('blogs', $blogs);
+        ->with('blogs', $blogs)
+         ->with('numberOfPages',$numberOfPages)
+        ->with('numberOfNews',$numberOfNews);
     }
     
     //end yamama

@@ -15,7 +15,8 @@
        
       
       <?php
-
+//echo $numberOfPages."<br>";
+//echo $numberOfEvents."<br>";
       $date=date("M, Y,d", strtotime('$event->date;'));
 $fulldate=explode(",",$date);?>
                   <li class="timeline--item">
@@ -85,7 +86,7 @@ $fulldate=explode(",",$date);?>
                     @else
                     <li><a href="/timeline">1</a></li>
                     @endif
-              @for($i=2;$i<=5;$i++)
+              @for($i=2;$i<=$numberOfPages;$i++)
                     @if( (isset($_GET['page'])) && $_GET['page']==$i)
 
                     <li class="active">
@@ -96,7 +97,7 @@ $fulldate=explode(",",$date);?>
                     @endif
                     @endfor
                       <li>
-                      @if(isset($_GET['page'])&& $_GET['page']==5)
+                      @if(isset($_GET['page'])&& $_GET['page']==$numberOfPages)
                       <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
