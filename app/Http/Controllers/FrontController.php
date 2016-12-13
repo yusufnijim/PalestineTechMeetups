@@ -58,6 +58,11 @@ class FrontController extends MyBaseController
     {
         return view('frontend.contact');
     }
+
+    public function getMoreawsomness()
+    {
+        return view('frontend.Moreawsomness');
+    }
 //by yamama
  public function getTimeline()
     {
@@ -72,15 +77,22 @@ class FrontController extends MyBaseController
      public function getNews()
     {
         $numberOfNews =$this->blog_repo->all()->count();
-           $numberOfPages= ceil($numberOfNews/12);
-         $blogs = $this->blog_repo->published()->latest()->paginate(12);
+        $numberOfPages= ceil($numberOfNews/12);
+        $blogs = $this->blog_repo->published()->latest()->paginate(12);
         return view('frontend.news')
 
         ->with('blogs', $blogs)
-         ->with('numberOfPages',$numberOfPages)
+        ->with('numberOfPages',$numberOfPages)
         ->with('numberOfNews',$numberOfNews);
     }
-    
+    public function getHandson()
+    {
+        return view('frontend.handson');
+    }
+      public function getMonthlymeetups()
+    {
+        return view('frontend.Monthlymeetups');
+    }
     //end yamama
     public function postContact()
     {
@@ -99,10 +111,7 @@ class FrontController extends MyBaseController
             ->with('results', $results)
             ->with('query', $query);
     }
-public function handson()
-    {
-        return view('frontend/handson');
-    }
+
     /**
      * Change language.
      *

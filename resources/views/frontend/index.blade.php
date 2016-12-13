@@ -41,7 +41,7 @@
                 Monthly Meetups
               </div>
               <div class="content text-justify padding-4x">
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="#">more</a>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/monthlymeetups">more</a>
               </div>
             </div>
             <div class="col-sm-4">
@@ -63,7 +63,7 @@
                 More Awesomeness
               </div>
               <div class="content text-justify padding-4x">
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="#">more</a>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/moreawsomness">more</a>
               </div>
             </div>
           </div>
