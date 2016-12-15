@@ -4,6 +4,9 @@
  @stop
  @section('content')
  <!-- Article -->
+ <?php
+print_r($volunteers);
+?>
       <?php
       $date=date("M, Y,d", strtotime('$event->date;'));
 $fulldate=explode(",",$date);?>

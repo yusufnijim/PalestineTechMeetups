@@ -9,18 +9,21 @@ use App\Models\User\UserModel;
 use App\Repositories\Contracts\Event\EventRepository;
 use App\Repositories\Contracts\Event\RegistrationRepository;
 use App\Repositories\Contracts\User\UserRepository;
-
+//yamama
+use App\Repositories\Contracts\Event\VolunteerRepository;
+//yamama
 class RegistrationController extends MyBaseController
 {
     protected $event_repo;
     protected $user_repo;
     protected $registration_epo;
 
-    public function __construct(EventRepository $event_repo, UserRepository $user_repo, RegistrationRepository $registration_epo)
+    public function __construct(EventRepository $event_repo,VolunteerRepository $volunteer_repo, UserRepository $user_repo, RegistrationRepository $registration_epo)
     {
         $this->event_repo = $event_repo;
         $this->user_repo = $user_repo;
         $this->registration_epo = $registration_epo;
+        $this->volunteer_repo = $volunteer_repo;
     }
 
     /**
@@ -35,7 +38,7 @@ class RegistrationController extends MyBaseController
         $event = $this->event_repo->find($id);
         $user = auth()->user();
         $latestEvents = $this->event_repo->published()->latest()->paginate(2);
-
+$volunteers=$this->getEventVolunteers($id);
         if ($user) {
             $status = $this->registration_epo->findWhere(
                 [
@@ -51,10 +54,20 @@ class RegistrationController extends MyBaseController
         return view('registration/signup')
             ->with('event', $event)
             ->with('status', $status)
-            ->with('latestEvents',$latestEvents);
+            ->with('latestEvents',$latestEvents)
+            ->with('volunteers',$volunteers);
     }
 //yamama test
+  public function getEventVolunteers($id)
+    {
+       
+        $event = $this->event_repo->find($id);
+        $users_list = $this->user_repo->all()->lists('first_name', 'id');
+        $volunteers_type_list = $this->volunteer_repo->type;
+        $volunteers = $this->volunteer_repo->all()->where('event_id','=',$event->id);
 
+        return   $volunteers;
+    }
     public function getAttend($id)
     {
         $event = $this->event_repo->find($id);

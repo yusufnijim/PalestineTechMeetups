@@ -93,6 +93,7 @@ class FrontController extends MyBaseController
     {
         return view('frontend.Monthlymeetups');
     }
+    
     //end yamama
     public function postContact()
     {

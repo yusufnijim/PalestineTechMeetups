@@ -7,12 +7,12 @@
         </div>
         <div class="sidebar--links">
           <ul class="sidebar--list">
-            <li><a href="#">Programs</a></li>
-            <li><a href="/news">News</a></li>
-            <li><a href="/timeline">Events</a></li>
-            <li><a href="#">Teams</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">{{trans('frontend/index.Programs') }}</a></li>
+            <li><a href="/news">{{trans('frontend/index.News') }}</a></li>
+            <li><a href="/timeline">{{ trans('frontend/index.Events') }}</a></li>
+            <li><a href="#">{{ trans('frontend/index.Team') }}</a></li>
+            <li><a href="/about">{{trans('frontend/index.About') }}</a></li>
+            <li><a href="#">{{trans('frontend/index.Contact') }}</a></li>
           </ul>
         </div>
       </section>
@@ -55,12 +55,12 @@
             </div>
             <div class="nav-links col-md-9 hidden-sm hidden-xs">
               <ul class="navbar">
-                <li><a href="#">Programs</a></li>
-                <li><a href="/news">News</a></li>
-                <li><a href="/timeline">Events</a></li>
-                <li><a href="#">Teams</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">{{trans('frontend/index.Programs') }}</a></li>
+                <li><a href="/news">{{trans('frontend/index.News') }}</a></li>
+                <li><a href="/timeline">{{ trans('frontend/index.Events') }}</a></li>
+                <li><a href="#">{{ trans('frontend/index.Team') }}</a></li>
+                <li><a href="/about">{{trans('frontend/index.About') }}</a></li>
+                <li><a href="#">{{trans('frontend/index.Contact') }}</a></li>
               </ul>
             </div>
             <div class="sidebar-trigger visible-sm visible-xs">

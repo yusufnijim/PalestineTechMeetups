@@ -14,4 +14,11 @@ return [
     */
 
     'Welcome' => 'Welcome',
+    'Home'=>'Home',
+    'Team'=>'Team',
+    'News' => 'News',
+    'Programs'=>'Programs',
+    'Contact'=>'Contact Us',
+    'Events'=>'Events',
+      'About'=>'About',
 ];

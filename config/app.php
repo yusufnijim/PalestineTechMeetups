@@ -66,7 +66,7 @@ return [
     |
     */
 //    'languages' =>  ['ar','en','fr'],
-    'locale' => 'en',
+    'locale' => 'ar',
     'languages' => ['en', 'fr', 'ar'],
 
     'locales' => [
@@ -87,7 +87,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
