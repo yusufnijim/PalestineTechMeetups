@@ -4,8 +4,8 @@
         <section class="news">
             <div class="dividor"></div>
             <div class="text-center">
-              <h1 class="title-uppercase">News</h1>
-              <h3 class="subtitle-uppercase">Keep updated with our latest news and stuff</h3>
+              <h1 class="title-uppercase">{{trans('frontend/index.News') }}</h1>
+              <h3 class="subtitle-uppercase">{{trans('frontend/index.updated') }}</h3>
             </div>
             <div class="dividor"></div>
             <div class="container">
@@ -32,7 +32,7 @@ $fulldate=explode(",",$date);?>
                           Open
                         </div-->
                         <div class="block--more">
-                          MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                        {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                         </div>
                         <div class="padding-2x block--content-wrapper">
                           <div class="block--title subtitle">

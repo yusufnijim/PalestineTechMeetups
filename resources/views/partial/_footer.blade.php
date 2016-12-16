@@ -5,10 +5,10 @@
               <div class="col-sm-6">
                 <div class="footer--subscribe">
                   <span class="footer--input envelop">
-                    <input type="text" class="" placeholder="Subscribe to our newsletter"/>
+                    <input type="text" class="" placeholder=  {{trans('frontend/index.Newsletter') }}/>
                   </span>
                   <button type="button" class="button green-btn">
-                    Subscribe
+                  {{trans('frontend/index.Subscribe') }}
                   </button>
                 </div>
               </div>
@@ -48,29 +48,29 @@
               </div>
               <div class="col-sm-4 hidden-xs">
                 <ul class="footer--links">
-                  <li><a href="#">Programs</a></li>
-                  <li><a href="#">News</a></li>
-                  <li><a href="#">Events</a></li>
-                  <li><a href="#">Teams</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">{{trans('frontend/index.Programs') }}</a></li>
+                  <li><a href="/news">{{trans('frontend/index.News') }}</a></li>
+                  <li><a href="/timeline">{{ trans('frontend/index.Events') }}</a></li>
+                  <li><a href="#">{{ trans('frontend/index.Team') }}</a></li>
+                  <li><a href="/about">{{trans('frontend/index.About') }}</a></li>
+                  <li><a href="#">{{trans('frontend/index.Contact') }}</a></li>
                 </ul>
               </div>
               <div class="col-sm-4">
 
                 <div class="footer--contact">
                   <div class="footer--input name full-width margin-bottom-2x">
-                    <input type="text" class="full-width" placeholder="Your Name">
+                    <input type="text" class="full-width" placeholder="{{trans('frontend/index.Name') }}">
                   </div>
                   <div class="footer--input envelop full-width margin-bottom-2x">
-                    <input type="text" class="full-width" placeholder="Your Email">
+                    <input type="text" class="full-width" placeholder= {{trans('frontend/index.Email') }}>
                   </div>
                   <div class="footer--input message full-width margin-bottom-2x">
-                    <textarea class="full-width" placeholder="Type your message here"></textarea>
+                    <textarea class="full-width" placeholder=  {{trans('frontend/index.Message') }}></textarea>
                   </div>
                   <div class="footer--contact_button">
                     <button type="button" class="button green-btn large-btn">
-                      Send
+                        {{trans('frontend/index.Send') }}
                     </button>
                   </div>
                 </div>

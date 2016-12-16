@@ -13,14 +13,14 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-              <h2 class="title-uppercase text-center margin-bottom-4x">About</h2>
+              <h2 class="title-uppercase text-center margin-bottom-4x">{{trans('frontend/index.About') }}</h2>
               <div class="content text-justify">
 
               {{$aboutus}}
 
               </div>
               <div class="text-center margin-top-4x">
-                <a class="button large-btn green-btn radiused" href="/about">Read More About Us</a>
+                <a class="button large-btn green-btn radiused" href="/about">{{trans('frontend/index.Readmoreabout') }}</a>
               </div>
             </div>
           </div>
@@ -31,17 +31,17 @@
       <!-- Programs -->
       <section class="programs backgrounded-section">
         <div class="container-fluid">
-          <h2 class="title-uppercase text-center margin-bottom-6x">Programs</h2>
+          <h2 class="title-uppercase text-center margin-bottom-6x">{{ trans('frontend/index.Programs') }}</h2>
           <div class="row text-center">
             <div class="col-sm-4">
               <div class="f45 purple">
                 <i class="fa fa-users" aria-hidden="true"></i>
               </div>
               <div class="subtitle-uppercase ">
-                Monthly Meetups
+              {{ trans('frontend/index.Monthlymeetups') }}
               </div>
               <div class="content text-justify padding-4x">
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/monthlymeetups">more</a>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/monthlymeetups">{{trans('frontend/index.More') }}</a>
               </div>
             </div>
             <div class="col-sm-4">
@@ -49,10 +49,10 @@
                 <i class="fa fa-cogs" aria-hidden="true"></i>
               </div>
               <div class="subtitle-uppercase ">
-                Hands-on
+                {{ trans('frontend/index.Handson') }}
               </div>
               <div class="content text-justify padding-4x">
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/handson">more</a>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/handson">{{trans('frontend/index.More') }}</a>
               </div>
             </div>
             <div class="col-sm-4">
@@ -60,10 +60,10 @@
                 <i class="fa fa-tachometer" aria-hidden="true"></i>
               </div>
               <div class="subtitle-uppercase ">
-                More Awesomeness
+                {{ trans('frontend/index.Awesomeness') }}
               </div>
               <div class="content text-justify padding-4x">
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/moreawsomness">more</a>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College... <a href="/moreawsomness">{{trans('frontend/index.More') }}</a>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
       <!-- Events -->
       <section class="events">
         <div class="container">
-          <h2 class="title-uppercase text-center margin-bottom-6x">Events</h2>
+          <h2 class="title-uppercase text-center margin-bottom-6x">{{ trans('frontend/index.Events') }}</h2>
           <div class="row">
 
       @foreach($events as $pos=>$event)
@@ -100,16 +100,16 @@ $fulldate=explode(",",$date);
                   </div>
                   @if($event->is_registration_open)
                         <div class="block--open">
-                          Open
+                        {{ trans('frontend/index.Open') }}
                         </div>
 
                         @else
                          <div class="block--closed">
-                         Closed
+                         {{ trans('frontend/index.Closed') }}
                          </div>
                            @endif
                   <div class="block--more">
-                    MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                  {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                   </div>
                   <div class="padding-2x block--content-wrapper">
                     <div class="block--title subtitle">
@@ -141,16 +141,16 @@ $fulldate=explode(",",$date);
                   </div>
                   @if($event->is_registration_open)
                         <div class="block--open">
-                          Open
+                        {{ trans('frontend/index.Open') }}
                         </div>
 
                         @else
                          <div class="block--closed">
-                         Closed
+                        {{ trans('frontend/index.Closed') }}
                          </div>
                            @endif
                   <div class="block--more">
-                    MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                    {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                   </div>
                   <div class="block--content-wrapper padding-2x">
                     <div class="block--title subtitle">
@@ -174,7 +174,7 @@ $fulldate=explode(",",$date);
 
           <div class="more-btn-cont">
             <a class="green-btn button radiused" href="/timeline">
-              More Events
+            {{trans('frontend/index.Moreevents') }}
               &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
             </a>
           </div>
@@ -185,7 +185,7 @@ $fulldate=explode(",",$date);
       <!-- news -->
       <section class="news backgrounded-section">
         <div class="container">
-          <h2 class="title-uppercase text-center margin-bottom-6x">News</h2>
+          <h2 class="title-uppercase text-center margin-bottom-6x">{{trans('frontend/index.News') }}</h2>
           <div class="row">
 
              @foreach($blogs as $pos=>$blog)
@@ -198,7 +198,7 @@ $fulldate=explode(",",$date);
                     <img src=" {{$blog->featured_image}}" alt="" />
                   </div>
                   <div class="block--more">
-                    MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                    {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                   </div>
                   <div class="block--content-wrapper padding-2x">
                     <div class="block--title subtitle">
@@ -220,7 +220,7 @@ $fulldate=explode(",",$date);
           </div>
           <div class="more-btn-cont margin-bottom-4x">
             <a class="green-btn button radiused" href="/news">
-              More News &nbsp;
+            {{trans('frontend/index.Morenews') }} &nbsp;
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </a>
           </div>
@@ -231,8 +231,8 @@ $fulldate=explode(",",$date);
       <!-- Thank you -->
       <section class="thanks">
         <div class="container">
-          <h2 class="title-uppercase text-center margin-bottom-3x">Well Done!</h2>
-          <h2 class="subtitle-uppercase text-center margin-bottom-6x">Thanks to our awesome volunteers for the amazing work</h2>
+          <h2 class="title-uppercase text-center margin-bottom-3x">{{trans('frontend/index.welldone') }}</h2>
+          <h2 class="subtitle-uppercase text-center margin-bottom-6x">{{trans('frontend/index.Thanksmsg') }}</h2>
           <div class="row">
             <div class="col-sm-12">
               <ul class="team">

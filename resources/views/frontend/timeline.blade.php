@@ -4,8 +4,8 @@
         <section class="timeline-container">
             <div class="dividor"></div>
             <div class="text-center">
-              <h1 class="title-uppercase">Events</h1>
-              <h3 class="subtitle-uppercase">Join our amazing community by attending one of our events</h3>
+              <h1 class="title-uppercase">{{trans('frontend/index.Events') }}</h1>
+              <h3 class="subtitle-uppercase">{{trans('frontend/index.join') }}</h3>
             </div>
             <div class="dividor"></div>
             <div class="container">
@@ -46,7 +46,7 @@ $fulldate=explode(",",$date);?>
                          </div>
                            @endif
                         <div class="block--more">
-                          MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                        {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                         </div>
                         <div class="padding-2x block--content-wrapper">
                           <div class="block--title subtitle">

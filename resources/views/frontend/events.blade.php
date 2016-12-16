@@ -70,7 +70,7 @@ $fulldate=explode(",",$date);?>
               <div class="col-sm-8">
                 <!-- description -->
                 <div class="description">
-                  <h3 class="subtitle-uppercase">Description</h3>
+                  <h3 class="subtitle-uppercase">  {{trans('frontend/index.Description') }}</h3>
                   <p>
 
 {{ strip_tags($event->body,"UTF-8")}}
@@ -85,7 +85,7 @@ $fulldate=explode(",",$date);?>
                 <!-- //description -->
                 <!-- volunteers -->
                 <div class="volunteers">
-                  <h3 class="subtitle-uppercase margin-bottom-3x">Volunteers</h3>
+                  <h3 class="subtitle-uppercase margin-bottom-3x">  {{trans('frontend/index.Volunteers') }}</h3>
                   <ul class="team small-team">
                     <li>
                       <div class="team--member">
@@ -176,7 +176,7 @@ $fulldate=explode(",",$date);?>
                 <!-- //volunteers -->
                 <!-- images -->
                 <section class="images">
-                  <h3 class="subtitle-uppercase margin-bottom-3x">Images</h3>
+                  <h3 class="subtitle-uppercase margin-bottom-3x">  {{trans('frontend/index.Images') }}</h3>
 
                   <ul class="images-list">
                     <li class="images-list--item">
@@ -218,7 +218,7 @@ $fulldate=explode(",",$date);?>
               <div class="col-sm-4">
                 <div class="dividor"></div>
                 <div class="margin-bottom-3x">
-                  <a href="../attend/{{ $event->id }}" class="button green-btn green-btn radiused full-width large-btn text-center">Attend this event</a>
+                  <a href="../attend/{{ $event->id }}" class="button green-btn green-btn radiused full-width large-btn text-center">  {{trans('frontend/index.attend') }}</a>
                 </div>
                 <div class="content margin-bottom-2x">
                     <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;
@@ -233,7 +233,7 @@ $fulldate=explode(",",$date);?>
                 <div class="more_articles">
                   <!-- block -->
 
-                  <div class="subtitle-uppercase margin-bottom-2x">More Events</div>
+                  <div class="subtitle-uppercase margin-bottom-2x">  {{trans('frontend/index.Moreevents') }}</div>
                   @foreach($latestEvents as $pos=>$latestEvent)
                   <?php
       $date=date("M, Y,d", strtotime('$latestEvent->date;'));
@@ -253,16 +253,16 @@ $fulldate=explode(",",$date);
                   </div>
                   @if($latestEvent->is_registration_open)
                         <div class="block--open">
-                          Open
+                          {{trans('frontend/index.Open') }}
                         </div>
 
                         @else
                          <div class="block--closed">
-                         Closed
+                          {{trans('frontend/index.Closed') }}
                          </div>
                            @endif
                       <div class="block--more">
-                        MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                          {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                       </div>
                       <div class="padding-2x block--content-wrapper">
                         <div class="block--title subtitle">

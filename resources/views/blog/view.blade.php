@@ -21,9 +21,7 @@ $fulldate=explode(",",$date);?>
                  {{$fulldate[0]}}
                 </div>
               </div>
-              <div class="article--head_open">
-                Open
-              </div>
+
               <!-- <div class="article--head_closed">
                 closed
               </div> -->
@@ -55,7 +53,7 @@ $fulldate=explode(",",$date);?>
 
               </div>
               <h1>
-               {{strip_tags($blog->title)}} 
+               {{strip_tags($blog->title)}}
               </h1>
             </div>
           </div>
@@ -69,9 +67,9 @@ $fulldate=explode(",",$date);?>
               <div class="col-sm-8">
                 <!-- description -->
                 <div class="description">
-                  <h3 class="subtitle-uppercase">Description</h3>
+                  <h3 class="subtitle-uppercase">{{trans('frontend/index.Description') }}</h3>
                   <p>
-                   
+
 {{ strip_tags($blog->body,"UTF-8")}}
                   </p>
                   <p>
@@ -84,7 +82,7 @@ $fulldate=explode(",",$date);?>
                 <!-- //description -->
                 <!-- volunteers -->
                 <div class="volunteers">
-                  <h3 class="subtitle-uppercase margin-bottom-3x">Volunteers</h3>
+                  <h3 class="subtitle-uppercase margin-bottom-3x">  {{trans('frontend/index.Volunteers') }}</h3>
                   <ul class="team small-team">
                     <li>
                       <div class="team--member">
@@ -175,7 +173,7 @@ $fulldate=explode(",",$date);?>
                 <!-- //volunteers -->
                 <!-- images -->
                 <section class="images">
-                  <h3 class="subtitle-uppercase margin-bottom-3x">Images</h3>
+                  <h3 class="subtitle-uppercase margin-bottom-3x">  {{trans('frontend/index.Images') }}</h3>
 
                   <ul class="images-list">
                     <li class="images-list--item">
@@ -231,7 +229,7 @@ $fulldate=explode(",",$date);?>
                 <!-- more articles -->
                 <div class="more_articles">
                   <!-- block -->
-                  <div class="subtitle-uppercase margin-bottom-2x">More News</div>
+                  <div class="subtitle-uppercase margin-bottom-2x">  {{trans('frontend/index.Morenews') }}</div>
                   @foreach($latestBlogs as $pos=>$latestBlog)
                   <?php
       $date=date("M, Y,d", strtotime('$latestBlog->date;'));
@@ -243,9 +241,9 @@ $fulldate=explode(",",$date);
                       <div class="block--img_container image-bg">
                         <img src={{$latestBlog->featured_image}} alt="" />
                       </div>
-                     
+
                       <div class="block--more">
-                        MORE &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
+                          {{trans('frontend/index.More') }} &nbsp;<i class="fa fa-chevron-circle-right purple fa-lg" aria-hidden="true"></i>
                       </div>
                       <div class="padding-2x block--content-wrapper">
                         <div class="block--title subtitle">
