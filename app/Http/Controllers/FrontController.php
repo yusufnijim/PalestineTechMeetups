@@ -93,7 +93,41 @@ class FrontController extends MyBaseController
     {
         return view('frontend.Monthlymeetups');
     }
-    
+
+    public function getEvents($id)
+    {
+        $event = $this->event_repo->find($id);
+        $user = auth()->user();
+        $latestEvents = $this->event_repo->published()->latest()->paginate(2);
+//$volunteers=$this->getEventVolunteers($id);
+        if ($user) {
+            $status = $this->registration_epo->findWhere(
+                [
+                    'user_id'      => isset($user->id) ? $user->id : null,
+                    'event_id'     => $id,
+                    'is_cancelled' => 0,
+                ]
+            )->first();
+        } else {
+            $status = -1;
+        }
+
+        return view('frontend.events')
+            ->with('event', $event)
+            ->with('status', $status)
+            ->with('latestEvents',$latestEvents);
+            //->with('volunteers',$volunteers);
+    }
+  /*  public function getEventVolunteers($id)
+      {
+
+          $event = $this->event_repo->find($id);
+          $users_list = $this->user_repo->all()->lists('first_name', 'id');
+          $volunteers_type_list = $this->volunteer_repo->type;
+          $volunteers = $this->volunteer_repo->all()->where('event_id','=',$event->id);
+
+          return   $volunteers;
+      }*/
     //end yamama
     public function postContact()
     {

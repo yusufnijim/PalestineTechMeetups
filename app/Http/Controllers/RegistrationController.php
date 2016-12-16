@@ -33,7 +33,7 @@ class RegistrationController extends MyBaseController
      *
      * @return mixed
      */
-    public function getSignup($id)
+  /*  public function getSignup($id)
     {
         $event = $this->event_repo->find($id);
         $user = auth()->user();
@@ -56,18 +56,18 @@ $volunteers=$this->getEventVolunteers($id);
             ->with('status', $status)
             ->with('latestEvents',$latestEvents)
             ->with('volunteers',$volunteers);
-    }
+    } */
 //yamama test
-  public function getEventVolunteers($id)
+  /*public function getEventVolunteers($id)
     {
-       
+
         $event = $this->event_repo->find($id);
         $users_list = $this->user_repo->all()->lists('first_name', 'id');
         $volunteers_type_list = $this->volunteer_repo->type;
         $volunteers = $this->volunteer_repo->all()->where('event_id','=',$event->id);
 
         return   $volunteers;
-    }
+    }*/
     public function getAttend($id)
     {
         $event = $this->event_repo->find($id);

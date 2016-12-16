@@ -15,9 +15,9 @@
             <div class="col-sm-8 col-sm-offset-2">
               <h2 class="title-uppercase text-center margin-bottom-4x">About</h2>
               <div class="content text-justify">
-
+         
               {{$aboutus}}
-
+               
               </div>
               <div class="text-center margin-top-4x">
                 <a class="button large-btn green-btn radiused" href="/about">Read More About Us</a>
@@ -76,7 +76,7 @@
         <div class="container">
           <h2 class="title-uppercase text-center margin-bottom-6x">Events</h2>
           <div class="row">
-
+          
       @foreach($events as $pos=>$event)
          <?php
       $date=date("M, Y,d", strtotime('$event->date;'));
@@ -86,9 +86,9 @@ $fulldate=explode(",",$date);
       <!-- block -->
         @if($pos==0)
          <div class="col-sm-6">
-
+   
               <div class="block block--vert">
-                <a href="/events/{{ $event->id }}">
+                <a href="/registration/signup/{{ $event->id }}">
                   <div class="block--img_container image-bg">
                     <img src="{{ $event->featured_image }}" alt="" />
                   </div>
@@ -102,7 +102,7 @@ $fulldate=explode(",",$date);
                         <div class="block--open">
                           Open
                         </div>
-
+            
                         @else
                          <div class="block--closed">
                          Closed
@@ -125,10 +125,10 @@ $fulldate=explode(",",$date);
               @endif
       @if($pos>0)
       @if($pos==1)<div class="col-sm-6"> @endif
-
+      
 
               <div class="block block--hori">
-                <a href="/events/{{ $event->id }}">
+                <a href="/registration/signup/{{ $event->id }}">
                   <div class="block--img_container image-bg">
                     <img src="{{ $event->featured_image }}" alt="" />
                   </div>
@@ -143,7 +143,7 @@ $fulldate=explode(",",$date);
                         <div class="block--open">
                           Open
                         </div>
-
+            
                         @else
                          <div class="block--closed">
                          Closed
@@ -164,14 +164,14 @@ $fulldate=explode(",",$date);
               </div>
                 <div class="dividor"></div>
               <!-- //block -->
-
+          
     @endif
-
-
+   
+     
           @endforeach
           </div>
           </div>
-
+          
           <div class="more-btn-cont">
             <a class="green-btn button radiused" href="/timeline">
               More Events
@@ -187,7 +187,7 @@ $fulldate=explode(",",$date);
         <div class="container">
           <h2 class="title-uppercase text-center margin-bottom-6x">News</h2>
           <div class="row">
-
+         
              @foreach($blogs as $pos=>$blog)
 
 <div class="col-sm-6 margin-bottom-6x">
@@ -205,7 +205,7 @@ $fulldate=explode(",",$date);
                     {{$blog->title}}
                     </div>
                     <div class="block--content content">
-
+                  
 {{ strip_tags(mb_substr($blog->body,0,300,"UTF-8"))}}
 
                     </div>
@@ -216,7 +216,7 @@ $fulldate=explode(",",$date);
             </div>
 
              @endforeach
-
+           
           </div>
           <div class="more-btn-cont margin-bottom-4x">
             <a class="green-btn button radiused" href="/news">
@@ -348,8 +348,8 @@ $fulldate=explode(",",$date);
       </section>
       <!-- //Thank you -->
 <div class="dividor"></div>
-
-
+      
+ 
 @endsection
 
 

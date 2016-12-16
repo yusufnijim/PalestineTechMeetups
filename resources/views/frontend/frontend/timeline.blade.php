@@ -12,8 +12,8 @@
                 <ul class="timeline">
                 @foreach($events as $pos=>$event)
       <!-- block -->
-
-
+       
+      
       <?php
 //echo $numberOfPages."<br>";
 //echo $numberOfEvents."<br>";
@@ -25,7 +25,7 @@ $fulldate=explode(",",$date);?>
                     @else
                     <div class="block block--hori">
                     @endif
-                      <a href="/events/{{ $event->id }}">
+                      <a href="/registration/signup/{{ $event->id }}">
                         <div class="block--img_container image-bg">
                           <img src="{{ $event->featured_image }}" alt="" />
                         </div>
@@ -39,7 +39,7 @@ $fulldate=explode(",",$date);?>
                         <div class="block--open">
                           Open
                         </div>
-
+            
                         @else
                          <div class="block--closed">
                          Closed
@@ -59,10 +59,10 @@ $fulldate=explode(",",$date);?>
                       </a>
                     </div>
                   </li>
-
+              
           @endforeach
                   <!-- //timeline--item -->
-
+                  
                   <!-- //timeline--item -->
                 </ul>
                 <!-- //timeline -->
