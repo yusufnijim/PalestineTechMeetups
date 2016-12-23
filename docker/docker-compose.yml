@@ -12,7 +12,7 @@ services:
       - ./conf/apache:/etc/apache2/sites-enabled/
       - ./conf/php:/usr/local/etc/php/
   db:
-    container_name: ptm_db
+    container_name: db
     image: mysql
     ports:
       - 3306:3306
@@ -20,7 +20,7 @@ services:
       - ./db/:/var/lib/mysql/
       - ./conf/mysql:/etc/mysql/
     environment:
-      MYSQL_DATABASE: ptm
-      MYSQL_USER: ptm_user
-      MYSQL_PASSWORD: ptm_password
-      MYSQL_ROOT_PASSWORD: ptm_password
+      MYSQL_DATABASE: main
+      MYSQL_USER: main_user
+      MYSQL_PASSWORD: main_password
+      MYSQL_ROOT_PASSWORD: main_password
