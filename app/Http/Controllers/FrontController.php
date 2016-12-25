@@ -8,18 +8,21 @@ use App\Jobs\ChangeLocale;
 use App\Repositories\Contracts\BlogRepository;
 use App\Repositories\Contracts\ContactRepository;
 use App\Repositories\Contracts\Event\EventRepository;
+use App\Repositories\Contracts\Event\RegistrationRepository;
 
 class FrontController extends MyBaseController
 {
     protected $blog_repo;
     protected $event_repo;
     protected $contact_repo;
+    protected $registration_repo;
 
-    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo)
+    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo, RegistrationRepository $registration_repo)
     {
         $this->blog_repo = $blog_repo;
         $this->event_repo = $event_repo;
         $this->contact_repo = $contact_repo;
+        $this->registration_repo = $registration_repo;
     }
 
     public function anyIndex()
@@ -101,7 +104,7 @@ class FrontController extends MyBaseController
         $latestEvents = $this->event_repo->published()->latest()->paginate(2);
 //$volunteers=$this->getEventVolunteers($id);
         if ($user) {
-            $status = $this->registration_epo->findWhere(
+            $status = $this->registration_repo->findWhere(
                 [
                     'user_id'      => isset($user->id) ? $user->id : null,
                     'event_id'     => $id,
