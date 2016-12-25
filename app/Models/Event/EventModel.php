@@ -4,7 +4,7 @@ namespace App\Models\Event;
 
 use App\Models\BaseModel;
 use App\Models\Survey\SurveyModel;
-use App\Models\EventImageModel;
+
 
 class EventModel extends BaseModel
 {
@@ -136,11 +136,6 @@ class EventModel extends BaseModel
     public function getEventtypeAttribute()
     {
         return $this->type == 0 ? 'One time' : 'Hands on';
-    }
-
-    public function events_images()
-    {
-        return $this->belongsTo(EventImageModel::class);
     }
     
 }

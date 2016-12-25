@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\EventImageModel;
+
 class BlogModel extends BaseModel
 {
     protected $table = 'blog';
@@ -121,5 +123,9 @@ class BlogModel extends BaseModel
         $result = static::$image_upload_directory.$image;
 
         return $result;
+    }
+    public function events_images()
+    {
+        return $this->belongsTo(EventImageModel::class);
     }
 }
