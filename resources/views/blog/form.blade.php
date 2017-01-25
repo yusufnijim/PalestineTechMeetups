@@ -40,6 +40,24 @@
         : {!! Form::checkbox('is_published', true, $blog->is_published, ['class' => 'form-control']) !!} <br/>
     </div>
 
+    <div class="form-group">
+        {!! Form::file('image1', ['id' => 'image1','onchange' => 'readURL(this, ".blog-image1")']) !!}
+        <img id="blog-image1" class='image blog-image1 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[0]->image: '' }}"/>
+        {!! Form::file('image2', ['id' => 'image2','onchange' => 'readURL(this, ".blog-image2")']) !!}
+        <img id="blog-image2" class='image blog-image2 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[1]->image: '' }}"/>
+        {!! Form::file('image3', ['id' => 'image3','onchange' => 'readURL(this, ".blog-image3")']) !!}
+        <img id="blog-image3" class='image blog-image3 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[2]->image: '' }}"/>
+        {!! Form::file('image4', ['id' => 'image4','onchange' => 'readURL(this, ".blog-image4")']) !!}
+        <img id="blog-image4" class='image blog-image4 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[3]->image: '' }}"/>
+        {!! Form::file('image5', ['id' => 'image5','onchange' => 'readURL(this, ".blog-image5")']) !!}
+        <img id="blog-image5" class='image blog-image5 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[4]->image: '' }}"/>
+        {!! Form::file('image6', ['id' => 'image6','onchange' => 'readURL(this, ".blog-image6")']) !!}
+        <img id="blog-image6" class='image blog-image6 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[5]->image: '' }}"/>
+        {!! Form::file('image7', ['id' => 'image7','onchange' => 'readURL(this, ".blog-image7")']) !!}
+        <img id="blog-image7" class='image blog-image7 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[6]->image: '' }}"/>
+        {!! Form::file('image8', ['id' => 'image8','onchange' => 'readURL(this, ".blog-image8")']) !!}
+        <img id="blog-image8" class='image blog-image8 img-rounded' width="300" height="220" src="{{ isset($eventImages) ? $eventImages[7]->image: '' }}"/>
+    </div>
 
     <div class="form-group">
         {!! Form::submit('submit', ['class' => 'btn btn-default']) !!}
@@ -78,6 +96,41 @@
             }
             return str;
         }
+
+        $('#blog-image1').click(function () {
+            $('#blog-image1').prop('src', '');
+            $('#image1').val('');
+        });
+        $('#blog-image2').click(function () {
+            $('#blog-image2').prop('src', '');
+            $('#image2').val('');
+        });
+        $('#blog-image3').click(function () {
+            $('#blog-image3').prop('src', '');
+            $('#image3').val('');
+        });
+        $('#blog-image4').click(function () {
+            $('#blog-image4').prop('src', '');
+            $('#image4').val('');
+        });
+        $('#blog-image5').click(function () {
+            $('#blog-image5').prop('src', '');
+            $('#image5').val('');
+        });
+        $('#blog-image6').click(function () {
+            $('#blog-image6').prop('src', '');
+            $('#image6').val('');
+        });
+        $('#blog-image7').click(function () {
+            $('#blog-image7').prop('src', '');
+            $('#image7').val('');
+        });
+        $('#blog-image8').click(function () {
+            $('#blog-image8').prop('src', '');
+            $('#image8').val('');
+        });
+
+
     </script>
 
 

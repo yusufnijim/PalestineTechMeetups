@@ -32,7 +32,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
@@ -47,7 +46,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">{{ @$title }}</h1>
-yamama
 
                     @include('partial/_error')
                     @include('partial/_flash')
@@ -88,5 +86,4 @@ yamama
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 
 </body>
-
 </html>

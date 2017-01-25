@@ -15,6 +15,6 @@ class EventImageModel extends BaseModel
 
     public function blog()
     {
-        return $this->hasMany('App\Models\BlogModel', 'blog_id', 'id');
+        return $this->belongsTo('App\Models\BlogModel', 'blog_id', 'id');
     }
 }

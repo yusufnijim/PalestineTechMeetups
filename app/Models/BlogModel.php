@@ -126,6 +126,6 @@ class BlogModel extends BaseModel
     }
     public function events_images()
     {
-        return $this->belongsTo(EventImageModel::class);
+        return $this->hasMany(EventImageModel::class);
     }
 }

@@ -176,36 +176,15 @@ $fulldate=explode(",",$date);?>
                   <h3 class="subtitle-uppercase margin-bottom-3x">  {{trans('frontend/index.Images') }}</h3>
 
                   <ul class="images-list">
-                    <li class="images-list--item">
-                      <a onClick="return false;" class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news1.jpg">
-                        <img src="../../assets/frontend/images/news1.jpg" alt="" />
-                      </a>
-                    </li>
-                    <li class="images-list--item">
-                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news2.jpg">
-                        <img src="../../assets/frontend/images/news2.jpg" alt="" />
-                      </a>
-                    </li>
-                    <li class="images-list--item">
-                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news3.jpg">
-                        <img src="../../assets/frontend/images/news3.jpg" alt="" />
-                      </a>
-                    </li>
-                    <li class="images-list--item">
-                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news4.jpg">
-                        <img src="../../assets/frontend/images/news4.jpg" alt="" />
-                      </a>
-                    </li>
-                    <li class="images-list--item">
-                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news5.jpg">
-                        <img src="../../assets/frontend/images/news5.jpg" alt="" />
-                      </a>
-                    </li>
-                    <li class="images-list--item">
-                      <a class="image-bg" data-lightbox="roadtrip" href="../../assets/frontend/images/news6.jpg">
-                        <img src="../../assets/frontend/images/news6.jpg" alt="" />
-                      </a>
-                    </li>
+                    @foreach($eventImages as $eventImage)
+                    @if($eventImage->image != '')
+                      <li class="images-list--item">
+                        <a class="image-bg" data-lightbox="roadtrip" href="{{$eventImage->image}}">
+                          <img src="{{$eventImage->image}}" alt="" />
+                        </a>
+                      </li>
+                      @endif
+                    @endforeach
                   </ul>
                 </section>
                 <!-- //images -->
