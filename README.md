@@ -1,4 +1,4 @@
-# Nablus Tech Meetups website
+# Palestine Tech Meetups website
 
 ## Installing without docker
 

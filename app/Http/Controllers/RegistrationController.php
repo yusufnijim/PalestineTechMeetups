@@ -11,6 +11,7 @@ use App\Repositories\Contracts\Event\RegistrationRepository;
 use App\Repositories\Contracts\User\UserRepository;
 //yamama
 use App\Repositories\Contracts\Event\VolunteerRepository;
+
 //yamama
 class RegistrationController extends MyBaseController
 {
@@ -18,7 +19,7 @@ class RegistrationController extends MyBaseController
     protected $user_repo;
     protected $registration_epo;
 
-    public function __construct(EventRepository $event_repo,VolunteerRepository $volunteer_repo, UserRepository $user_repo, RegistrationRepository $registration_epo)
+    public function __construct(EventRepository $event_repo, VolunteerRepository $volunteer_repo, UserRepository $user_repo, RegistrationRepository $registration_epo)
     {
         $this->event_repo = $event_repo;
         $this->user_repo = $user_repo;
@@ -33,17 +34,17 @@ class RegistrationController extends MyBaseController
      *
      * @return mixed
      */
-  /*  public function getSignup($id)
+    public function getSignup($id)
     {
         $event = $this->event_repo->find($id);
         $user = auth()->user();
         $latestEvents = $this->event_repo->published()->latest()->paginate(2);
-$volunteers=$this->getEventVolunteers($id);
+        $volunteers = $this->getEventVolunteers($id);
         if ($user) {
             $status = $this->registration_epo->findWhere(
                 [
-                    'user_id'      => isset($user->id) ? $user->id : null,
-                    'event_id'     => $id,
+                    'user_id' => isset($user->id) ? $user->id : null,
+                    'event_id' => $id,
                     'is_cancelled' => 0,
                 ]
             )->first();
@@ -54,20 +55,21 @@ $volunteers=$this->getEventVolunteers($id);
         return view('registration/signup')
             ->with('event', $event)
             ->with('status', $status)
-            ->with('latestEvents',$latestEvents)
-            ->with('volunteers',$volunteers);
-    } */
-//yamama test
-  /*public function getEventVolunteers($id)
+            ->with('latestEvents', $latestEvents)
+            ->with('volunteers', $volunteers);
+    }
+
+    public function getEventVolunteers($id)
     {
 
         $event = $this->event_repo->find($id);
         $users_list = $this->user_repo->all()->lists('first_name', 'id');
         $volunteers_type_list = $this->volunteer_repo->type;
-        $volunteers = $this->volunteer_repo->all()->where('event_id','=',$event->id);
+        $volunteers = $this->volunteer_repo->all()->where('event_id', '=', $event->id);
 
-        return   $volunteers;
-    }*/
+        return $volunteers;
+    }
+
     public function getAttend($id)
     {
         $event = $this->event_repo->find($id);
@@ -76,8 +78,8 @@ $volunteers=$this->getEventVolunteers($id);
         if ($user) {
             $status = $this->registration_epo->findWhere(
                 [
-                    'user_id'      => isset($user->id) ? $user->id : null,
-                    'event_id'     => $id,
+                    'user_id' => isset($user->id) ? $user->id : null,
+                    'event_id' => $id,
                     'is_cancelled' => 0,
                 ]
             )->first();
@@ -91,7 +93,7 @@ $volunteers=$this->getEventVolunteers($id);
     }
 
     //yamama test
-    public function postSignup($id)
+    public function anyRegister($id)
     {
         $event = $this->event_repo->find($id);
 
@@ -100,7 +102,7 @@ $volunteers=$this->getEventVolunteers($id);
 
         $reg = $this->registration_epo->findWhere(
             [
-                'user_id'  => $user->id,
+                'user_id' => $user->id,
                 'event_id' => $id,
             ]
         )->first();
@@ -116,11 +118,11 @@ $volunteers=$this->getEventVolunteers($id);
             }
         } else {
             if ($event->require_additional_fields and $event->survey_id) {
-                return redirect('/survey/view/'.$event->survey_id);
+                return redirect('/survey/view/' . $event->survey_id);
             } else {
                 $this->registration_epo->create(
                     [
-                        'user_id'  => $user->id,
+                        'user_id' => $user->id,
                         'event_id' => $id,
                     ]
                 );
@@ -128,8 +130,7 @@ $volunteers=$this->getEventVolunteers($id);
             }
         }
 
-
-        return redirect("/registration/signup/$id");
+        return redirect("/events/$id");
     }
 
     public function getView($id)
@@ -160,7 +161,7 @@ $volunteers=$this->getEventVolunteers($id);
 
         $reg = $this->registration_epo->findWhere(['event_id' => $id]);
 
-        return export_to_excel($reg, 'event_'.$id);
+        return export_to_excel($reg, 'event_' . $id);
     }
 
     public function postUpdateaccepted($id)
@@ -169,7 +170,7 @@ $volunteers=$this->getEventVolunteers($id);
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $id,
-            'user_id'  => request()['user_id'],
+            'user_id' => request()['user_id'],
         ])->first();
         $reg->update([
             'is_accepted' => request()['is_accepted'] == 1 ? 0 : 1,
@@ -184,7 +185,7 @@ $volunteers=$this->getEventVolunteers($id);
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $id,
-            'user_id'  => request()['user_id'],
+            'user_id' => request()['user_id'],
         ])->first();
         $reg->update([
             'is_attended' => request()['is_attended'] == 1 ? 0 : 1,
@@ -200,7 +201,7 @@ $volunteers=$this->getEventVolunteers($id);
 
         $reg = $this->registration_epo->findWhere([
             'event_id' => $event_id,
-            'user_id'  => $user_id,
+            'user_id' => $user_id,
         ])->first();
 
         if ($reg) {
@@ -247,9 +248,9 @@ $volunteers=$this->getEventVolunteers($id);
             $user = UserModel::find($instance->user_id);
             \Mail::send('email / custom', [
                 'confirm_attendance' => request()->confirm_attendance,
-                'event_id'           => $event_id,
-                'user'               => $user,
-                'body'               => request()->body,
+                'event_id' => $event_id,
+                'user' => $user,
+                'body' => request()->body,
             ], function ($m) use ($user) {
                 $m->from('noreply@NablusTechMeetups . com', 'Nablus Tech Meetups');
 
@@ -259,9 +260,9 @@ $volunteers=$this->getEventVolunteers($id);
         }
 
         // done!
-        flash('emails in - queued for '.$count, 'success');
+        flash('emails in - queued for ' . $count, 'success');
 
-        return redirect(' / registration / view / '.$event_id);
+        return redirect(' / registration / view / ' . $event_id);
     }
 
     public function postSendemailcount($event_id)

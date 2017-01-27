@@ -16,8 +16,8 @@
 
             <div>
                 Title: {!! Form::text('name', $survey->name, ['required' => 'true']) !!} <br/>
-                Body: {!! Form::textarea('description2', $survey->description,
-        ['class'=>'survey_body', 'id' => 'survey_body']) !!}
+                Body: {!! Form::textarea('description2',
+                $survey->description, ['class'=>'survey_body', 'id' => 'survey_body']) !!}
                 <br/>
 
 

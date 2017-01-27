@@ -19,8 +19,8 @@
                     'select',
                 ],
                 dataType: 'xml',
-{{--                formData: "{!!  $survey->raw_form !!}",--}}
-                formData: '{!!  preg_replace('~[\r\n]+~', '', $survey->raw_form) !!}',
+                    {{--                formData: "{!!  $survey->raw_form !!}",--}}
+                    formData: '{!!  preg_replace('~[\r\n]+~', '', $survey->raw_form) !!}',
                 prefix: 'fb-',
                 disableFields: [
                     'header',

@@ -52,7 +52,7 @@ class SurveyController extends MyBaseController
         $survey_id = $survey->id;
         flash('survey created successfully', 'success');
 
-        return redirect('/survey/edit/'.$survey_id);
+        return redirect('/survey/edit/' . $survey_id);
     }
 
     public function getEdit($id)
@@ -112,7 +112,7 @@ class SurveyController extends MyBaseController
         $user_id = auth()->check() ? auth()->user()->id : 0;
 
         $submission_id = SurveySubmissionModel::create([
-            'user_id'   => $user_id,
+            'user_id' => $user_id,
             'survey_id' => $survey_id,
         ])->id;
         $survey = SurveyQuestionAnswerModel::insert($survey_id, request()->input(), $submission_id);
@@ -128,7 +128,7 @@ class SurveyController extends MyBaseController
 
             $this->registration_epo->create(
                 [
-                    'user_id'  => $user_id,
+                    'user_id' => $user_id,
                     'event_id' => $event_id,
                 ]
             );

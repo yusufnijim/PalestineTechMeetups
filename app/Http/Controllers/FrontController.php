@@ -29,7 +29,7 @@ class FrontController extends MyBaseController
     {
         $blogs = $this->blog_repo->published()->latest()->paginate(4);
         $events = $this->event_repo->published()->latest()->paginate(3);
-            $aboutus="  Hello, Laravel
+        $aboutus = "  Hello, Laravel
     you are really complicated and I hate you
     Thank you Hello, Laravel
     you are really complicated and I hate you
@@ -49,7 +49,7 @@ class FrontController extends MyBaseController
         return view('frontend.index')
             ->with('events', $events)
             ->with('blogs', $blogs)
-            ->with('aboutus',$aboutus);
+            ->with('aboutus', $aboutus);
     }
 
     public function getAbout()
@@ -66,33 +66,36 @@ class FrontController extends MyBaseController
     {
         return view('frontend.Moreawsomness');
     }
-//by yamama
- public function getTimeline()
+
+    //by yamama
+    public function getTimeline()
     {
-         $events = $this->event_repo->published()->latest()->paginate(7);
-           $numberOfevents =$this->event_repo->all()->count();
-           $numberOfPages= ceil($numberOfevents/7);
+        $events = $this->event_repo->published()->latest()->paginate(7);
+        $numberOfevents = $this->event_repo->all()->count();
+        $numberOfPages = ceil($numberOfevents / 7);
         return view('frontend.timeline')
-        ->with('events', $events)
-        ->with('numberOfPages',$numberOfPages)
-        ->with('numberOfEvents',$numberOfevents);
+            ->with('events', $events)
+            ->with('numberOfPages', $numberOfPages)
+            ->with('numberOfEvents', $numberOfevents);
     }
-     public function getNews()
+
+    public function getNews()
     {
-        $numberOfNews =$this->blog_repo->all()->count();
-        $numberOfPages= ceil($numberOfNews/12);
+        $numberOfNews = $this->blog_repo->all()->count();
+        $numberOfPages = ceil($numberOfNews / 12);
         $blogs = $this->blog_repo->published()->latest()->paginate(12);
         return view('frontend.news')
-
-        ->with('blogs', $blogs)
-        ->with('numberOfPages',$numberOfPages)
-        ->with('numberOfNews',$numberOfNews);
+            ->with('blogs', $blogs)
+            ->with('numberOfPages', $numberOfPages)
+            ->with('numberOfNews', $numberOfNews);
     }
+
     public function getHandson()
     {
         return view('frontend.handson');
     }
-      public function getMonthlymeetups()
+
+    public function getMonthlymeetups()
     {
         return view('frontend.Monthlymeetups');
     }
@@ -106,8 +109,8 @@ class FrontController extends MyBaseController
         if ($user) {
             $status = $this->registration_repo->findWhere(
                 [
-                    'user_id'      => isset($user->id) ? $user->id : null,
-                    'event_id'     => $id,
+                    'user_id' => isset($user->id) ? $user->id : null,
+                    'event_id' => $id,
                     'is_cancelled' => 0,
                 ]
             )->first();
@@ -115,22 +118,22 @@ class FrontController extends MyBaseController
             $status = -1;
         }
 
-        return view('frontend.events')
+        return view('frontend/events')
             ->with('event', $event)
             ->with('status', $status)
-            ->with('latestEvents',$latestEvents);
-            //->with('volunteers',$volunteers);
+            ->with('latestEvents', $latestEvents);
+        //->with('volunteers',$volunteers);
     }
-  /*  public function getEventVolunteers($id)
-      {
+    /*  public function getEventVolunteers($id)
+        {
 
-          $event = $this->event_repo->find($id);
-          $users_list = $this->user_repo->all()->lists('first_name', 'id');
-          $volunteers_type_list = $this->volunteer_repo->type;
-          $volunteers = $this->volunteer_repo->all()->where('event_id','=',$event->id);
+            $event = $this->event_repo->find($id);
+            $users_list = $this->user_repo->all()->lists('first_name', 'id');
+            $volunteers_type_list = $this->volunteer_repo->type;
+            $volunteers = $this->volunteer_repo->all()->where('event_id','=',$event->id);
 
-          return   $volunteers;
-      }*/
+            return   $volunteers;
+        }*/
     //end yamama
     public function postContact()
     {
@@ -154,12 +157,11 @@ class FrontController extends MyBaseController
      * Change language.
      *
      * @param App\Jobs\ChangeLocaleCommand $changeLocale
-     * @param string                       $lang
+     * @param string $lang
      *
      * @return Response
      */
-    public function language($lang,
-                             ChangeLocale $changeLocale)
+    public function language($lang, ChangeLocale $changeLocale)
     {
         $lang = in_array($lang, config('app.languages')) ? $lang : config('app.fallback_locale');
         $changeLocale->lang = $lang;

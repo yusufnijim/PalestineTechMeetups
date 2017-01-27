@@ -37,6 +37,13 @@ class CreateUserTable extends Migration
 
             $table->nullableTimestamps();
         });
+
+        DB::table('user')->insert([
+            'first_name' => 'Amin',
+            'last_name' => 'Mukh',
+            'email' => 'mukh_amin@yahoo.com',
+            'password' => bcrypt('amin123'),
+        ]);
     }
 
     /**

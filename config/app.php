@@ -168,7 +168,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         Laravel\Socialite\SocialiteServiceProvider::class,
-//        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         Bestmomo\Filemanager\FilemanagerServiceProvider::class,
 //        Laracasts\Flash\FlashServiceProvider,
 
@@ -226,7 +226,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-//        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 //        'Flash' => Laracasts\Flash\Flash::class,
 
 //        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,

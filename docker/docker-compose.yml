@@ -23,4 +23,4 @@ services:
       MYSQL_DATABASE: main
       MYSQL_USER: main_user
       MYSQL_PASSWORD: main_password
-      MYSQL_ROOT_PASSWORD: main_password
+      MYSQL_ROOT_PASSWORD: root_password

@@ -12,7 +12,7 @@ return array(
      |
      */
 
-    'enabled' => null,
+    'enabled' => false, //config('app.debug'), disabled because of FormBuilder drag and drop
 
     /*
      |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
-# Nablus Tech Meetups website
+# Palestine Tech Meetups website
 
-NTM backend site
+PalestineTM backend site
 
 ## Getting Started
 
