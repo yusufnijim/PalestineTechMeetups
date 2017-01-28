@@ -44,5 +44,6 @@ return [
   "Description"=>"Description",
     "Volunteers"=>"Volunteers",
     "Images"=>"Images",
+      "closereg"=>"so sorry , The registration is full",
 
 ];

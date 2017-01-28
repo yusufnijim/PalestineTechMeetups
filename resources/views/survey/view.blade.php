@@ -1,6 +1,10 @@
-@extends('layout.backend')
+@extends ("layout/frontend")
 
 @section('content')
+<div class="container-fluid">
+<div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+            <div class="text-left margin-top-4x" >
     <h2>{{ $survey->name }}</h2>
     {!! $survey->description !!} <br/> <br/>
 
@@ -64,5 +68,5 @@
     <br/>
     {!! Form::submit("save") !!}
     {!! Form::close() !!}
-
+</div></div></div></div>
 @stop

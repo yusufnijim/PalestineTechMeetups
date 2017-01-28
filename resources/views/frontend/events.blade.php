@@ -230,8 +230,13 @@
                     <div class="col-sm-4">
                         <div class="dividor"></div>
                         <div class="margin-bottom-3x">
-                            <a href="../attend/{{ $event->id }}"
+  @if($event->is_registration_open)
+                            <a href="/survey/view/{{ $event->survey_id }}"
                                class="button green-btn green-btn radiused full-width large-btn text-center">  {{trans('frontend/index.attend') }}</a>
+                               @else
+                               <a href="#"
+                                  class="button green-btn green-btn radiused full-width large-btn text-center">  {{trans('frontend/index.closereg') }}</a>
+                               @endif
                         </div>
                         <div class="content margin-bottom-2x">
                             <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;
