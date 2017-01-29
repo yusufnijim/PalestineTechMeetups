@@ -21,6 +21,12 @@ class SurveyController extends MyBaseController
     protected $event_repo;
     protected $registration_epo;
 
+    /**
+     * SurveyController constructor.
+     * @param SurveyRepository $survey_repo
+     * @param EventRepository $event_repo
+     * @param RegistrationRepository $registration_epo
+     */
     public function __construct(SurveyRepository $survey_repo, EventRepository $event_repo, RegistrationRepository $registration_epo)
     {
         $this->survey_repo = $survey_repo;
@@ -28,6 +34,10 @@ class SurveyController extends MyBaseController
         $this->registration_epo = $registration_epo;
     }
 
+    /**
+     * index to pull all forms
+     * @return $this
+     */
     public function anyIndex()
     {
         can('event.survey');
@@ -38,6 +48,10 @@ class SurveyController extends MyBaseController
             ->with('surveys', $surveys);
     }
 
+    /**
+     * get form create page
+     * @return $this
+     */
     public function getCreate()
     {
         can('event.survey');
@@ -45,6 +59,10 @@ class SurveyController extends MyBaseController
         return view('survey/create')->with('survey', $this->survey_repo->newInstance());
     }
 
+    /**
+     * callback to create a form
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postCreate()
     {
         can('event.survey');
@@ -55,6 +73,11 @@ class SurveyController extends MyBaseController
         return redirect('/survey/edit/' . $survey_id);
     }
 
+    /**
+     * get dynamic form edit page
+     * @param $id
+     * @return $this
+     */
     public function getEdit($id)
     {
         can('event.survey');
@@ -66,6 +89,11 @@ class SurveyController extends MyBaseController
             ->with('edit', true);
     }
 
+    /**
+     * callback to edit dynamic form title and body
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function putEdit($id)
     {
         can('event.survey');
@@ -76,6 +104,11 @@ class SurveyController extends MyBaseController
         return redirect('/survey');
     }
 
+    /**
+     * callback to save form questions(admin area)
+     * @param $survey_id
+     * @return string
+     */
     public function anySaveform($survey_id)
     {
         can('event.survey');
@@ -90,6 +123,11 @@ class SurveyController extends MyBaseController
         return json_encode(true);
     }
 
+    /**
+     * view specific form
+     * @param $id
+     * @return $this
+     */
     public function getView($id)
     {
         can('event.survey');
@@ -98,6 +136,11 @@ class SurveyController extends MyBaseController
         return view('survey/view')->with('survey', $survey);
     }
 
+    /**
+     * AJAX callback, to fetch dynamic form results.
+     * @param $id
+     * @return $this
+     */
     public function getViewajax($id)
     {
         can('event.survey');
@@ -106,10 +149,18 @@ class SurveyController extends MyBaseController
         return view('survey/view_ajax')->with('survey', $survey);
     }
 
+    /**
+     * callback to user form submission, to store questions' results
+     * @param $survey_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postAnswer($survey_id)
     {
-        can('event.manage');
         $user_id = auth()->check() ? auth()->user()->id : 0;
+
+        if (!$user_id) {
+            abbort(404);
+        }
 
         $submission_id = SurveySubmissionModel::create([
             'user_id' => $user_id,
@@ -136,10 +187,15 @@ class SurveyController extends MyBaseController
 
             flash('sign up complete', 'success');
 
-            return redirect("/registration/signup/$event_id");
+            return redirect(url('/'));
         }
     }
 
+    /**
+     * Get registration form results for specific dynamic form
+     * @param $survey_id
+     * @return $this
+     */
     public function getResults($survey_id)
     {
         can('event.survey');
@@ -149,6 +205,12 @@ class SurveyController extends MyBaseController
             ->with('survey', $survey);
     }
 
+    /**
+     * get dynamic form submission(per user)
+     * @param $survey_id
+     * @param int $user_id
+     * @return $this|void
+     */
     public function getResult($survey_id, $user_id = 0)
     {
         can('event.survey');
