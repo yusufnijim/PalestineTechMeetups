@@ -16,7 +16,7 @@
 
             <div>
                 Title: {!! Form::text('name', $survey->name, ['required' => 'true']) !!} <br/>
-                Body: {!! Form::textarea('description2',
+                Body: {!! Form::textarea('description',
                 $survey->description, ['class'=>'survey_body', 'id' => 'survey_body']) !!}
                 <br/>
 
@@ -30,14 +30,15 @@
 
                 {!! Form::close() !!}
 
-                @if(isset($edit))
-                    @include('survey/partial/formbuilder')
-                @endif
 
             </div>
+
+            @if(isset($edit))
+                @include('survey/partial/formbuilder')
+            @endif
             <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
             <script type="text/javascript">
-                CKEDITOR.replace('description2', {
+                CKEDITOR.replace('description', {
                     filebrowserBrowseUrl: '{!! url('filemanager/index.html') !!}'
                 });
 

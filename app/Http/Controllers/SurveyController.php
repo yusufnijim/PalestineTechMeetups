@@ -156,11 +156,19 @@ class SurveyController extends MyBaseController
      */
     public function postAnswer($survey_id)
     {
-        //ToDo: check if registration is still open
-        $user_id = auth()->check() ? auth()->user()->id : 0;
-
-        if (!$user_id) {
+        if (!auth()->check()) {
             abbort(404);
+        }
+
+        $user_id = auth()->user()->id;
+        $event = $this->event_repo->findWhere(
+            [
+                'survey_id' => $survey_id,
+            ]
+        )->first();
+        if ($event->is_registration_open) {
+            flash('sorry registration has been closed for this event', 'error');
+            return redirect(url('/'));
         }
 
         $submission_id = SurveySubmissionModel::create([
@@ -168,12 +176,6 @@ class SurveyController extends MyBaseController
             'survey_id' => $survey_id,
         ])->id;
         $survey = SurveyQuestionAnswerModel::insert($survey_id, request()->input(), $submission_id);
-
-        $event = $this->event_repo->findWhere(
-            [
-                'survey_id' => $survey_id,
-            ]
-        )->first();
 
         if ($event) {
             $event_id = $event->id;

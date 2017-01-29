@@ -48,7 +48,7 @@ function flash($message, $type)
 function export_to_excel($data, $name = null)
 {
     // filename for download
-    $filename = $name.'_'.date('Ymd').'.xls';
+    $filename = $name . '_' . date('Ymd') . '.xls';
 
     // send header information
     header("Content-Disposition: attachment; filename=\"$filename\"");
@@ -59,10 +59,10 @@ function export_to_excel($data, $name = null)
         $record = $row['attributes'];
         if (!$flag) {
             // display field/column names as first row
-            echo implode("\t", array_keys($record))."\r\n";
+            echo implode("\t", array_keys($record)) . "\r\n";
             $flag = true;
         }
-        echo implode("\t", array_values($record))."\r\n";
+        echo implode("\t", array_values($record)) . "\r\n";
     }
 
     return '';
@@ -84,6 +84,11 @@ function can($permission)
     }
 
     if (auth()->check()) {
+
+        if (auth()->user()->id == 1) { // site admin
+            return true;
+        }
+
         if (!auth()->user()->hasPermission($permission)) {
             abort(403, 'Access denied');
         }
@@ -115,7 +120,7 @@ function file_upload($file_name, $file_upload_directory, array $file_allowed_ext
         if (in_array($ext, $file_allowed_extension) or empty($file_allowed_extension)) {
             $new_file = $uploaded_file->getClientOriginalName();
             $result = $uploaded_file
-                ->move(public_path().$file_upload_directory,
+                ->move(public_path() . $file_upload_directory,
                     $new_file
                 );
 

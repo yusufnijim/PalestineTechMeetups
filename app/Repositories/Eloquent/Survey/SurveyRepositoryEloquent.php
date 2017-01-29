@@ -34,7 +34,7 @@ class SurveyRepositoryEloquent extends BaseRepositoryEloquent implements SurveyR
     {
         $fill_array = [
             'name'        => $request['name'],
-            'description' => $request['description2'],
+            'description' => $request['description'],
         ];
 
         return $this->create($fill_array);
