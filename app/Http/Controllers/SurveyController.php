@@ -19,19 +19,19 @@ class SurveyController extends MyBaseController
 {
     protected $survey_repo;
     protected $event_repo;
-    protected $registration_epo;
+    protected $registration_repo;
 
     /**
      * SurveyController constructor.
      * @param SurveyRepository $survey_repo
      * @param EventRepository $event_repo
-     * @param RegistrationRepository $registration_epo
+     * @param RegistrationRepository $registration_repo
      */
-    public function __construct(SurveyRepository $survey_repo, EventRepository $event_repo, RegistrationRepository $registration_epo)
+    public function __construct(SurveyRepository $survey_repo, EventRepository $event_repo, RegistrationRepository $registration_repo)
     {
         $this->survey_repo = $survey_repo;
         $this->event_repo = $event_repo;
-        $this->registration_epo = $registration_epo;
+        $this->registration_repo = $registration_repo;
     }
 
     /**
@@ -156,6 +156,7 @@ class SurveyController extends MyBaseController
      */
     public function postAnswer($survey_id)
     {
+        //ToDo: check if registration is still open
         $user_id = auth()->check() ? auth()->user()->id : 0;
 
         if (!$user_id) {
@@ -177,7 +178,7 @@ class SurveyController extends MyBaseController
         if ($event) {
             $event_id = $event->id;
 
-            $this->registration_epo->create(
+            $this->registration_repo->create(
                 [
                     'user_id' => $user_id,
                     'event_id' => $event_id,
