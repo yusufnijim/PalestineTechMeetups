@@ -9,6 +9,9 @@ use App\Repositories\Contracts\BlogRepository;
 use App\Repositories\Contracts\ContactRepository;
 use App\Repositories\Contracts\Event\EventRepository;
 use App\Repositories\Contracts\Event\RegistrationRepository;
+use App\Repositories\Contracts\Event\VolunteerRepository;
+use App\Repositories\Contracts\User\UserRepository;
+
 
 class FrontController extends MyBaseController
 {
@@ -16,17 +19,27 @@ class FrontController extends MyBaseController
     protected $event_repo;
     protected $contact_repo;
     protected $registration_repo;
+    protected $volunteer_repo;
+    protected $user_repo;
 
-    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo, RegistrationRepository $registration_repo)
+    public function __construct(BlogRepository $blog_repo, EventRepository $event_repo, ContactRepository $contact_repo, RegistrationRepository $registration_repo, VolunteerRepository $volunteer_repo, UserRepository $user_repo)
     {
         $this->blog_repo = $blog_repo;
         $this->event_repo = $event_repo;
         $this->contact_repo = $contact_repo;
         $this->registration_repo = $registration_repo;
+        $this->volunteer_repo = $volunteer_repo;
+        $this->user_repo = $user_repo;
     }
 
     public function anyIndex()
     {
+        $latestVolunteers = $this->volunteer_repo->published()->latest()->paginate();
+        $volunteersInfo = [];
+        foreach ($latestVolunteers as $latestVolunteer) {
+            $temp = $this->user_repo->findByField('id', $latestVolunteer->user_id)[0];
+             array_push($volunteersInfo, $temp);
+        }
         $blogs = $this->blog_repo->published()->latest()->paginate(4);
         $events = $this->event_repo->published()->latest()->paginate(3);
         $aboutus = "  Hello, Laravel
@@ -46,10 +59,13 @@ class FrontController extends MyBaseController
     Thank you Hello, Laravel
     you are really complicated and I hate you
     Thank you";
+
         return view('frontend.index')
+            ->with('')
             ->with('events', $events)
             ->with('blogs', $blogs)
-            ->with('aboutus', $aboutus);
+            ->with('aboutus', $aboutus)
+            ->with('volunteersInfo', $volunteersInfo);
     }
 
     public function getAbout()

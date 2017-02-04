@@ -236,16 +236,17 @@ $fulldate=explode(",",$date);
           <div class="row">
             <div class="col-sm-12">
               <ul class="team">
+              @foreach($volunteersInfo as $volunteerInfo)
                 <li>
                   <div class="team--member">
                     <div class="team--member_img image-bg">
-                      <img src="assets/frontend/images/team1.jpg" alt="" />
+                      <img src="{{$volunteerInfo->image}}" alt="" />
                     </div>
                     <div class="team--member_name">
-                      Jafar Hajeer
+                      {{$volunteerInfo->first_name}}&nbsp;{{$volunteerInfo->last_name}}
                     </div>
                     <div class="team--member_social">
-                      <a class="purple" href="#">
+                      <a class="purple" href="{{$volunteerInfo->fb_id}}">
                         <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
                       </a>
                       <a class="purple" href="#">
@@ -257,90 +258,7 @@ $fulldate=explode(",",$date);
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div class="team--member">
-                    <div class="team--member_img image-bg">
-                      <img src="assets/frontend/images/team2.jpg" alt="" />
-                    </div>
-                    <div class="team--member_name">
-                      Salahuddin Assi
-                    </div>
-                    <div class="team--member_social">
-                      <a class="purple" href="#">
-                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="team--member">
-                    <div class="team--member_img image-bg">
-                      <img src="assets/frontend/images/team3.jpg" alt="" />
-                    </div>
-                    <div class="team--member_name">
-                      Adel Jodallah
-                    </div>
-                    <div class="team--member_social">
-                      <a class="purple" href="#">
-                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="team--member">
-                    <div class="team--member_img image-bg">
-                      <img src="assets/frontend/images/team1.jpg" alt="" />
-                    </div>
-                    <div class="team--member_name">
-                      Jafar Hajeer
-                    </div>
-                    <div class="team--member_social">
-                      <a class="purple" href="#">
-                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="team--member">
-                    <div class="team--member_img image-bg">
-                      <img src="assets/frontend/images/team2.jpg" alt="" />
-                    </div>
-                    <div class="team--member_name">
-                      Salah Assi
-                    </div>
-                    <div class="team--member_social">
-                      <a class="purple" href="#">
-                        <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                      <a class="purple" href="#">
-                        <i class="fa fa-linkedin-square fa-lg" aria-hidden="true"></i>
-                      </a>
-                    </div>
-                  </div>
-                </li>
+                @endforeach
               </ul>
             </div>
           </div>
